@@ -1,12 +1,13 @@
 {
 	"folders": [
-		{
-			"path": "."
-		}
+			{
+					"path": "."
+			}
 	],
 	"extensions": {
-		"recommendations": [
-			"dbaeumer.vscode-eslint"
-		]
+			"recommendations": [
+					"dbaeumer.vscode-eslint",
+					"refringe.spt-id-highlighter"
+			]
 	}
 }
