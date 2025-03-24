@@ -24,7 +24,7 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     template._props.Width = 1;
     template._props.Height = 1;
     template._props.Grids[0]._props.cellsH = 24;
-    //template._props.Grids[0]._props.cellsH = 14;
+    //template._props.Grids[0]._props.cellsV = 14;
   }
 
   logger.success('[MyCustomSPTAKI]: BaseClasses.SIMPLE_CONTAINER 已调整');

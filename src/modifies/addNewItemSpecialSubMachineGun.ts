@@ -111,7 +111,26 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
                   ItemTpl.AMMO_57X28_SS197SR,
                   ItemTpl.AMMO_57X28_SS198LF,
                   ItemTpl.AMMO_57X28_R37X,
-                  ItemTpl.AMMO_57X28_R37F
+                  ItemTpl.AMMO_57X28_R37F,
+                  // 4.6x30
+                  ItemTpl.AMMO_46X30_ACTION_SX,
+                  ItemTpl.AMMO_46X30_AP_SX,
+                  ItemTpl.AMMO_46X30_FMJ_SX,
+                  ItemTpl.AMMO_46X30_JSP_SX,
+                  ItemTpl.AMMO_46X30_SUBSONIC_SX,
+                  // 7.62x25TT
+                  ItemTpl.AMMO_762X25TT_AKBS,
+                  ItemTpl.AMMO_762X25TT_FMJ43,
+                  ItemTpl.AMMO_762X25TT_LRN,
+                  ItemTpl.AMMO_762X25TT_LRNPC,
+                  ItemTpl.AMMO_762X25TT_P,
+                  ItemTpl.AMMO_762X25TT_PST,
+                  ItemTpl.AMMO_762X25TT_PT,
+                  // 9x33r
+                  ItemTpl.AMMO_9X33R_FMJ,
+                  ItemTpl.AMMO_9X33R_HP,
+                  ItemTpl.AMMO_9X33R_JHP,
+                  ItemTpl.AMMO_9X33R_SP
                 ]
               }
             ]
