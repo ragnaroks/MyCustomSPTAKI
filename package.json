@@ -1,6 +1,6 @@
 {
     "name": "MyCustomSPTAKI",
-    "version": "3.10.20250322",
+    "version": "3.10.20250327",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "ragnaroks",

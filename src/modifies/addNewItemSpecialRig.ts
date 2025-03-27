@@ -53,7 +53,7 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
             filters: [
               {
                 Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.POCKETS,BaseClasses.MOB_CONTAINER,BaseClasses.MAGAZINE]
+                ExcludedFilter: [BaseClasses.POCKETS,BaseClasses.MOB_CONTAINER,BaseClasses.MAGAZINE,BaseClasses.AMMO,BaseClasses.AMMO_BOX]
               }
             ],
             isSortingTable: false,

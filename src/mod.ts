@@ -82,6 +82,9 @@ import addNewItemSpecialRifleMagazine2 from './modifies/addNewItemSpecialRifleMa
 import addNewItemSpecialRifleMagazine3 from './modifies/addNewItemSpecialRifleMagazine3';
 import addNewItemSpecialPistolMagazine3 from './modifies/addNewItemSpecialPistolMagazine3';
 import addNewItemSpecialWeaponContainer from './modifies/addNewItemSpecialWeaponContainer';
+import modifyBaseClassCompensator from './modifies/modifyBaseClassCompensator';
+import modifyBaseClassFlashHider from './modifies/modifyBaseClassFlashHider';
+import modifyBaseClassCombMuzzleDevice from './modifies/modifyBaseClassCombMuzzleDevice';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -176,6 +179,15 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 枪管调整
     myConfig.modifyBaseClassBarrel && modifyBaseClassBarrel(this.logger,this.itemHelper,tables);
+
+    // 组合式膛口装置
+    myConfig.modifyBaseClassCombMuzzleDevice && modifyBaseClassCombMuzzleDevice(this.logger,this.itemHelper,tables);
+
+    // 消焰器增强
+    myConfig.modifyBaseClassFlashHider && modifyBaseClassFlashHider(this.logger,this.itemHelper,tables);
+
+    // 制退器增强
+    myConfig.modifyBaseClassCompensator && modifyBaseClassCompensator(this.logger,this.itemHelper,tables);
 
     // 消音器增强
     myConfig.modifyBaseClassSilencer && modifyBaseClassSilencer(this.logger,this.itemHelper,tables);

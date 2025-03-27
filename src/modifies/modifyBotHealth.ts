@@ -8,19 +8,19 @@ export default function modifyBotHealth(logger:ILogger,tables: IDatabaseTables) 
     for(const bodyPartItem of character.health.BodyParts) {
       //bodyPartItem.Head.max *= 2;
       //bodyPartItem.Head.min *= 2;
-      bodyPartItem.Chest.max *= 2;
-      bodyPartItem.Chest.min *= 2;
-      bodyPartItem.Stomach.max *= 2;
-      bodyPartItem.Stomach.min *= 2;
-      bodyPartItem.LeftArm.max *= 2;
-      bodyPartItem.LeftArm.min *= 2;
-      bodyPartItem.RightArm.max *= 2;
-      bodyPartItem.RightArm.min *= 2;
-      bodyPartItem.LeftLeg.max *= 2;
-      bodyPartItem.LeftLeg.min *= 2;
-      bodyPartItem.RightLeg.max *= 2;
-      bodyPartItem.RightLeg.min *= 2;
+      bodyPartItem.Chest.max *= 5;
+      bodyPartItem.Chest.min *= 5;
+      bodyPartItem.Stomach.max *= 3;
+      bodyPartItem.Stomach.min *= 3;
+      bodyPartItem.LeftArm.max *= 3;
+      bodyPartItem.LeftArm.min *= 3;
+      bodyPartItem.RightArm.max *= 3;
+      bodyPartItem.RightArm.min *= 3;
+      bodyPartItem.LeftLeg.max *= 3;
+      bodyPartItem.LeftLeg.min *= 3;
+      bodyPartItem.RightLeg.max *= 3;
+      bodyPartItem.RightLeg.min *= 3;
     }
   }
-  logger.success('[MyCustomSPTAKI]: AI ' + Object.keys(tables.bots.types).join('/') + ' 已获得 2 倍生命值');
+  logger.success('[MyCustomSPTAKI]: AI ' + Object.keys(tables.bots.types).join('/') + ' 已获得 3 倍生命值');
 }
