@@ -85,6 +85,9 @@ import addNewItemSpecialWeaponContainer from './modifies/addNewItemSpecialWeapon
 import modifyBaseClassCompensator from './modifies/modifyBaseClassCompensator';
 import modifyBaseClassFlashHider from './modifies/modifyBaseClassFlashHider';
 import modifyBaseClassCombMuzzleDevice from './modifies/modifyBaseClassCombMuzzleDevice';
+import modifyBaseClassArmorPlant from './modifies/modifyBaseClassArmorPlant';
+import addNewItemSpecialLightPlateCarrier from './modifies/addNewItemSpecialLightPlateCarrier';
+import addNewItemSpecialHeavyPlateCarrier from './modifies/addNewItemSpecialHeavyPlateCarrier';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -234,8 +237,11 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 胸挂增强
     myConfig.modifyBaseClassVest && modifyBaseClassVest(this.logger,this.itemHelper,tables);
 
-    // 护甲插板增强
+    // 护甲增强
     myConfig.modifyBaseClassArmor && modifyBaseClassArmor(this.logger,this.itemHelper,tables);
+
+    // 护甲插板增强
+    myConfig.modifyBaseClassArmorPlant && modifyBaseClassArmorPlant(this.logger,this.itemHelper,tables);
 
     // 头盔增强
     myConfig.modifyBaseClassHeadwear && modifyBaseClassHeadwear(this.logger,this.itemHelper,tables);
@@ -274,6 +280,10 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制胸挂
     addNewItemSpecialRig(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制插板背心
+    addNewItemSpecialLightPlateCarrier(this.logger,this.customItemService,tables);
+    addNewItemSpecialHeavyPlateCarrier(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制安全箱
     addNewItemSpecialSecureContainer(this.logger,this.customItemService,tables);
