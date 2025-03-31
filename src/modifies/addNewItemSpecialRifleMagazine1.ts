@@ -12,7 +12,7 @@ export default function addNewItemSpecialRifleMagazine1(logger:ILogger,customIte
   
   const templateItem = tables.templates.items[ItemTpl.MAGAZINE_762X51_KAC_762_10RND] || null;
   if(!templateItem){
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialRifleMagazine30，错误：模板物品 MAGAZINE_762X51_KAC_762_10RND 不存在');
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialRifleMagazine1，错误：模板物品 MAGAZINE_762X51_KAC_762_10RND 不存在');
     return;
   }
 
@@ -105,13 +105,13 @@ export default function addNewItemSpecialRifleMagazine1(logger:ILogger,customIte
                   ItemTpl.AMMO_762X39_T45M1,
                   ItemTpl.AMMO_762X39_US,
                   // 7.62x51
-                  //ItemTpl.AMMO_762X51_BCP_FMJ,
-                  //ItemTpl.AMMO_762X51_M61,
-                  //ItemTpl.AMMO_762X51_M62,
-                  //ItemTpl.AMMO_762X51_M80,
-                  //ItemTpl.AMMO_762X51_M993,
-                  //ItemTpl.AMMO_762X51_TCW_SP,
-                  //ItemTpl.AMMO_762X51_ULTRA_NOSLER,
+                  ItemTpl.AMMO_762X51_BCP_FMJ,
+                  ItemTpl.AMMO_762X51_M61,
+                  ItemTpl.AMMO_762X51_M62,
+                  ItemTpl.AMMO_762X51_M80,
+                  ItemTpl.AMMO_762X51_M993,
+                  ItemTpl.AMMO_762X51_TCW_SP,
+                  ItemTpl.AMMO_762X51_ULTRA_NOSLER,
                   // .300blk
                   ItemTpl.AMMO_762X35_AP,
                   ItemTpl.AMMO_762X35_BCP_FMJ,

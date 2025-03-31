@@ -49,7 +49,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      //MaxDurability:100,
+      MaxDurability:300,
       Chambers: [
         {
           _id:'67dd12d3fd5fe0a25c396a81',// id+0x01

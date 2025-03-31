@@ -6,10 +6,11 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 
-export default function addNewItemBigFood(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
-  const newId:string = '05eea6795e2e4ced85390ea2';
-  const assortId:string = '05eea6795e2e4ced85390eb2';
+const newId:string = '05eea6795e2e4ced85390ea2';
 
+const assortId:string = '05eea6795e2e4ced85390eb2';
+
+export default function addNewItemBigFood(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
     newId: newId,
@@ -32,8 +33,8 @@ export default function addNewItemBigFood(logger:ILogger,customItemService:Custo
     overrideProperties: {
       Prefab: {path: 'assets/content/weapons/usable_items/item_ifr/item_ifr_loot.bundle',rcid: ''},
       UsePrefab: {path: 'assets/content/weapons/usable_items/item_ifr/item_irf_container.bundle',rcid: ''},
-      ExamineExperience: 50,
-      LootExperience: 50,
+      ExamineExperience: 150,
+      LootExperience: 150,
       CanSellOnRagfair: true,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',

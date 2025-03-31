@@ -10,14 +10,14 @@ export default function addNewItemSpecialRifleMagazine2(logger:ILogger,customIte
   const newId: string = '67dd1dce40aca0ed6482f8c0';
   const assortId:string = '67dd1dce40aca0ed6482f8d0';
   
-  const templateItem = tables.templates.items[ItemTpl.MAGAZINE_762X51_KAC_762_20RND] || null;
+  const templateItem = tables.templates.items[ItemTpl.MAGAZINE_762X51_L7AWM_25RND] || null;
   if(!templateItem){
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialRifleMagazine60，错误：模板物品 MAGAZINE_762X51_KAC_762_20RND 不存在');
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialRifleMagazine60，错误：模板物品 MAGAZINE_762X51_L7AWM_25RND 不存在');
     return;
   }
 
   const newItem: NewItemFromCloneDetails = {
-    itemTplToClone: ItemTpl.MAGAZINE_762X51_KAC_762_20RND,
+    itemTplToClone: ItemTpl.MAGAZINE_762X51_L7AWM_25RND,
     newId: newId,
     parentId: BaseClasses.MAGAZINE,
     fleaPriceRoubles: 25_0000,
@@ -105,13 +105,13 @@ export default function addNewItemSpecialRifleMagazine2(logger:ILogger,customIte
                   ItemTpl.AMMO_762X39_T45M1,
                   ItemTpl.AMMO_762X39_US,
                   // 7.62x51
-                  //ItemTpl.AMMO_762X51_BCP_FMJ,
-                  //ItemTpl.AMMO_762X51_M61,
-                  //ItemTpl.AMMO_762X51_M62,
-                  //ItemTpl.AMMO_762X51_M80,
-                  //ItemTpl.AMMO_762X51_M993,
-                  //ItemTpl.AMMO_762X51_TCW_SP,
-                  //ItemTpl.AMMO_762X51_ULTRA_NOSLER,
+                  ItemTpl.AMMO_762X51_BCP_FMJ,
+                  ItemTpl.AMMO_762X51_M61,
+                  ItemTpl.AMMO_762X51_M62,
+                  ItemTpl.AMMO_762X51_M80,
+                  ItemTpl.AMMO_762X51_M993,
+                  ItemTpl.AMMO_762X51_TCW_SP,
+                  ItemTpl.AMMO_762X51_ULTRA_NOSLER,
                   // .300blk
                   ItemTpl.AMMO_762X35_AP,
                   ItemTpl.AMMO_762X35_BCP_FMJ,

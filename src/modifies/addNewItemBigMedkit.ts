@@ -6,10 +6,11 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 
-export default function addNewItemBigMedkit(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
-  const newId:string = 'a45acf65633b4e7189bb57c7';
-  const assortId:string = 'a45acf65633b4e7189bb57d7';
+const newId:string = 'a45acf65633b4e7189bb57c7';
 
+const assortId:string = 'a45acf65633b4e7189bb57d7';
+
+export default function addNewItemBigMedkit(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.MEDKIT_GRIZZLY_MEDICAL_KIT,
     newId: newId,
@@ -36,10 +37,10 @@ export default function addNewItemBigMedkit(logger:ILogger,customItemService:Cus
       Weight: 10.0,
       Width: 2,
       Height: 2,
-      ExamineExperience: 50,
-      LootExperience: 50,
+      ExamineExperience: 500,
+      LootExperience: 500,
       MaxHpResource: 18_0000,
-      hpResourceRate: 200,
+      hpResourceRate: 500,// => 100hp/sec
       StimulatorBuffs: '',
       BackgroundColor: 'red',
       effects_damage: {

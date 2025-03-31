@@ -6,10 +6,14 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 
+const newId:string = 'c3419b66b3684cffb0744dff';
+
+const assortId:string = 'c3419b66b3684cffb0744e00';
+
 export default function addNewItemBigDrink(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
-    newId: 'c3419b66b3684cffb0744dff',
+    newId: newId,
     parentId: BaseClasses.DRUGS,
     fleaPriceRoubles: 125_0000,
     handbookPriceRoubles: 100_0000,
@@ -29,8 +33,8 @@ export default function addNewItemBigDrink(logger:ILogger,customItemService:Cust
     overrideProperties: {
       Prefab: {path: 'assets/content/weapons/usable_items/item_bottle/item_water_bottle_loot.bundle',rcid: ''},
       UsePrefab: {path: 'assets/content/weapons/usable_items/item_bottle/item_water_bottle_container.bundle',rcid: ''},
-      ExamineExperience: 50,
-      LootExperience: 50,
+      ExamineExperience: 100,
+      LootExperience: 100,
       CanSellOnRagfair: true,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',
@@ -51,7 +55,7 @@ export default function addNewItemBigDrink(logger:ILogger,customItemService:Cust
   if(createResult.success) {
     const assort = tables.traders[Traders.THERAPIST].assort;
     assort.items.push({
-      _id: 'c3419b66b3684cffb0744e00',
+      _id: assortId,
       _tpl: createResult.itemId,
       parentId: 'hideout',
       slotId: 'hideout',
@@ -62,8 +66,8 @@ export default function addNewItemBigDrink(logger:ILogger,customItemService:Cust
         BuyRestrictionCurrent: 0
       }
     });
-    assort.loyal_level_items['c3419b66b3684cffb0744e00'] = 4;
-    assort.barter_scheme['c3419b66b3684cffb0744e00'] = [
+    assort.loyal_level_items[assortId] = 4;
+    assort.barter_scheme[assortId] = [
       [
         {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
       ]

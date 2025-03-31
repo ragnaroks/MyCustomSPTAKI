@@ -81,6 +81,7 @@ import addNewItemSpecialHeavyPlateCarrier from './modifies/addNewItemSpecialHeav
 import modifyBaseClassItem from './modifies/modifyBaseClassItem';
 import modifyBaseClassNightVision from './modifies/modifyBaseClassNightVision';
 import modifyBaseClassThermalVision from './modifies/modifyBaseClassThermalVision';
+import addNewItemBigHealingInjector from './modifies/addNewItemBigHealingInjector';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -233,6 +234,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     
     // 自定义物品：超大医疗包
     addNewItemBigMedkit(this.logger,this.customItemService,tables);
+
+    // 自定义物品：超大治疗针
+    addNewItemBigHealingInjector(this.logger,this.customItemService,tables);
 
     // 自定义物品：超大水
     addNewItemBigDrink(this.logger,this.customItemService,tables);

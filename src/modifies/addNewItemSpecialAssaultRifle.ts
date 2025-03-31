@@ -49,7 +49,7 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      //MaxDurability:100,
+      MaxDurability:300,
       Chambers: [
         {
           _id:'67dd1f71aadac40ff26204d1',// id+0x01
@@ -115,13 +115,13 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
                   ItemTpl.AMMO_762X39_T45M1,
                   ItemTpl.AMMO_762X39_US,
                   // 7.62x51
-                  //ItemTpl.AMMO_762X51_BCP_FMJ,
-                  //ItemTpl.AMMO_762X51_M61,
-                  //ItemTpl.AMMO_762X51_M62,
-                  //ItemTpl.AMMO_762X51_M80,
-                  //ItemTpl.AMMO_762X51_M993,
-                  //ItemTpl.AMMO_762X51_TCW_SP,
-                  //ItemTpl.AMMO_762X51_ULTRA_NOSLER,
+                  ItemTpl.AMMO_762X51_BCP_FMJ,
+                  ItemTpl.AMMO_762X51_M61,
+                  ItemTpl.AMMO_762X51_M62,
+                  ItemTpl.AMMO_762X51_M80,
+                  ItemTpl.AMMO_762X51_M993,
+                  ItemTpl.AMMO_762X51_TCW_SP,
+                  ItemTpl.AMMO_762X51_ULTRA_NOSLER,
                   // .300blk
                   ItemTpl.AMMO_762X35_AP,
                   ItemTpl.AMMO_762X35_BCP_FMJ,

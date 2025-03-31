@@ -49,7 +49,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      //MaxDurability:100,
+      MaxDurability:300,
       Chambers: [
         {
           _id:'67dce787331916fd3364d671',// id+0x01

@@ -21,6 +21,7 @@ export default function modifyBaseClassInventory(logger:ILogger,itemHelper:ItemH
       slot._props.filters[0].Filter.push(...glArray);
     }
   }
+  
   for(const id of glArray) {
     const template = tables.templates.items[id] || null;
     if(!template) {continue;}
