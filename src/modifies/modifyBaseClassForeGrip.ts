@@ -9,12 +9,9 @@ export default function modifyBaseClassForeGrip(logger:ILogger,itemHelper:ItemHe
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
-    template._props.ExtraSizeForceAdd = false;
-    template._props.ExtraSizeUp = 0;
-    template._props.ExtraSizeDown = 0;
-    template._props.ExtraSizeLeft = 0;
-    template._props.ExtraSizeRight = 0;
-    template._props.Recoil = template._props.Recoil >= 0 ? -1 : template._props.Recoil * 3;
+    const base:number = template._props.Ergonomics;
+    template._props.Ergonomics = base * 2;
+    template._props.Recoil = -Math.floor(base * 1.5);
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.FOREGRIP 已调整');
 }

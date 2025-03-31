@@ -3,8 +3,9 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {ItemHelper} from '@spt/helpers/ItemHelper';
 
-export default function modifyBaseClassNightVision(logger:ILogger,itemHelper:ItemHelper,tables:IDatabaseTables) : void {
-  const idArray = itemHelper.getItemTplsOfBaseType(BaseClasses.NIGHTVISION);
+export default function modifyBaseClassThermalVision(logger:ILogger,itemHelper:ItemHelper,tables:IDatabaseTables) : void {
+  return;
+  const idArray = itemHelper.getItemTplsOfBaseType(BaseClasses.THERMAL_VISION);
   for(const id of idArray) {
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
@@ -25,5 +26,5 @@ export default function modifyBaseClassNightVision(logger:ILogger,itemHelper:Ite
     template._props.Mask = "Anvis";
     template._props.MaskSize = 2;
   }
-  logger.success('[MyCustomSPTAKI]: BaseClasses.NIGHTVISION 已调整');
+  logger.success('[MyCustomSPTAKI]: BaseClasses.THERMAL_VISION 已调整');
 }

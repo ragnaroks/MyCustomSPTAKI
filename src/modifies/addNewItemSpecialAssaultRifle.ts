@@ -49,6 +49,7 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
+      //MaxDurability:100,
       Chambers: [
         {
           _id:'67dd1f71aadac40ff26204d1',// id+0x01

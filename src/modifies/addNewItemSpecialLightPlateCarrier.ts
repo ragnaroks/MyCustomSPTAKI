@@ -121,6 +121,46 @@ export default function addNewItemSpecialLightPlateCarrier(logger:ILogger,custom
           _props:{
             filters:[plantSlotFilter]
           }
+        },{
+          _id:'67e643969bdc5111d9dbe067',//id+0x07
+          _mergeSlotWithChildren:true,
+          _name:'plate7',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe068',//id+0x08
+          _mergeSlotWithChildren:true,
+          _name:'plate8',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe069',//id+0x09
+          _mergeSlotWithChildren:true,
+          _name:'plate9',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe06a',//id+0x0a
+          _mergeSlotWithChildren:true,
+          _name:'plate10',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
         }
       ]
     }

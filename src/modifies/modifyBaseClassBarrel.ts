@@ -9,8 +9,6 @@ export default function modifyBaseClassBarrel(logger:ILogger,itemHelper:ItemHelp
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     //template._props.CanSellOnRagfair = true;
-    template._props.Width = 1;
-    template._props.Height = 1;
     template._props.ExtraSizeDown = 0;
     template._props.ExtraSizeUp = 0;
     template._props.ExtraSizeRight = 0;

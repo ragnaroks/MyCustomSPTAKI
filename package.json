@@ -1,10 +1,10 @@
 {
     "name": "MyCustomSPTAKI",
-    "version": "3.10.20250327",
+    "version": "3.11.20250330",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "ragnaroks",
-    "sptVersion": "~3.10",
+    "sptVersion": "~3.11",
 	"loadBefore": [],
 	"loadAfter": [],
 	"incompatibilities": [],

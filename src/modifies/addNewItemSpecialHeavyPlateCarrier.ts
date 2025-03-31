@@ -26,7 +26,7 @@ const plantSlotFilter:ISlotFilter = {
 
 const newId: string = '67e643969bdc5111d9dbe090';
 
-const assortId:string = '67e643969bdc5111d9dbe0a0';
+const assortId:string = '67e643969bdc5111d9dbe0b0';
 
 export default function addNewItemSpecialHeavyPlateCarrier(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
@@ -195,6 +195,66 @@ export default function addNewItemSpecialHeavyPlateCarrier(logger:ILogger,custom
           _id:'67e643969bdc5111d9dbe09e',//id+0x0e
           _mergeSlotWithChildren:true,
           _name:'plate14',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe09f',//id+0x0f
+          _mergeSlotWithChildren:true,
+          _name:'plate15',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe0a0',//id+0x10
+          _mergeSlotWithChildren:true,
+          _name:'plate16',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe0a1',//id+0x11
+          _mergeSlotWithChildren:true,
+          _name:'plate17',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe0a2',//id+0x12
+          _mergeSlotWithChildren:true,
+          _name:'plate18',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe0a3',//id+0x13
+          _mergeSlotWithChildren:true,
+          _name:'plate19',
+          _parent:newId,
+          _proto:'64479fdf9731c8fadc0642c1',
+          _required:false,
+          _props:{
+            filters:[plantSlotFilter]
+          }
+        },{
+          _id:'67e643969bdc5111d9dbe0a4',//id+0x14
+          _mergeSlotWithChildren:true,
+          _name:'plate20',
           _parent:newId,
           _proto:'64479fdf9731c8fadc0642c1',
           _required:false,

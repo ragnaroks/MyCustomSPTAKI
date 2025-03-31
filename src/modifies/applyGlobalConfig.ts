@@ -15,7 +15,7 @@ export default function applyGlobalConfig(logger:ILogger,tables:IDatabaseTables)
   
   tables.globals.config.TripwiresSettings.InertSeconds = 600;
 
-  tables.globals.config.RagFair.isOnlyFoundInRaidAllowed = false;
+  tables.globals.config.RagFair.isOnlyFoundInRaidAllowed = true;
 
   logger.success('[MyCustomSPTAKI]: 全局配置 已调整');
 }

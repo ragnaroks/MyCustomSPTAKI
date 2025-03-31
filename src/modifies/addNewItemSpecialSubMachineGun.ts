@@ -45,10 +45,11 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       AllowSlide: false,
       BackgroundColor: 'red',
       BaseMalfunctionChance: 0,
-      BurstShotsCount: 5,
+      BurstShotsCount: 3,
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
+      //MaxDurability:100,
       Chambers: [
         {
           _id:'67dd12d3fd5fe0a25c396a81',// id+0x01

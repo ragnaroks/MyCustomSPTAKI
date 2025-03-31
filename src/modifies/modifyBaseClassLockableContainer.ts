@@ -9,8 +9,6 @@ export default function modifyBaseClassLockableContainer(logger:ILogger,itemHelp
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     template._props.Weight = 0;
-    template._props.Width = 1;
-    template._props.Height = 1;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.LOCKABLE_CONTAINER 已调整');
 }

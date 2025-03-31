@@ -9,14 +9,7 @@ export default function modifyBaseClassIronSight(logger:ILogger,itemHelper:ItemH
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
-    template._props.Width = 1;
-    template._props.Height = 1;
-    template._props.ExtraSizeForceAdd = false;
-    template._props.ExtraSizeUp = 0;
-    template._props.ExtraSizeDown = 0;
-    template._props.ExtraSizeLeft = 0;
-    template._props.ExtraSizeRight = 0;
-    template._props.Ergonomics = 1;
+    template._props.Ergonomics = 3;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.IRON_SIGHT 已调整');
 }

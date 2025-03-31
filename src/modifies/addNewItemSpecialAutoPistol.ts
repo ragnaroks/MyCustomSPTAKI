@@ -45,10 +45,11 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
       AllowSlide: false,
       BackgroundColor: 'red',
       BaseMalfunctionChance: 0,
-      BurstShotsCount: 5,
+      BurstShotsCount: 3,
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
+      //MaxDurability:100,
       Chambers: [
         {
           _id:'67dce787331916fd3364d671',// id+0x01

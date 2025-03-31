@@ -34,10 +34,6 @@ import modifyBaseClassMarksmanRifle from './modifies/modifyBaseClassMarksmanRifl
 import modifyBaseClassMachineGun from './modifies/modifyBaseClassMachineGun';
 import modifyBaseClassAssaultCarbine from './modifies/modifyBaseClassAssaultCarbine';
 import modifyBaseClassAssaultRifle from './modifies/modifyBaseClassAssaultRifle';
-import modifyBaseClassMasterMod from './modifies/modifyBaseClassMasterMod';
-import modifyBaseClassBarrel from './modifies/modifyBaseClassBarrel';
-import modifyBaseClassSilencer from './modifies/modifyBaseClassSilencer';
-import modifyBaseClassUBGL from './modifies/modifyBaseClassUBGL';
 import modifyBaseClassMoney from './modifies/modifyBaseClassMoney';
 import modifyBaseClassAmmo from './modifies/modifyBaseClassAmmo';
 import modifyBaseClassThrowWeapon from './modifies/modifyBaseClassThrowWeapon';
@@ -66,9 +62,6 @@ import modifyBaseClassHeadwear from './modifies/modifyBaseClassHeadwear';
 import modifyBaseClassHeadphones from './modifies/modifyBaseClassHeadphones';
 import modifyBaseClassVisors from './modifies/modifyBaseClassVisors';
 import modifyBaseClassFacecover from './modifies/modifyBaseClassFacecover';
-import modifyBaseClassMount from './modifies/modifyBaseClassMount';
-import modifyBaseClassHandguard from './modifies/modifyBaseClassHandguard';
-import modifyBaseClassReceiver from './modifies/modifyBaseClassReceiver';
 import addNewItemSpecialAmmoContainer from './modifies/addNewItemSpecialAmmoContainer';
 import addNewItemSpecialAutoPistol from './modifies/addNewItemSpecialAutoPistol';
 import addNewItemSpecialSubMachineGun from './modifies/addNewItemSpecialSubMachineGun';
@@ -82,12 +75,12 @@ import addNewItemSpecialRifleMagazine2 from './modifies/addNewItemSpecialRifleMa
 import addNewItemSpecialRifleMagazine3 from './modifies/addNewItemSpecialRifleMagazine3';
 import addNewItemSpecialPistolMagazine3 from './modifies/addNewItemSpecialPistolMagazine3';
 import addNewItemSpecialWeaponContainer from './modifies/addNewItemSpecialWeaponContainer';
-import modifyBaseClassCompensator from './modifies/modifyBaseClassCompensator';
-import modifyBaseClassFlashHider from './modifies/modifyBaseClassFlashHider';
-import modifyBaseClassCombMuzzleDevice from './modifies/modifyBaseClassCombMuzzleDevice';
 import modifyBaseClassArmorPlant from './modifies/modifyBaseClassArmorPlant';
 import addNewItemSpecialLightPlateCarrier from './modifies/addNewItemSpecialLightPlateCarrier';
 import addNewItemSpecialHeavyPlateCarrier from './modifies/addNewItemSpecialHeavyPlateCarrier';
+import modifyBaseClassItem from './modifies/modifyBaseClassItem';
+import modifyBaseClassNightVision from './modifies/modifyBaseClassNightVision';
+import modifyBaseClassThermalVision from './modifies/modifyBaseClassThermalVision';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -132,72 +125,54 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 保险归还
     myConfig.applyInsuranceConfig && applyInsuranceConfig(this.logger,tables);
     
-    // 背包无副作用，占位 1x1，可交易
+    // 背包
     myConfig.modifyBaseClassBackpack && modifyBaseClassBackpack(this.logger,this.itemHelper,tables);
     
-    // 容器无副作用，占位 1x1，可交易
+    // 容器
     myConfig.modifyBaseClassSimpleContainer && modifyBaseClassSimpleContainer(this.logger,this.itemHelper,tables);
     
-    // 上锁容器无副作用，占位 1x1，包含几个任务物品
+    // 上锁容器
     myConfig.modifyBaseClassLockableContainer && modifyBaseClassLockableContainer(this.logger,this.itemHelper,tables);
     
-    // 安全箱无副作用，负重修改，可存放任何物品但不包括安全箱
+    // 安全箱
     myConfig.modifyBaseClassSecureContainer && modifyBaseClassSecureContainer(this.logger,this.itemHelper,tables);
     
-    // 夜视仪增强
-    //modifyBaseClassNightVision(this.logger,this.itemHelper,tables);
+    // 夜视仪
+    myConfig.modifyBaseClassNightVision && modifyBaseClassNightVision(this.logger,this.itemHelper,tables);
 
-    // 手枪增强
+    // 热成像
+    myConfig.modifyBaseClassThermalVision && modifyBaseClassThermalVision(this.logger,this.itemHelper,tables);
+
+    // 手枪
     myConfig.modifyBaseClassPistol && modifyBaseClassPistol(this.logger,this.itemHelper,tables);
     
-    // 霰弹枪增强
+    // 霰弹枪
     myConfig.modifyBaseClassShotgun && modifyBaseClassShotgun(this.logger,this.itemHelper,tables);
     
-    // 榴弹发射器增强
+    // 榴弹发射器
     myConfig.modifyBaseClassGrenadeLauncher && modifyBaseClassGrenadeLauncher(this.logger,this.itemHelper,tables);
     
-    // 冲锋枪增强
+    // 冲锋枪
     myConfig.modifyBaseClassSmg && modifyBaseClassSmg(this.logger,this.itemHelper,tables);
     
-    // 狙击步枪增强
+    // 狙击步枪
     myConfig.modifyBaseClassSniperRifle && modifyBaseClassSniperRifle(this.logger,this.itemHelper,tables);
     
-    // 转轮手枪增强
+    // 转轮手枪
     myConfig.modifyBaseClassRevolver && modifyBaseClassRevolver(this.logger,this.itemHelper,tables);
     
-    // 精确射手步枪增强
+    // 精确射手步枪
     myConfig.modifyBaseClassMarksmanRifle && modifyBaseClassMarksmanRifle(this.logger,this.itemHelper,tables);
     
-    // 机枪增强
+    // 机枪
     myConfig.modifyBaseClassMachineGun && modifyBaseClassMachineGun(this.logger,this.itemHelper,tables);
 
-    // 突击卡宾枪增强
+    // 突击卡宾枪
     myConfig.modifyBaseClassAssaultCarbine && modifyBaseClassAssaultCarbine(this.logger,this.itemHelper,tables);
 
-    // 突击步枪增强
+    // 突击步枪
     myConfig.modifyBaseClassAssaultRifle && modifyBaseClassAssaultRifle(this.logger,this.itemHelper,tables);
 
-    // 武器配件增强
-    myConfig.modifyBaseClassMasterMod && modifyBaseClassMasterMod(this.logger,this.itemHelper,tables);
-
-    // 枪管调整
-    myConfig.modifyBaseClassBarrel && modifyBaseClassBarrel(this.logger,this.itemHelper,tables);
-
-    // 组合式膛口装置
-    myConfig.modifyBaseClassCombMuzzleDevice && modifyBaseClassCombMuzzleDevice(this.logger,this.itemHelper,tables);
-
-    // 消焰器增强
-    myConfig.modifyBaseClassFlashHider && modifyBaseClassFlashHider(this.logger,this.itemHelper,tables);
-
-    // 制退器增强
-    myConfig.modifyBaseClassCompensator && modifyBaseClassCompensator(this.logger,this.itemHelper,tables);
-
-    // 消音器增强
-    myConfig.modifyBaseClassSilencer && modifyBaseClassSilencer(this.logger,this.itemHelper,tables);
-
-    // 下挂式发射器增强
-    myConfig.modifyBaseClassUBGL && modifyBaseClassUBGL(this.logger,this.itemHelper,tables);
-    
     // 货币堆叠
     myConfig.modifyBaseClassMoney && modifyBaseClassMoney(this.logger,this.itemHelper,tables);
     
@@ -208,45 +183,36 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 改堆叠数量无用，投掷会清空整个堆叠
     myConfig.modifyBaseClassThrowWeapon && modifyBaseClassThrowWeapon(this.logger,this.itemHelper,tables);
     
-    // 弹匣增强，人机优化，占位 1x1，不包括转轮手枪弹巢
+    // 弹匣，不包括转轮手枪弹巢
     myConfig.modifyBaseClassMagazine && modifyBaseClassMagazine(this.logger,this.itemHelper,tables);
 
-    // 手枪式握把增强
+    // 手枪式握把
     myConfig.modifyBaseClassPistolGrip && modifyBaseClassPistolGrip(this.logger,this.itemHelper,tables);
 
-    // 前握把增强
+    // 前握把
     myConfig.modifyBaseClassForeGrip && modifyBaseClassForeGrip(this.logger,this.itemHelper,tables);
 
-    // 枪托增强
+    // 枪托
     myConfig.modifyBaseClassStock && modifyBaseClassStock(this.logger,this.itemHelper,tables);
 
-    // 导轨调整
-    myConfig.modifyBaseClassMount && modifyBaseClassMount(this.logger,this.itemHelper,tables);
-
-    // 护木调整
-    myConfig.modifyBaseClassHandguard && modifyBaseClassHandguard(this.logger,this.itemHelper,tables);
-
-    // 上机匣调整
-    myConfig.modifyBaseClassReceiver && modifyBaseClassReceiver(this.logger,this.itemHelper,tables);
-
-    // 瞄具增强
+    // 瞄具
     myConfig.modifyBaseClassIronSight && modifyBaseClassIronSight(this.logger,this.itemHelper,tables);
     myConfig.modifyBaseClassQuickSight && modifyBaseClassQuickSight(this.logger,this.itemHelper,tables);
     myConfig.modifyBaseClassOpticSight && modifyBaseClassOpticSight(this.logger,this.itemHelper,tables);
 
-    // 胸挂增强
+    // 胸挂
     myConfig.modifyBaseClassVest && modifyBaseClassVest(this.logger,this.itemHelper,tables);
 
-    // 护甲增强
+    // 护甲
     myConfig.modifyBaseClassArmor && modifyBaseClassArmor(this.logger,this.itemHelper,tables);
 
-    // 护甲插板增强
+    // 护甲插板
     myConfig.modifyBaseClassArmorPlant && modifyBaseClassArmorPlant(this.logger,this.itemHelper,tables);
 
-    // 头盔增强
+    // 头盔
     myConfig.modifyBaseClassHeadwear && modifyBaseClassHeadwear(this.logger,this.itemHelper,tables);
 
-    // 耳机增强
+    // 耳机
     myConfig.modifyBaseClassHeadphones && modifyBaseClassHeadphones(this.logger,this.itemHelper,tables);
 
     // 观测物品，包括护目镜
@@ -255,13 +221,12 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 面部装备
     myConfig.modifyBaseClassFacecover && modifyBaseClassFacecover(this.logger,this.itemHelper,tables);
 
-    // 物品增强，可堆叠，可出售
-    // 排除可使用的物品（食物、药物等），排除任务物品
-    // 物品堆叠会导致变成不可交易
-
     // 库存调整
     // 主要是让手枪位置可以放入榴弹发射器
     myConfig.modifyBaseClassInventory && modifyBaseClassInventory(this.logger,this.itemHelper,tables);
+
+    // 所有物品占位 1x1
+    myConfig.modifyBaseClassItem && modifyBaseClassItem(this.logger,tables);
 
     // AI 生命值修改，不修改头部
     myConfig.modifyBotHealth && modifyBotHealth(this.logger,tables);

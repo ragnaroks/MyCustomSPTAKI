@@ -9,8 +9,6 @@ export default function modifyBaseClassSilencer(logger:ILogger,itemHelper:ItemHe
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
-    template._props.Width = 1;
-    template._props.Height = 1;
     template._props.Ergonomics = 2;
     template._props.HeatFactor = 0.85;
     template._props.DurabilityBurnModificator = 1.1;

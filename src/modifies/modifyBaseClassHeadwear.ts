@@ -9,8 +9,6 @@ export default function modifyBaseClassHeadwear(logger:ILogger,itemHelper:ItemHe
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
     //template._props.CanSellOnRagfair = true;
-    template._props.Width = 1;
-    template._props.Height = 1;
     template._props.mousePenalty = 0;
     template._props.speedPenaltyPercent = 0;
     template._props.weaponErgonomicPenalty = 0;

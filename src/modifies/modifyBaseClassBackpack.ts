@@ -10,8 +10,6 @@ export default function modifyBaseClassBackpack(logger:ILogger,itemHelper:ItemHe
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Weight = 0;
-    template._props.Width = 1;
-    template._props.Height = 1;
     template._props.mousePenalty = 0;
     template._props.speedPenaltyPercent = 0;
     template._props.weaponErgonomicPenalty = 0;
