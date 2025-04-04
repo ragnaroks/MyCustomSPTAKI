@@ -13,8 +13,8 @@ const assortId:string = '67eb1cb18609418ea4389d20';
 
 const buffs:Array<IBuff> = [
   {AbsoluteValue:true,BuffType:'HealthRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:20},
-  {AbsoluteValue:true,BuffType:'EnergyRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-1},
-  {AbsoluteValue:true,BuffType:'HydrationRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-2},
+  //{AbsoluteValue:true,BuffType:'EnergyRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-0.5},
+  //{AbsoluteValue:true,BuffType:'HydrationRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-1},
 ];
 
 export default function addNewItemBigHealingInjector(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
