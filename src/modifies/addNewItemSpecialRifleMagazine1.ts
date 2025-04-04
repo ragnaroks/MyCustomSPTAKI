@@ -148,28 +148,30 @@ export default function addNewItemSpecialRifleMagazine1(logger:ILogger,customIte
   };
   
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 3,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialRifleMagazine1，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialRifleMagazine1，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 3,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+  
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialRifleMagazine1，ID：' + createResult.itemId);
 }

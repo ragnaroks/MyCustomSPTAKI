@@ -6,12 +6,12 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialAssaultRifle(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newId: string = '67dd1f71aadac40ff26204d0';
-  const assortId:string = '67dd1f71aadac40ff26204e0';
+  const assortId: string = '67dd1f71aadac40ff26204e0';
 
   const templateItem = tables.templates.items[ItemTpl.ASSAULTRIFLE_SIG_MCXSPEAR_68X51_ASSAULT_RIFLE] || null;
-  if(!templateItem){
+  if(!templateItem) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialAssaultRifle，错误：模板物品 ASSAULTRIFLE_SIG_MCXSPEAR_68X51_ASSAULT_RIFLE 不存在');
     return;
   }
@@ -49,19 +49,20 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      MaxDurability:300,
+      MaxDurability: 500,
+      DeviationCurve: 1,
       Chambers: [
         {
-          _id:'67dd1f71aadac40ff26204d1',// id+0x01
-          _name:'patron_in_weapon',
-          _parent:newId,
-          _mergeSlotWithChildren:false,
-          _proto:'55d4af244bdc2d962f8b4571',
-          _required:false,
-          _props:{
-            filters:[
+          _id: '67dd1f71aadac40ff26204d1',// id+0x01
+          _name: 'patron_in_weapon',
+          _parent: newId,
+          _mergeSlotWithChildren: false,
+          _proto: '55d4af244bdc2d962f8b4571',
+          _required: false,
+          _props: {
+            filters: [
               {
-                Filter:[
+                Filter: [
                   // 5.56x45
                   ItemTpl.AMMO_556X45_6MM_BB,
                   ItemTpl.AMMO_556X45_FMJ,
@@ -143,10 +144,10 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
       Ergonomics: 71,
       HeatFactorByShot: 1.0,
       HeatFactorGun: 1.0,
-      Rarity:'Superrare',
+      Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       SingleFireRate: 500,
-      Slots:[
+      Slots: [
         {
           _id: '67dd1f71aadac40ff26204d2',//id+0x02
           _mergeSlotWithChildren: false,
@@ -154,7 +155,7 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_pistol_grip')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_pistol_grip')._props
         },{
           _id: '67dd1f71aadac40ff26204d3',//id+0x03
           _mergeSlotWithChildren: false,
@@ -163,10 +164,10 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
           _proto: '55d30c394bdc2dae468b4577',
           _required: false,
           _props: {
-            filters:[
+            filters: [
               {
-                AnimationIndex:-1,
-                Filter:['67dd17915bdad9aa03d95570','67dd1dce40aca0ed6482f8c0','67dd1e75c58c32a1669b2e70']
+                AnimationIndex: -1,
+                Filter: ['67dd17915bdad9aa03d95570','67dd1dce40aca0ed6482f8c0','67dd1e75c58c32a1669b2e70']
               }
             ]
           }
@@ -177,7 +178,7 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_reciever')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_reciever')._props
         },{
           _id: '67dd1f71aadac40ff26204d5',//id+0x05
           _mergeSlotWithChildren: false,
@@ -185,7 +186,7 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
           _parent: newId,
           _proto: '55d30c394bdc2dae468b4577',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_stock_000')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_stock_000')._props
         },{
           _id: '67dd1f71aadac40ff26204d6',//id+0x06
           _mergeSlotWithChildren: false,
@@ -193,39 +194,41 @@ export default function addNewItemSpecialAssaultRifle(logger:ILogger,customItemS
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_charge')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_charge')._props
         }
       ],
       bFirerate: 1000,
       weapFireType: ['single','burst','fullauto']
     }
   };
-  
-  const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    tables.globals.config.Mastering.push({Name:'SAR',Level2:3000,Level3:8000,Templates:[createResult.itemId]});
 
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialAssaultRifle，ID：' + createResult.itemId);
-  } else {
+  const createResult = customItemService.createItemFromClone(newItem);
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialAssaultRifle，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  tables.globals.config.Mastering.push({Name: 'SAR',Level2: 3000,Level3: 8000,Templates: [createResult.itemId]});
+
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialAssaultRifle，ID：' + createResult.itemId);
 }

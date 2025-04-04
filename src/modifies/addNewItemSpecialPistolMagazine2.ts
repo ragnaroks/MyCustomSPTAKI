@@ -6,12 +6,12 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialPistolMagazine2(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialPistolMagazine2(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newId: string = '67dd07553f86d487ade69a70';
-  const assortId:string = '67dd07553f86d487ade69a80';
-  
+  const assortId: string = '67dd07553f86d487ade69a80';
+
   const templateItem = tables.templates.items[ItemTpl.MAGAZINE_9X19_BIG_STICK_33RND] || null;
-  if(!templateItem){
+  if(!templateItem) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialPistolMagazine2，错误：模板物品 MAGAZINE_9X19_BIG_STICK_33RND 不存在');
     return;
   }
@@ -43,15 +43,15 @@ export default function addNewItemSpecialPistolMagazine2(logger:ILogger,customIt
       LootExperience: 50,
       Cartridges: [
         {
-          _id:'67dd07553f86d487ade69a71',// id+0x01
-          _name:'cartridges',
-          _parent:newId,
-          _proto:'5748538b2459770af276a261',
+          _id: '67dd07553f86d487ade69a71',// id+0x01
+          _name: 'cartridges',
+          _parent: newId,
+          _proto: '5748538b2459770af276a261',
           _max_count: 100,
-          _props:{
-            filters:[
+          _props: {
+            filters: [
               {
-                Filter:[
+                Filter: [
                   // 9x19
                   ItemTpl.AMMO_9X19_PBP,
                   ItemTpl.AMMO_9X19_AP_63,
@@ -96,7 +96,7 @@ export default function addNewItemSpecialPistolMagazine2(logger:ILogger,customIt
                   //ItemTpl.AMMO_127X33_HAWK_JSP,
                   //ItemTpl.AMMO_127X33_JHP,
                   // 5.7x28
-                  ItemTpl.AMMO_57X28_SS190, 
+                  ItemTpl.AMMO_57X28_SS190,
                   ItemTpl.AMMO_57X28_L191,
                   ItemTpl.AMMO_57X28_SB193,
                   ItemTpl.AMMO_57X28_SS197SR,
@@ -130,44 +130,46 @@ export default function addNewItemSpecialPistolMagazine2(logger:ILogger,customIt
       ],
       CheckTimeModifier: 20,
       Ergonomics: -5,
-      ExtraSizeForceAdd:false,
-      ExtraSizeDown:0,
-      ExtraSizeLeft:0,
-      ExtraSizeRight:0,
-      ExtraSizeUp:0,
-      Height:1,
-      LoadUnloadModifier:20,
-      MalfunctionChance:0,
-      Rarity:'Superrare',
-      RarityPvE:'Superrare',
-      Recoil:0,
-      Width:1
+      ExtraSizeForceAdd: false,
+      ExtraSizeDown: 0,
+      ExtraSizeLeft: 0,
+      ExtraSizeRight: 0,
+      ExtraSizeUp: 0,
+      Height: 1,
+      LoadUnloadModifier: 20,
+      MalfunctionChance: 0,
+      Rarity: 'Superrare',
+      RarityPvE: 'Superrare',
+      Recoil: 0,
+      Width: 1
     }
   };
-  
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 3,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl:ItemTpl.MONEY_ROUBLES,count:newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialPistolMagazine2，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialPistolMagazine2，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 3,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialPistolMagazine2，ID：' + createResult.itemId);
 }

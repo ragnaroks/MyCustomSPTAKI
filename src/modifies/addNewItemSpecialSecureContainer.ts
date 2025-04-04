@@ -6,9 +6,11 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
+const newId: string = '67d8fe7b00471695d35c1cfb';
+
+const assortId: string = '67d8fe7b00471695d35c1d0b';
+
 export default function addNewItemSpecialSecureContainer(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67d8fe7b00471695d35c1cfb';
-  
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.SECURE_CONTAINER_KAPPA,
     newId: newId,
@@ -63,31 +65,34 @@ export default function addNewItemSpecialSecureContainer(logger:ILogger,customIt
       ]
     }
   };
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: '67d8fe7b00471695d35c1d0b',
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items['67d8fe7b00471695d35c1d0b'] = 3;
-    assort.barter_scheme['67d8fe7b00471695d35c1d0b'] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: 2_0000_0000},
-        {_tpl: ItemTpl.MONEY_DOLLARS,count: 100_0000},
-        {_tpl: ItemTpl.MONEY_EUROS,count: 100_0000}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialSecureContainer，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialSecureContainer，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: 2_0000_0000},
+      {_tpl: ItemTpl.MONEY_DOLLARS,count: 100_0000},
+      {_tpl: ItemTpl.MONEY_EUROS,count: 100_0000}
+    ]
+  ];
+  
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialSecureContainer，ID：' + createResult.itemId);
 }

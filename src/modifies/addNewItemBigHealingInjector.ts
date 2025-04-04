@@ -7,17 +7,17 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {IBuff} from '@spt/models/eft/common/IGlobals';
 
-const newId:string = '67eb1cb18609418ea4389d10';
+const newId: string = '67eb1cb18609418ea4389d10';
 
-const assortId:string = '67eb1cb18609418ea4389d20';
+const assortId: string = '67eb1cb18609418ea4389d20';
 
-const buffs:Array<IBuff> = [
-  {AbsoluteValue:true,BuffType:'HealthRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:20},
-  {AbsoluteValue:true,BuffType:'EnergyRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-1},
-  {AbsoluteValue:true,BuffType:'HydrationRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-2},
+const buffs: Array<IBuff> = [
+  {AbsoluteValue: true,BuffType: 'HealthRate',Chance: 1,Delay: 1,Duration: 60,SkillName: '',Value: 20},
+  //{AbsoluteValue:true,BuffType:'EnergyRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-0.5},
+  //{AbsoluteValue:true,BuffType:'HydrationRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-1},
 ];
 
-export default function addNewItemBigHealingInjector(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigHealingInjector(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables): void {
   tables.globals.config.Health.Effects.Stimulator.Buffs['Buffs_BigHealingInjector'] = buffs;
 
   const newItem: NewItemFromCloneDetails = {
@@ -61,29 +61,32 @@ export default function addNewItemBigHealingInjector(logger:ILogger,customItemSe
       effects_health: {}
     }
   };
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.THERAPIST].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 BigHealingInjector，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 BigHealingInjector，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  logger.success('[MyCustomSPTAKI]: 已加入 BigHealingInjector，ID：' + createResult.itemId);
 }

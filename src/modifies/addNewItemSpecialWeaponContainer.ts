@@ -6,9 +6,9 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialWeaponContainer(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialWeaponContainer(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newId: string = '67df1f6130138a0f56cd2680';
-  const assortId:string = '67df1f6130138a0f56cd2690';
+  const assortId: string = '67df1f6130138a0f56cd2690';
 
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.CONTAINER_THICC_ITEM_CASE,
@@ -32,13 +32,13 @@ export default function addNewItemSpecialWeaponContainer(logger:ILogger,customIt
     overrideProperties: {
       CanSellOnRagfair: true,
       BackgroundColor: 'red',
-      Prefab: {path:'assets/content/items/containers/item_container_weapon_thicc/item_container_weapon_thicc.bundle',rcid:''},
+      Prefab: {path: 'assets/content/items/containers/item_container_weapon_thicc/item_container_weapon_thicc.bundle',rcid: ''},
       Weight: 0,
       Width: 1,
       Height: 1,
-      mousePenalty:0,
-      speedPenaltyPercent:0,
-      weaponErgonomicPenalty:0,
+      mousePenalty: 0,
+      speedPenaltyPercent: 0,
+      weaponErgonomicPenalty: 0,
       ExamineExperience: 100,
       LootExperience: 100,
       Grids: [
@@ -65,29 +65,32 @@ export default function addNewItemSpecialWeaponContainer(logger:ILogger,customIt
       ]
     }
   };
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialWeaponContainer，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialWeaponContainer，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialWeaponContainer，ID：' + createResult.itemId);
 }

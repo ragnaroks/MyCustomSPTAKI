@@ -6,10 +6,11 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialAmmoContainer(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67dccdd9a480dda56ab15bba';
-  const assortId: string = '67dccdd9a480dda56ab15bca';
+const newId: string = '67eb96123600da352339b130';
 
+const assortId: string = '67eb96123600da352339b140';
+
+export default function addNewItemSpecialPlateContainer(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.CONTAINER_THICC_ITEM_CASE,
     newId: newId,
@@ -19,20 +20,20 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
     handbookParentId: '5b5f6fa186f77409407a7eb7',
     locales: {
       en: {
-        name: 'special ammo container',
-        shortName: 'SAC',
-        description: 'special ammo container'
+        name: 'special plate container',
+        shortName: 'SPC',
+        description: 'special plate container'
       },
       ch: {
-        name: '特制弹药箱',
-        shortName: '弹药箱',
-        description: '特制弹药箱'
+        name: '特制插板箱',
+        shortName: '插板箱',
+        description: '特制插板箱'
       }
     },
     overrideProperties: {
       CanSellOnRagfair: true,
       BackgroundColor: 'red',
-      Prefab: {path: 'assets/content/items/containers/item_container_ammo/item_container_ammo.bundle',rcid: ''},
+      Prefab: {path: 'assets/content/items/containers/item_container_plates_case/item_container_plates_case.bundle',rcid: ''},
       Weight: 0,
       Width: 1,
       Height: 1,
@@ -43,7 +44,7 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
       LootExperience: 100,
       Grids: [
         {
-          _id: '67dccdd9a480dda56ab15bbb',//id+0x01
+          _id: '67eb96123600da352339b131',//id+0x01
           _name: 'main',
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
@@ -52,7 +53,7 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
             cellsV: 14,
             filters: [
               {
-                Filter: [BaseClasses.AMMO,BaseClasses.AMMO_BOX],
+                Filter: [BaseClasses.ARMOR_PLATE],
                 ExcludedFilter: []
               }
             ],
@@ -68,7 +69,7 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialAmmoContainer，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialPlateContainer，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -92,5 +93,5 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
     ]
   ];
 
-  logger.success('[MyCustomSPTAKI]: 已加入 SpecialAmmoContainer，ID：' + createResult.itemId);
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialPlateContainer，ID：' + createResult.itemId);
 }

@@ -6,11 +6,11 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 
-const newId:string = '05eea6795e2e4ced85390ea2';
+const newId: string = '05eea6795e2e4ced85390ea2';
 
-const assortId:string = '05eea6795e2e4ced85390eb2';
+const assortId: string = '05eea6795e2e4ced85390eb2';
 
-export default function addNewItemBigFood(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigFood(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
     newId: newId,
@@ -51,29 +51,32 @@ export default function addNewItemBigFood(logger:ILogger,customItemService:Custo
       }
     }
   };
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.THERAPIST].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 BigFood，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 BigFood，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  logger.success('[MyCustomSPTAKI]: 已加入 BigFood，ID：' + createResult.itemId);
 }

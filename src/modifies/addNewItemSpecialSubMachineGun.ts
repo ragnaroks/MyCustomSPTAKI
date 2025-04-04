@@ -6,10 +6,11 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67dd12d3fd5fe0a25c396a80';
-  const assortId:string = '67dd12d3fd5fe0a25c396a90';
+const newId: string = '67dd12d3fd5fe0a25c396a80';
 
+const assortId:string = '67dd12d3fd5fe0a25c396a90';
+
+export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
   const templateItem = tables.templates.items[ItemTpl.SMG_SOYUZTM_STM9_GEN2_9X19_CARBINE] || null;
   if(!templateItem){
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialSubMachineGun，错误：模板物品 SMG_SOYUZTM_STM9_GEN2_9X19_CARBINE 不存在');
@@ -49,7 +50,8 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      MaxDurability:300,
+      MaxDurability: 500,
+      DeviationCurve: 1.35,
       Chambers: [
         {
           _id:'67dd12d3fd5fe0a25c396a81',// id+0x01
@@ -209,30 +211,32 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
   };
   
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    tables.globals.config.Mastering.push({Name:'SSMG',Level2:2000,Level3:5000,Templates:[createResult.itemId]});
-
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialSubMachineGun，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialSubMachineGun，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  tables.globals.config.Mastering.push({Name:'SSMG',Level2:2000,Level3:5000,Templates:[createResult.itemId]});
+  
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialSubMachineGun，ID：' + createResult.itemId);
 }

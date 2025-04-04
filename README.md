@@ -20,6 +20,8 @@ edit the `config.json`, suggest use VSCode or notepad2
   "modifyBaseClassSimpleContainer":true,
   "modifyBaseClassLockableContainer":true,
   "modifyBaseClassSecureContainer":true,
+  "modifyBaseClassNightVision":true,
+  "modifyBaseClassThermalVision":true,
   "modifyBaseClassPistol":true,
   "modifyBaseClassShotgun":true,
   "modifyBaseClassGrenadeLauncher":true,
@@ -52,8 +54,11 @@ edit the `config.json`, suggest use VSCode or notepad2
   "modifyBaseClassFacecover":true,
   "modifyBaseClassInventory":true,
   "modifyBaseClassItem":true,
-  "modifyBotHealth":true,
-  "modifyPlayerHealth":true
+  "enhancedMPR45":true,
+  // health scale but exclude head
+  "modifyBotHealth":3,
+  // health scale
+  "modifyPlayerHealth":3
 }
 ```
 

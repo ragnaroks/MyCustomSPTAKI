@@ -145,10 +145,12 @@ export default function addNewItemSpecialPocket(logger:ILogger,customItemService
       ]
     }
   };
+
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialPocket，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialPocket，错误：' + createResult.errors.join('、'));
+    return;
   }
+  
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialPocket，ID：' + createResult.itemId);
 }

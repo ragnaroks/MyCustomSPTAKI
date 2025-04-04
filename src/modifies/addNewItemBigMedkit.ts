@@ -6,11 +6,11 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 
-const newId:string = 'a45acf65633b4e7189bb57c7';
+const newId: string = 'a45acf65633b4e7189bb57c7';
 
-const assortId:string = 'a45acf65633b4e7189bb57d7';
+const assortId: string = 'a45acf65633b4e7189bb57d7';
 
-export default function addNewItemBigMedkit(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigMedkit(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.MEDKIT_GRIZZLY_MEDICAL_KIT,
     newId: newId,
@@ -54,29 +54,32 @@ export default function addNewItemBigMedkit(logger:ILogger,customItemService:Cus
       effects_health: {}
     }
   };
+  
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    const assort = tables.traders[Traders.THERAPIST].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 BigMedkit，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 BigMedkit，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  logger.success('[MyCustomSPTAKI]: 已加入 BigMedkit，ID：' + createResult.itemId);
 }

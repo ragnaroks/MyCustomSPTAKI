@@ -43,6 +43,7 @@
   "modifyBaseClassFacecover":true,
   "modifyBaseClassInventory":true,
   "modifyBaseClassItem":true,
-  "modifyBotHealth":true,
-  "modifyPlayerHealth":true
+  "enhancedMPR45":true,
+  "modifyBotHealth":3,
+  "modifyPlayerHealth":3
 }

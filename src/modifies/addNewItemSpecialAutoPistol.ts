@@ -6,12 +6,12 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialAutoPistol(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newId: string = '67dce787331916fd3364d670';
-  const assortId:string = '67dce787331916fd3364d680';
+  const assortId: string = '67dce787331916fd3364d680';
 
   const templateItem = tables.templates.items[ItemTpl.PISTOL_GLOCK_17_9X19] || null;
-  if(!templateItem){
+  if(!templateItem) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialAutoPistol，错误：模板物品 PISTOL_GLOCK_17_9X19 不存在');
     return;
   }
@@ -49,19 +49,20 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      MaxDurability:300,
+      MaxDurability: 300,
+      DeviationCurve: 2,
       Chambers: [
         {
-          _id:'67dce787331916fd3364d671',// id+0x01
-          _name:'patron_in_weapon',
-          _parent:newId,
-          _mergeSlotWithChildren:false,
-          _proto:'55d4af244bdc2d962f8b4571',
-          _required:false,
-          _props:{
-            filters:[
+          _id: '67dce787331916fd3364d671',// id+0x01
+          _name: 'patron_in_weapon',
+          _parent: newId,
+          _mergeSlotWithChildren: false,
+          _proto: '55d4af244bdc2d962f8b4571',
+          _required: false,
+          _props: {
+            filters: [
               {
-                Filter:[
+                Filter: [
                   // 9x19
                   ItemTpl.AMMO_9X19_PBP,
                   ItemTpl.AMMO_9X19_AP_63,
@@ -106,7 +107,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
                   //ItemTpl.AMMO_127X33_HAWK_JSP,
                   //ItemTpl.AMMO_127X33_JHP,
                   // 5.7x28
-                  ItemTpl.AMMO_57X28_SS190, 
+                  ItemTpl.AMMO_57X28_SS190,
                   ItemTpl.AMMO_57X28_L191,
                   ItemTpl.AMMO_57X28_SB193,
                   ItemTpl.AMMO_57X28_SS197SR,
@@ -141,10 +142,10 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
       Ergonomics: 93,
       HeatFactorByShot: 1.0,
       HeatFactorGun: 1.0,
-      Rarity:'Superrare',
+      Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       SingleFireRate: 500,
-      Slots:[
+      Slots: [
         {
           _id: '67dce787331916fd3364d672',//id+0x02
           _mergeSlotWithChildren: false,
@@ -152,7 +153,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_barrel')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_barrel')._props
         },{
           _id: '67dce787331916fd3364d673',//id+0x03
           _mergeSlotWithChildren: false,
@@ -160,7 +161,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: false,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_pistol_grip')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_pistol_grip')._props
         },{
           _id: '67dce787331916fd3364d674',//id+0x04
           _mergeSlotWithChildren: false,
@@ -168,7 +169,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: true,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_reciever')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_reciever')._props
         },{
           _id: '67dce787331916fd3364d675',//id+0x05
           _mergeSlotWithChildren: false,
@@ -177,10 +178,10 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _proto: '55d30c394bdc2dae468b4577',
           _required: false,
           _props: {
-            filters:[
+            filters: [
               {
-                AnimationIndex:0,
-                Filter:['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70']
+                AnimationIndex: 0,
+                Filter: ['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70']
               }
             ]
           }
@@ -191,7 +192,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: false,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_tactical')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_tactical')._props
         },
         {
           _id: '67dce787331916fd3364d677',//id+0x07
@@ -200,7 +201,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: false,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_mount')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_mount')._props
         },
         {
           _id: '67dce787331916fd3364d678',//id+0x08
@@ -209,7 +210,7 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
           _parent: newId,
           _proto: '55d30c4c4bdc2db4468b457e',
           _required: false,
-          _props: templateItem._props.Slots.find(x=>x._name==='mod_stock')._props
+          _props: templateItem._props.Slots.find(x => x._name === 'mod_stock')._props
         }
       ],
       bFirerate: 1000,
@@ -218,30 +219,32 @@ export default function addNewItemSpecialAutoPistol(logger:ILogger,customItemSer
   };
 
   const createResult = customItemService.createItemFromClone(newItem);
-  if(createResult.success) {
-    tables.globals.config.Mastering.push({Name:'SAP',Level2:1000,Level3:3000,Templates:[createResult.itemId]});
-
-    const assort = tables.traders[Traders.MECHANIC].assort;
-    assort.items.push({
-      _id: assortId,
-      _tpl: createResult.itemId,
-      parentId: 'hideout',
-      slotId: 'hideout',
-      upd: {
-        UnlimitedCount: true,
-        StackObjectsCount: 9999999,
-        BuyRestrictionMax: 1,
-        BuyRestrictionCurrent: 0
-      }
-    });
-    assort.loyal_level_items[assortId] = 4;
-    assort.barter_scheme[assortId] = [
-      [
-        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-      ]
-    ];
-    logger.success('[MyCustomSPTAKI]: 已加入 SpecialAutoPistol，ID：' + createResult.itemId);
-  } else {
+  if(!createResult.success) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialAutoPistol，错误：' + createResult.errors.join('、'));
+    return;
   }
+
+  const assort = tables.traders[Traders.REF].assort;
+  assort.items.push({
+    _id: assortId,
+    _tpl: createResult.itemId,
+    parentId: 'hideout',
+    slotId: 'hideout',
+    upd: {
+      UnlimitedCount: true,
+      StackObjectsCount: 9999999,
+      BuyRestrictionMax: 1,
+      BuyRestrictionCurrent: 0
+    }
+  });
+  assort.loyal_level_items[assortId] = 1;
+  assort.barter_scheme[assortId] = [
+    [
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+    ]
+  ];
+
+  tables.globals.config.Mastering.push({Name:'SAP',Level2:1000,Level3:3000,Templates:[createResult.itemId]});
+
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialAutoPistol，ID：' + createResult.itemId);
 }

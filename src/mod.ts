@@ -82,18 +82,22 @@ import modifyBaseClassItem from './modifies/modifyBaseClassItem';
 import modifyBaseClassNightVision from './modifies/modifyBaseClassNightVision';
 import modifyBaseClassThermalVision from './modifies/modifyBaseClassThermalVision';
 import addNewItemBigHealingInjector from './modifies/addNewItemBigHealingInjector';
+import addNewItemSpecialPlateContainer from './modifies/addNewItemSpecialPlateContainer';
+import enhancedMPR45 from './modifies/enhancedMPR45';
+import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNightVisionDevice';
+import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
 class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
-  private logger:ILogger;
-  private databaseServer:DatabaseServer;
-  private profileHelper:ProfileHelper;
-  private itemHelper:ItemHelper;
-  private configServer:ConfigServer;
-  private customItemService:CustomItemService;
+  private logger: ILogger;
+  private databaseServer: DatabaseServer;
+  private profileHelper: ProfileHelper;
+  private itemHelper: ItemHelper;
+  private configServer: ConfigServer;
+  private customItemService: CustomItemService;
 
-  public preSptLoad(container:DependencyContainer): void {
+  public preSptLoad(container: DependencyContainer): void {
     this.logger = container.resolve<ILogger>('WinstonLogger');
     this.databaseServer = container.resolve<DatabaseServer>('DatabaseServer');
     this.profileHelper = container.resolve<ProfileHelper>('ProfileHelper');
@@ -102,15 +106,15 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     this.customItemService = container.resolve<CustomItemService>('CustomItemService');
   }
 
-  public postDBLoad(container:DependencyContainer): void {
+  public postDBLoad(container: DependencyContainer): void {
     const tables: IDatabaseTables = this.databaseServer.getTables();
     const lostOnDeathConfig: ILostOnDeathConfig = this.configServer.getConfig<ILostOnDeathConfig>(ConfigTypes.LOST_ON_DEATH);
     const ragfairConfig: IRagfairConfig = this.configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
     const hideoutConfig: IHideoutConfig = this.configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
-    
+
     // global
     myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,tables);
-    
+
     // lostOnDeathConfig
     myConfig.applyLostOnDeathConfig && applyLostOnDeathConfig(this.logger,lostOnDeathConfig);
 
@@ -119,25 +123,25 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // hideoutConfig
     myConfig.applyHideoutConfig && applyHideoutConfig(this.logger,hideoutConfig);
-    
+
     // exfil
     myConfig.applyExfilConfig && applyExfilConfig(this.logger,tables);
-    
+
     // 保险归还
     myConfig.applyInsuranceConfig && applyInsuranceConfig(this.logger,tables);
-    
+
     // 背包
     myConfig.modifyBaseClassBackpack && modifyBaseClassBackpack(this.logger,this.itemHelper,tables);
-    
+
     // 容器
     myConfig.modifyBaseClassSimpleContainer && modifyBaseClassSimpleContainer(this.logger,this.itemHelper,tables);
-    
+
     // 上锁容器
     myConfig.modifyBaseClassLockableContainer && modifyBaseClassLockableContainer(this.logger,this.itemHelper,tables);
-    
+
     // 安全箱
     myConfig.modifyBaseClassSecureContainer && modifyBaseClassSecureContainer(this.logger,this.itemHelper,tables);
-    
+
     // 夜视仪
     myConfig.modifyBaseClassNightVision && modifyBaseClassNightVision(this.logger,this.itemHelper,tables);
 
@@ -146,25 +150,25 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 手枪
     myConfig.modifyBaseClassPistol && modifyBaseClassPistol(this.logger,this.itemHelper,tables);
-    
+
     // 霰弹枪
     myConfig.modifyBaseClassShotgun && modifyBaseClassShotgun(this.logger,this.itemHelper,tables);
-    
+
     // 榴弹发射器
     myConfig.modifyBaseClassGrenadeLauncher && modifyBaseClassGrenadeLauncher(this.logger,this.itemHelper,tables);
-    
+
     // 冲锋枪
     myConfig.modifyBaseClassSmg && modifyBaseClassSmg(this.logger,this.itemHelper,tables);
-    
+
     // 狙击步枪
     myConfig.modifyBaseClassSniperRifle && modifyBaseClassSniperRifle(this.logger,this.itemHelper,tables);
-    
+
     // 转轮手枪
     myConfig.modifyBaseClassRevolver && modifyBaseClassRevolver(this.logger,this.itemHelper,tables);
-    
+
     // 精确射手步枪
     myConfig.modifyBaseClassMarksmanRifle && modifyBaseClassMarksmanRifle(this.logger,this.itemHelper,tables);
-    
+
     // 机枪
     myConfig.modifyBaseClassMachineGun && modifyBaseClassMachineGun(this.logger,this.itemHelper,tables);
 
@@ -176,14 +180,14 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 货币堆叠
     myConfig.modifyBaseClassMoney && modifyBaseClassMoney(this.logger,this.itemHelper,tables);
-    
+
     // 弹药，包括榴弹，可出售，堆叠 9600（40、50、60 均能除尽 1200，再放大几倍）
     myConfig.modifyBaseClassAmmo && modifyBaseClassAmmo(this.logger,this.itemHelper,tables);
-    
+
     // 投掷武器，包括手榴弹，可出售
     // 改堆叠数量无用，投掷会清空整个堆叠
     myConfig.modifyBaseClassThrowWeapon && modifyBaseClassThrowWeapon(this.logger,this.itemHelper,tables);
-    
+
     // 弹匣，不包括转轮手枪弹巢
     myConfig.modifyBaseClassMagazine && modifyBaseClassMagazine(this.logger,this.itemHelper,tables);
 
@@ -218,7 +222,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 观测物品，包括护目镜
     myConfig.modifyBaseClassVisors && modifyBaseClassVisors(this.logger,this.itemHelper,tables);
-    
+
     // 面部装备
     myConfig.modifyBaseClassFacecover && modifyBaseClassFacecover(this.logger,this.itemHelper,tables);
 
@@ -229,9 +233,12 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 所有物品占位 1x1
     myConfig.modifyBaseClassItem && modifyBaseClassItem(this.logger,tables);
 
+    // MPR45 侧轨增强
+    myConfig.enhancedMPR45 && enhancedMPR45(this.logger,this.itemHelper,tables);
+
     // AI 生命值修改，不修改头部
-    myConfig.modifyBotHealth && modifyBotHealth(this.logger,tables);
-    
+    modifyBotHealth(this.logger,tables,myConfig.modifyBotHealth);
+
     // 自定义物品：超大医疗包
     addNewItemBigMedkit(this.logger,this.customItemService,tables);
 
@@ -272,6 +279,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 自定义物品：特制手榴弹箱
     addNewItemSpecialGrenadeContainer(this.logger,this.customItemService,tables);
 
+    // 自定义物品：特制手榴弹箱
+    addNewItemSpecialPlateContainer(this.logger,this.customItemService,tables);
+
     // 自定义物品：特制武器箱
     addNewItemSpecialWeaponContainer(this.logger,this.customItemService,tables);
 
@@ -295,15 +305,21 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 自定义物品：特制突击步枪
     addNewItemSpecialAssaultRifle(this.logger,this.customItemService,tables);
 
+    // 自定义物品：特制夜视仪
+    addNewItemSpecialNightVisionDevice(this.logger,this.customItemService,this.itemHelper,tables);
+
+    // 自定义物品：特制热成像
+    addNewItemSpecialThermalVisionDevice(this.logger,this.customItemService,this.itemHelper,tables);
+
     //
     this.logger.success('[MyCustomSPTAKI]: 处理完成');
   }
-  
+
   public postSptLoad(container: DependencyContainer): void {
     const profiles = this.profileHelper.getProfiles();
 
     // 玩家生命值修改
-    myConfig.modifyPlayerHealth && modifyPlayerHealth(this.logger,profiles);
+    modifyPlayerHealth(this.logger,profiles,myConfig.modifyPlayerHealth);
   }
 }
 
