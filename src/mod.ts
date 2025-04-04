@@ -82,6 +82,8 @@ import modifyBaseClassItem from './modifies/modifyBaseClassItem';
 import modifyBaseClassNightVision from './modifies/modifyBaseClassNightVision';
 import modifyBaseClassThermalVision from './modifies/modifyBaseClassThermalVision';
 import addNewItemBigHealingInjector from './modifies/addNewItemBigHealingInjector';
+import addNewItemSpecialPlateContainer from './modifies/addNewItemSpecialPlateContainer';
+import enhancedMPR45 from './modifies/enhancedMPR45';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -229,6 +231,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 所有物品占位 1x1
     myConfig.modifyBaseClassItem && modifyBaseClassItem(this.logger,tables);
 
+    // MPR45 侧轨增强
+    myConfig.enhancedMPR45 && enhancedMPR45(this.logger,this.itemHelper,tables);
+
     // AI 生命值修改，不修改头部
     myConfig.modifyBotHealth && modifyBotHealth(this.logger,tables);
     
@@ -271,6 +276,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制手榴弹箱
     addNewItemSpecialGrenadeContainer(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制手榴弹箱
+    addNewItemSpecialPlateContainer(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制武器箱
     addNewItemSpecialWeaponContainer(this.logger,this.customItemService,tables);
