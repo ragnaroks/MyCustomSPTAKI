@@ -12,6 +12,11 @@ export default function modifyBaseClassOpticSight(logger:ILogger,itemHelper:Item
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Ergonomics = -3;
+    template._props.IsNoisy = false;
+    template._props.IsFpsStuck = false;
+    template._props.IsMotionBlurred = false;
+    template._props.IsGlitch = false;
+    template._props.IsPixelated = false;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.OPTIC_SCOPE 已调整');
   logger.success('[MyCustomSPTAKI]: BaseClasses.ASSAULT_SCOPE 已调整');

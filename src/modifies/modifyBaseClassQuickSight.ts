@@ -11,6 +11,11 @@ export default function modifyBaseClassQuickSight(logger:ILogger,itemHelper:Item
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Ergonomics = 5;
+    template._props.IsNoisy = false;
+    template._props.IsFpsStuck = false;
+    template._props.IsMotionBlurred = false;
+    template._props.IsGlitch = false;
+    template._props.IsPixelated = false;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.COMPACT_COLLIMATOR 已调整');
   logger.success('[MyCustomSPTAKI]: BaseClasses.COLLIMATOR 已调整');
