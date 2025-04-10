@@ -6,10 +6,11 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialPistolMagazine3(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67dd07553f86d487ade89c70';
-  const assortId: string = '67dd07553f86d487ade89c80';
+const newId: string = '67dd07553f86d487ade89c70';
 
+const assortId: string = '67dd07553f86d487ade89c80';
+
+export default function addNewItemSpecialPistolMagazine3(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const templateItem = tables.templates.items[ItemTpl.MAGAZINE_9X19_G_SGMT_50RND] || null;
   if(!templateItem) {
     logger.error('[MyCustomSPTAKI]: 未加入 SpecialPistolMagazine3，错误：模板物品 MAGAZINE_9X19_G_SGMT_50RND 不存在');

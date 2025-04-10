@@ -181,7 +181,7 @@ export default function addNewItemSpecialAutoPistol(logger: ILogger,customItemSe
             filters: [
               {
                 AnimationIndex: 0,
-                Filter: ['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70']
+                Filter: ['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70','67dd07553f86d487ade89c70']
               }
             ]
           }

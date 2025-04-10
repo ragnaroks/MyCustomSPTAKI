@@ -166,7 +166,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
             filters:[
               {
                 AnimationIndex:-1,
-                Filter:['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70']
+                Filter:['67dd012b1b3dd0c240cb5350','67dd07553f86d487ade69a70','67dd07553f86d487ade89c70']
               }
             ]
           }
