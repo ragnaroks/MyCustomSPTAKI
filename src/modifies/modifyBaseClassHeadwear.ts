@@ -13,6 +13,10 @@ export default function modifyBaseClassHeadwear(logger:ILogger,itemHelper:ItemHe
     template._props.speedPenaltyPercent = 0;
     template._props.weaponErgonomicPenalty = 0;
     template._props.ConflictingItems = [];
+    template._props.BlocksEarpiece = false;
+    template._props.BlocksEyewear = false;
+    template._props.BlocksFaceCover = false;
+    template._props.BlocksHeadwear = false;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.HEADWEAR 已调整');
 }
