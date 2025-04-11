@@ -11,6 +11,7 @@ export default function modifyBaseClassQuickSight(logger:ILogger,itemHelper:Item
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Ergonomics = 5;
+    template._props.ConflictingItems = [];
     template._props.IsNoisy = false;
     template._props.IsFpsStuck = false;
     template._props.IsMotionBlurred = false;

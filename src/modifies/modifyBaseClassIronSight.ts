@@ -10,6 +10,7 @@ export default function modifyBaseClassIronSight(logger:ILogger,itemHelper:ItemH
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Ergonomics = 3;
+    template._props.ConflictingItems = [];
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.IRON_SIGHT 已调整');
 }
