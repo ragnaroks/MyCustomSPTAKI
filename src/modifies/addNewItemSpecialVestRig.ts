@@ -6,10 +6,11 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-export default function addNewItemSpecialRig(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67d8d6e2b96d1278ae75d242';
-  const assortId:string = '67d8d6e2b96d1278ae75d252';
-  
+const newId: string = '67d8d6e2b96d1278ae75d242';
+
+const assortId:string = '67d8d6e2b96d1278ae75d252';
+
+export default function addNewItemSpecialVestRig(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.VEST_POYASA_POYASB_GEAR_RIG,
     newId: newId,
@@ -19,9 +20,9 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
     handbookParentId: '5b5f6f8786f77447ed563642',
     locales: {
       en: {
-        name: 'special rig',
-        shortName: 'SR',
-        description: 'special rig'
+        name: 'special vest rig',
+        shortName: 'SVR',
+        description: 'special vest rig'
       },
       ch: {
         name: '特制胸挂',
@@ -52,8 +53,8 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
             cellsV: 2,
             filters: [
               {
-                Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.POCKETS,BaseClasses.MOB_CONTAINER,BaseClasses.MAGAZINE,BaseClasses.AMMO,BaseClasses.AMMO_BOX]
+                Filter: [BaseClasses.THROW_WEAPON],
+                ExcludedFilter: []
               }
             ],
             isSortingTable: false,
@@ -71,7 +72,7 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
             cellsV: 4,
             filters: [
               {
-                Filter: [BaseClasses.THROW_WEAPON,BaseClasses.AMMO],
+                Filter: [BaseClasses.AMMO],
                 ExcludedFilter: []
               }
             ],
@@ -106,7 +107,7 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialRig，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialVestRig，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -130,5 +131,5 @@ export default function addNewItemSpecialRig(logger:ILogger,customItemService:Cu
     ]
   ];
   
-  logger.success('[MyCustomSPTAKI]: 已加入 SpecialRig，ID：' + createResult.itemId);
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialVestRig，ID：' + createResult.itemId);
 }
