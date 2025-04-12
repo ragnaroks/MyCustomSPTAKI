@@ -13,7 +13,7 @@ import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
 import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
 import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
-import myConfig from '../config.json';
+import myConfig from './config.json';
 import applyGlobalConfig from './modifies/applyGlobalConfig';
 import applyLostOnDeathConfig from './modifies/applyLostOnDeathConfig';
 import applyRagfairConfig from './modifies/applyRagfairConfig';
@@ -53,7 +53,7 @@ import addNewItemBigFood from './modifies/addNewItemBigFood';
 import addNewItemSpecialPocket from './modifies/addNewItemSpecialPocket';
 import modifyBotHealth from './modifies/modifyBotHealth';
 import modifyPlayerHealth from './modifies/modifyPlayerHealth';
-import addNewItemSpecialRig from './modifies/addNewItemSpecialRig';
+import addNewItemSpecialVestRig from './modifies/addNewItemSpecialVestRig';
 import addNewItemSpecialSecureContainer from './modifies/addNewItemSpecialSecureContainer';
 import addNewItemSpecialConsumeContainer from './modifies/addNewItemSpecialConsumeContainer';
 import addNewItemSpecialMedicalContainer from './modifies/addNewItemSpecialMedicalContainer';
@@ -86,6 +86,8 @@ import addNewItemSpecialPlateContainer from './modifies/addNewItemSpecialPlateCo
 import enhancedMPR45 from './modifies/enhancedMPR45';
 import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNightVisionDevice';
 import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
+import addNewItemSpecialDogtagArmband from './modifies/addNewItemSpecialDogtagArmband';
+import {BaseClasses} from '../types/models/enums/BaseClasses';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -240,22 +242,22 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     modifyBotHealth(this.logger,tables,myConfig.modifyBotHealth);
 
     // 自定义物品：超大医疗包
-    addNewItemBigMedkit(this.logger,this.customItemService,tables);
+    addNewItemBigMedkit(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：超大治疗针
-    addNewItemBigHealingInjector(this.logger,this.customItemService,tables);
+    addNewItemBigHealingInjector(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：超大水
-    addNewItemBigDrink(this.logger,this.customItemService,tables);
+    addNewItemBigDrink(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：超大食物
-    addNewItemBigFood(this.logger,this.customItemService,tables);
+    addNewItemBigFood(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：特制口袋
     addNewItemSpecialPocket(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制胸挂
-    addNewItemSpecialRig(this.logger,this.customItemService,tables);
+    addNewItemSpecialVestRig(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制插板背心
     addNewItemSpecialLightPlateCarrier(this.logger,this.customItemService,tables);
@@ -310,6 +312,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制热成像
     addNewItemSpecialThermalVisionDevice(this.logger,this.customItemService,this.itemHelper,tables);
+
+    // 自定义物品：特制手雷臂带
+    addNewItemSpecialDogtagArmband(this.logger,this.customItemService,tables);
 
     //
     this.logger.success('[MyCustomSPTAKI]: 处理完成');
