@@ -5,12 +5,13 @@ import {NewItemFromCloneDetails} from '@spt/models/spt/mod/NewItemDetails';
 import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
+import {ItemHelper} from '@spt/helpers/ItemHelper';
 
 const newId: string = '05eea6795e2e4ced85390ea2';
 
 const assortId: string = '05eea6795e2e4ced85390eb2';
 
-export default function addNewItemBigFood(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigFood(logger: ILogger,customItemService: CustomItemService,itemHelper:ItemHelper,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
     newId: newId,
@@ -77,6 +78,14 @@ export default function addNewItemBigFood(logger: ILogger,customItemService: Cus
       {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
     ]
   ];
+
+  for (const id of itemHelper.getItemTplsOfBaseType(BaseClasses.POCKETS)) {
+    const template = tables.templates.items[id] || null;
+    if(!template || template._props.Slots.length<1){continue;}
+    for (const slot of template._props.Slots) {
+      slot._props.filters[0].Filter.push(createResult.itemId);
+    }
+  }
 
   logger.success('[MyCustomSPTAKI]: 已加入 BigFood，ID：' + createResult.itemId);
 }

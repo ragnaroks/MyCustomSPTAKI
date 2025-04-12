@@ -6,6 +6,7 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {IBuff} from '@spt/models/eft/common/IGlobals';
+import {ItemHelper} from '@spt/helpers/ItemHelper';
 
 const newId: string = '67eb1cb18609418ea4389d10';
 
@@ -17,7 +18,7 @@ const buffs: Array<IBuff> = [
   //{AbsoluteValue:true,BuffType:'HydrationRate',Chance:1,Delay:1,Duration:60,SkillName:'',Value:-1},
 ];
 
-export default function addNewItemBigHealingInjector(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigHealingInjector(logger: ILogger,customItemService: CustomItemService,itemHelper:ItemHelper,tables: IDatabaseTables): void {
   tables.globals.config.Health.Effects.Stimulator.Buffs['Buffs_BigHealingInjector'] = buffs;
 
   const newItem: NewItemFromCloneDetails = {
@@ -87,6 +88,14 @@ export default function addNewItemBigHealingInjector(logger: ILogger,customItemS
       {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
     ]
   ];
+
+  for (const id of itemHelper.getItemTplsOfBaseType(BaseClasses.POCKETS)) {
+    const template = tables.templates.items[id] || null;
+    if(!template || template._props.Slots.length<1){continue;}
+    for (const slot of template._props.Slots) {
+      slot._props.filters[0].Filter.push(createResult.itemId);
+    }
+  }
 
   logger.success('[MyCustomSPTAKI]: 已加入 BigHealingInjector，ID：' + createResult.itemId);
 }

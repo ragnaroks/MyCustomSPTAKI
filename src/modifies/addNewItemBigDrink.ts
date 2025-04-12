@@ -5,12 +5,13 @@ import {NewItemFromCloneDetails} from '@spt/models/spt/mod/NewItemDetails';
 import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
+import {ItemHelper} from '@spt/helpers/ItemHelper';
 
 const newId:string = 'c3419b66b3684cffb0744dff';
 
 const assortId:string = 'c3419b66b3684cffb0744e00';
 
-export default function addNewItemBigDrink(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables): void {
+export default function addNewItemBigDrink(logger:ILogger,customItemService:CustomItemService,itemHelper:ItemHelper,tables:IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
     newId: newId,
@@ -77,5 +78,14 @@ export default function addNewItemBigDrink(logger:ILogger,customItemService:Cust
       {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
     ]
   ];
+
+  for (const id of itemHelper.getItemTplsOfBaseType(BaseClasses.POCKETS)) {
+    const template = tables.templates.items[id] || null;
+    if(!template || template._props.Slots.length<1){continue;}
+    for (const slot of template._props.Slots) {
+      slot._props.filters[0].Filter.push(createResult.itemId);
+    }
+  }
+
   logger.success('[MyCustomSPTAKI]: 已加入 BigDrink，ID：' + createResult.itemId);
 }
