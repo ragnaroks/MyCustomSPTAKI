@@ -13,7 +13,7 @@ import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
 import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
 import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
-import myConfig from './config.json';
+import myConfig from '../config.json';
 import applyGlobalConfig from './modifies/applyGlobalConfig';
 import applyLostOnDeathConfig from './modifies/applyLostOnDeathConfig';
 import applyRagfairConfig from './modifies/applyRagfairConfig';
@@ -119,7 +119,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     myConfig.applyLostOnDeathConfig && applyLostOnDeathConfig(this.logger,lostOnDeathConfig);
 
     // ragfairConfig
-    myConfig.applyRagfairConfig && applyRagfairConfig(this.logger,ragfairConfig);
+    myConfig.applyRagfairConfig && applyRagfairConfig(this.logger,ragfairConfig,tables,myConfig.allowRagfairList);
 
     // hideoutConfig
     myConfig.applyHideoutConfig && applyHideoutConfig(this.logger,hideoutConfig);
