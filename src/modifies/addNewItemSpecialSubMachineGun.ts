@@ -51,6 +51,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       ExamineExperience: 100,
       LootExperience: 100,
       MaxDurability: 500,
+      Durability: 500,
       DeviationCurve: 1.35,
       Chambers: [
         {
