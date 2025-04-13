@@ -12,6 +12,9 @@ export default function applyGlobalConfig(logger:ILogger,tables:IDatabaseTables)
   tables.globals.config.SavagePlayCooldown = 60;
   tables.globals.config.SavagePlayCooldownNdaFree = 60;
   tables.globals.config.AimPunchMagnitude = 0;
+
+  //tables.globals.config.MaxBotsAliveOnMap = 6;
+  //tables.globals.config.MaxBotsAliveOnMapPvE = 9;
   
   tables.globals.config.TripwiresSettings.InertSeconds = 600;
 

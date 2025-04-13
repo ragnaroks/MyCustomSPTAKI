@@ -17,6 +17,7 @@
   ],
   "applyHideoutConfig":true,
   "applyExfilConfig":true,
+  "escapeTimeLimit": 60,
   "applyInsuranceConfig":true,
   "modifyBaseClassBackpack":true,
   "modifyBaseClassSimpleContainer":true,

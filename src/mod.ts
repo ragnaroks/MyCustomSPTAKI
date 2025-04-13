@@ -127,7 +127,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     myConfig.applyHideoutConfig && applyHideoutConfig(this.logger,hideoutConfig);
 
     // exfil
-    myConfig.applyExfilConfig && applyExfilConfig(this.logger,tables);
+    myConfig.applyExfilConfig && applyExfilConfig(this.logger,tables,myConfig.escapeTimeLimit);
 
     // 保险归还
     myConfig.applyInsuranceConfig && applyInsuranceConfig(this.logger,tables);
