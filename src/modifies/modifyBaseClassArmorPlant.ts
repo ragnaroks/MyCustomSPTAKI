@@ -13,6 +13,8 @@ export default function modifyBaseClassArmorPlant(logger:ILogger,itemHelper:Item
     template._props.speedPenaltyPercent = 0;
     template._props.weaponErgonomicPenalty = 0;
     template._props.armorColliders = [
+      'BackHead','Ears','Eyes','HeadCommon','Jaw','NeckBack','NeckFront','ParietalHead',
+      //
       'LeftCalf','LeftForearm','LeftSideChestDown','LeftSideChestUp','LeftThigh','LeftUpperArm',
       'Pelvis','PelvisBack','RibcageLow','RibcageUp','SpineDown','SpineTop',
       'RightCalf','RightForearm','RightSideChestDown','RightSideChestUp','RightThigh','RightUpperArm',

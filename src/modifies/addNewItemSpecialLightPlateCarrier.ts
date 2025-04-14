@@ -11,6 +11,7 @@ const plantSlotFilter: ISlotFilter = {
   Filter: [BaseClasses.ARMOR_PLATE],
   Plate: ItemTpl.ARMORPLATE_GAC_3S15M_BALLISTIC_PLATE,
   armorColliders: [
+    'BackHead','Ears','Eyes','HeadCommon','Jaw','NeckBack','NeckFront','ParietalHead',
     'LeftCalf','LeftForearm','LeftSideChestDown','LeftSideChestUp','LeftThigh','LeftUpperArm',
     'Pelvis','PelvisBack','RibcageLow','RibcageUp','SpineDown','SpineTop',
     'RightCalf','RightForearm','RightSideChestDown','RightSideChestUp','RightThigh','RightUpperArm',
