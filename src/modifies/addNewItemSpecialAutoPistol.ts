@@ -49,8 +49,6 @@ export default function addNewItemSpecialAutoPistol(logger: ILogger,customItemSe
       DurabilityBurnRatio: 1.0,
       ExamineExperience: 100,
       LootExperience: 100,
-      MaxDurability: 300,
-      Durability: 300,
       DeviationCurve: 2,
       Chambers: [
         {
