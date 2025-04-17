@@ -30,7 +30,7 @@ export default function addNewItemSpecialConsumeContainer(logger: ILogger,custom
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_food/item_container_food.bundle',rcid: ''},
       Weight: 0,

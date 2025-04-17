@@ -31,7 +31,7 @@ export default function addNewItemSpecialPlateContainer(logger: ILogger,customIt
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_plates_case/item_container_plates_case.bundle',rcid: ''},
       Weight: 0,

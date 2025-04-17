@@ -37,8 +37,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
-      CanRequireOnRagfair: false,
+      CanSellOnRagfair: false,
       AllowFeed: false,
       AllowJam: false,
       AllowMisfire: false,
@@ -48,8 +47,8 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
       BaseMalfunctionChance: 0,
       BurstShotsCount: 3,
       DurabilityBurnRatio: 1.0,
-      ExamineExperience: 100,
-      LootExperience: 100,
+      ExamineExperience: 150,
+      LootExperience: 150,
       DeviationCurve: 1.35,
       Chambers: [
         {

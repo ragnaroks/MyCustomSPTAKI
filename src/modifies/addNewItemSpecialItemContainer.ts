@@ -30,7 +30,7 @@ export default function addNewItemSpecialItemContainer(logger: ILogger,customIte
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_items_thicc/item_container_items_thicc.bundle',rcid: ''},
       Weight: 0,

@@ -30,7 +30,7 @@ export default function addNewItemSpecialMedicalContainer(logger: ILogger,custom
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_meds/item_container_meds.bundle',rcid: ''},
       Weight: 0,

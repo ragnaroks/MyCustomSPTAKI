@@ -38,8 +38,7 @@ export default function addNewItemSpecialNightVisionDevice(logger: ILogger,custo
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
-      CanRequireOnRagfair: false,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       ExamineExperience: 100,
       LootExperience: 100,

@@ -36,10 +36,9 @@ export default function addNewItemSpecialRifleMagazine3(logger:ILogger,customIte
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
-      CanRequireOnRagfair: false,
-      ExamineExperience: 50,
-      LootExperience: 50,
+      CanSellOnRagfair: false,
+      ExamineExperience: 30,
+      LootExperience: 30,
       BackgroundColor: 'red',
       Cartridges: [
         {

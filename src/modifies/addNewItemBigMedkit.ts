@@ -32,7 +32,7 @@ export default function addNewItemBigMedkit(logger: ILogger,customItemService: C
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       Weight: 10.0,

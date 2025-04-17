@@ -41,7 +41,7 @@ export default function addNewItemBigHealingInjector(logger: ILogger,customItemS
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       Weight: 10.0,

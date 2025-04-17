@@ -30,7 +30,7 @@ export default function addNewItemSpecialMagazineContainer(logger: ILogger,custo
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_magbox/item_container_magbox.bundle',rcid: ''},
       Weight: 0,

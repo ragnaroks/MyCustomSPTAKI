@@ -30,7 +30,7 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_ammo/item_container_ammo.bundle',rcid: ''},
       Weight: 0,

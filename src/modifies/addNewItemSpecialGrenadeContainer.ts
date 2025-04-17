@@ -30,7 +30,7 @@ export default function addNewItemSpecialGrenadeContainer(logger: ILogger,custom
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
       Prefab: {path: 'assets/content/items/containers/item_container_grenadebox/item_container_grenadebox.bundle',rcid: ''},
       Weight: 0,

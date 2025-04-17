@@ -36,18 +36,17 @@ export default function addNewItemSpecialPistolMagazine2(logger: ILogger,customI
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
-      CanRequireOnRagfair: false,
+      CanSellOnRagfair: false,
       BackgroundColor: 'red',
-      ExamineExperience: 50,
-      LootExperience: 50,
+      ExamineExperience: 10,
+      LootExperience: 10,
       Cartridges: [
         {
           _id: '67dd07553f86d487ade69a71',// id+0x01
           _name: 'cartridges',
           _parent: newId,
           _proto: '5748538b2459770af276a261',
-          _max_count: 100,
+          _max_count: 200,
           _props: {
             filters: [
               {

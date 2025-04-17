@@ -31,7 +31,7 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
       }
     },
     overrideProperties: {
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       Weight: 0,
       Width: 1,
       Height: 1,

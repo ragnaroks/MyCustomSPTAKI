@@ -36,7 +36,7 @@ export default function addNewItemBigDrink(logger:ILogger,customItemService:Cust
       UsePrefab: {path: 'assets/content/weapons/usable_items/item_bottle/item_water_bottle_container.bundle',rcid: ''},
       ExamineExperience: 100,
       LootExperience: 100,
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       Weight: 10.0,

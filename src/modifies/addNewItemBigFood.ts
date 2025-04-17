@@ -36,7 +36,7 @@ export default function addNewItemBigFood(logger: ILogger,customItemService: Cus
       UsePrefab: {path: 'assets/content/weapons/usable_items/item_ifr/item_irf_container.bundle',rcid: ''},
       ExamineExperience: 150,
       LootExperience: 150,
-      CanSellOnRagfair: true,
+      CanSellOnRagfair: false,
       Rarity: 'Superrare',
       RarityPvE: 'Superrare',
       Weight: 10.0,

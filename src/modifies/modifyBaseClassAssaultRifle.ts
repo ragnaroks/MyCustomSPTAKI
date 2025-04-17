@@ -8,7 +8,7 @@ export default function modifyBaseClassAssaultRifle(logger:ILogger,itemHelper:It
   for(const id of idArray) {
     const template = tables.templates.items[id] || null;
     if(!template || template._type !== "Item") {continue;}
-    template._props.CanSellOnRagfair = true;
+    //template._props.CanSellOnRagfair = true;
     template._props.AllowJam = false;
     template._props.AllowFeed = false;
     template._props.AllowMisfire = false;
