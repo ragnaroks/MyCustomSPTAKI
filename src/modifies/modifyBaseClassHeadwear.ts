@@ -17,6 +17,7 @@ export default function modifyBaseClassHeadwear(logger:ILogger,itemHelper:ItemHe
     template._props.BlocksEyewear = false;
     template._props.BlocksFaceCover = false;
     template._props.BlocksHeadwear = false;
+    template._props.FaceShieldMask = 'NoMask';
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.HEADWEAR 已调整');
 }

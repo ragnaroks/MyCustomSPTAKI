@@ -17,6 +17,7 @@ export default function modifyBaseClassVisors(logger:ILogger,itemHelper:ItemHelp
     template._props.BlocksEyewear = false;
     template._props.BlocksFaceCover = false;
     template._props.BlocksHeadwear = false;
+    template._props.FaceShieldMask = 'NoMask';
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.VISORS 已调整');
 }
