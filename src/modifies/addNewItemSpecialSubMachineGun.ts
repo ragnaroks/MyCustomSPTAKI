@@ -234,7 +234,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
     ]
   ];
 
-  tables.globals.config.Mastering.push({Name:'SSMG',Level2:2000,Level3:5000,Templates:[createResult.itemId]});
+  tables.globals.config.Mastering.push({Name:'SSMG',Level2:1000,Level3:3000,Templates:[createResult.itemId]});
   
   logger.success('[MyCustomSPTAKI]: 已加入 SpecialSubMachineGun，ID：' + createResult.itemId);
 }

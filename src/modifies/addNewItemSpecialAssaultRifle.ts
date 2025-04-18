@@ -226,7 +226,7 @@ export default function addNewItemSpecialAssaultRifle(logger: ILogger,customItem
     ]
   ];
 
-  tables.globals.config.Mastering.push({Name: 'SAR',Level2: 3000,Level3: 8000,Templates: [createResult.itemId]});
+  tables.globals.config.Mastering.push({Name: 'SAR',Level2: 1000,Level3: 3000,Templates: [createResult.itemId]});
 
   logger.success('[MyCustomSPTAKI]: 已加入 SpecialAssaultRifle，ID：' + createResult.itemId);
 }
