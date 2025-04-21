@@ -86,8 +86,7 @@ import addNewItemSpecialPlateContainer from './modifies/addNewItemSpecialPlateCo
 import enhancedMPR45 from './modifies/enhancedMPR45';
 import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNightVisionDevice';
 import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
-import addNewItemSpecialDogtagArmband from './modifies/addNewItemSpecialDogtagArmband';
-import {BaseClasses} from '../types/models/enums/BaseClasses';
+import addNewItemSpecialContainerArmband from './modifies/addNewItemSpecialContainerArmband';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -313,8 +312,8 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 自定义物品：特制热成像
     addNewItemSpecialThermalVisionDevice(this.logger,this.customItemService,this.itemHelper,tables);
 
-    // 自定义物品：特制手雷臂带
-    addNewItemSpecialDogtagArmband(this.logger,this.customItemService,tables);
+    // 自定义物品：特制空间臂带
+    addNewItemSpecialContainerArmband(this.logger,this.customItemService,tables);
 
     //
     this.logger.success('[MyCustomSPTAKI]: 处理完成');

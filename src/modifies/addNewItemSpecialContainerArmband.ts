@@ -10,24 +10,24 @@ const newId: string = '67f9fbe1727f56bdc866b020';
 
 const assortId:string = '67f9fbe1727f56bdc866b030';
 
-export default function addNewItemSpecialDogtagArmband(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialContainerArmband(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.ARMBAND_DEADSKUL,
     newId: newId,
     parentId: BaseClasses.VEST,
-    fleaPriceRoubles: 125_0000,
-    handbookPriceRoubles: 100_0000,
+    fleaPriceRoubles: 625_0000,
+    handbookPriceRoubles: 500_0000,
     handbookParentId: '5b47574386f77428ca22b33f',
     locales: {
       en: {
-        name: 'special dogtag armband',
-        shortName: 'SDTA',
-        description: 'special dogtag armband'
+        name: 'special container armband',
+        shortName: 'SCA',
+        description: 'special container armband'
       },
       ch: {
-        name: '特制狗牌臂带',
-        shortName: '狗牌臂带',
-        description: '特制狗牌臂带'
+        name: '特制空间臂带',
+        shortName: '空间臂带',
+        description: '特制空间臂带'
       }
     },
     overrideProperties: {
@@ -38,10 +38,12 @@ export default function addNewItemSpecialDogtagArmband(logger:ILogger,customItem
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
-      ExamineExperience: 100,
-      LootExperience: 100,
+      ExamineExperience: 500,
+      LootExperience: 500,
       BackgroundColor: 'red',
       RigLayoutName:'',
+      Unlootable: true,
+      InsuranceDisabled: false,
       Grids: [
         {
           _id: '67f9fbe1727f56bdc866b021',//id+0x01
@@ -53,19 +55,8 @@ export default function addNewItemSpecialDogtagArmband(logger:ILogger,customItem
             cellsV: 14,
             filters: [
               {
-                Filter: [
-                  ItemTpl.BARTER_DOGTAG_BEAR,
-                  ItemTpl.BARTER_DOGTAG_BEAR_EOD,
-                  ItemTpl.BARTER_DOGTAG_BEAR_PRESTIGE_1,
-                  ItemTpl.BARTER_DOGTAG_BEAR_PRESTIGE_2,
-                  ItemTpl.BARTER_DOGTAG_BEAR_TUE,
-                  ItemTpl.BARTER_DOGTAG_USEC,
-                  ItemTpl.BARTER_DOGTAG_USEC_EOD,
-                  ItemTpl.BARTER_DOGTAG_USEC_PRESTIGE_1,
-                  ItemTpl.BARTER_DOGTAG_USEC_PRESTIGE_2,
-                  ItemTpl.BARTER_DOGTAG_USEC_TUE
-                ],
-                ExcludedFilter: []
+                Filter: [BaseClasses.ITEM],
+                ExcludedFilter: [BaseClasses.SIMPLE_CONTAINER,BaseClasses.MOB_CONTAINER]
               }
             ],
             isSortingTable: false,
@@ -80,7 +71,7 @@ export default function addNewItemSpecialDogtagArmband(logger:ILogger,customItem
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialDogtagArmband，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialContainerArmband，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -113,5 +104,5 @@ export default function addNewItemSpecialDogtagArmband(logger:ILogger,customItem
     }
   }
   
-  logger.success('[MyCustomSPTAKI]: 已加入 SpecialDogtagArmband，ID：' + createResult.itemId);
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialContainerArmband，ID：' + createResult.itemId);
 }

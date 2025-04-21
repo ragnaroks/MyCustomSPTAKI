@@ -122,7 +122,17 @@ export default function addNewItemSpecialRifleMagazine3(logger:ILogger,customIte
                   ItemTpl.AMMO_9X33R_FMJ,
                   ItemTpl.AMMO_9X33R_HP,
                   ItemTpl.AMMO_9X33R_JHP,
-                  ItemTpl.AMMO_9X33R_SP
+                  ItemTpl.AMMO_9X33R_SP,
+                  // 7.62x54r
+                  ItemTpl.AMMO_762X54R_BS,
+                  ItemTpl.AMMO_762X54R_BT,
+                  ItemTpl.AMMO_762X54R_FMJ,
+                  ItemTpl.AMMO_762X54R_HP_BT,
+                  ItemTpl.AMMO_762X54R_LPS,
+                  ItemTpl.AMMO_762X54R_PS,
+                  ItemTpl.AMMO_762X54R_SNB,
+                  ItemTpl.AMMO_762X54R_SP_BT,
+                  ItemTpl.AMMO_762X54R_T46M
                 ]
               }
             ]
