@@ -186,7 +186,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 货币堆叠
     myConfig.modifyBaseClassMoney && modifyBaseClassMoney(this.logger,this.itemHelper,tables);
 
-    // 弹药，包括榴弹，可出售，堆叠 9600（40、50、60 均能除尽 1200，再放大几倍）
+    // 弹药，包括榴弹，堆叠 300，堆叠改太大容易在空投捡到大量高级弹药
     myConfig.modifyBaseClassAmmo && modifyBaseClassAmmo(this.logger,this.itemHelper,tables);
 
     // 投掷武器，包括手榴弹，可出售
