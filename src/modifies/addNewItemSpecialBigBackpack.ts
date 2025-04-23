@@ -6,59 +6,55 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 
-const newId: string = '67d8fe7b00471695d35c1cfb';
+const newId: string = '6808d4958d784f8cad5861b0';
 
-const assortId: string = '67d8fe7b00471695d35c1d0b';
+const assortId:string = '6808d4958d784f8cad5861c0';
 
-export default function addNewItemSpecialSecureContainer(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemService:CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
-    itemTplToClone: ItemTpl.SECURE_CONTAINER_KAPPA,
+    itemTplToClone: ItemTpl.BACKPACK_PARTISANS_BAG,
     newId: newId,
-    parentId: BaseClasses.MOB_CONTAINER,
-    fleaPriceRoubles: 6_2500_0000,
-    handbookPriceRoubles: 5_0000_0000,
-    handbookParentId: '5b5f6fd286f774093f2ecf0d',
+    parentId: BaseClasses.BACKPACK,
+    fleaPriceRoubles: 125_0000,
+    handbookPriceRoubles: 100_0000,
+    handbookParentId: '5b5f6f6c86f774093f2ecf0b',
     locales: {
       en: {
-        name: 'special secure container',
-        shortName: 'SSC',
-        description: 'special secure container'
+        name: 'special big backpack',
+        shortName: 'SBB',
+        description: 'special big backpack'
       },
       ch: {
-        name: '特制安全箱',
-        shortName: '安全箱',
-        description: '特制安全箱'
+        name: '特制大背包',
+        shortName: '大背包',
+        description: '特制大背包'
       }
     },
     overrideProperties: {
       CanSellOnRagfair: false,
-      Weight: -10000,
-      Width: 4,
-      Height: 4,
-      mousePenalty: 0,
-      speedPenaltyPercent: 0,
-      weaponErgonomicPenalty: 0,
-      ExamineExperience: 5_0000,
-      LootExperience: 5_0000,
+      Weight: 0,
+      Width: 1,
+      Height: 1,
+      mousePenalty:0,
+      speedPenaltyPercent:0,
+      weaponErgonomicPenalty:0,
+      ExamineExperience: 100,
+      LootExperience: 100,
       BackgroundColor: 'red',
-      isSecured: true,
-      Prefab: {
-        path: 'assets/content/items/containers/item_container_money/item_container_money.bundle',
-        rcid: ''
-      },
+      RigLayoutName:'',
       Grids: [
         {
-          _id: '67d8fe7b00471695d35c1cfc',
+          _id: '6808d4958d784f8cad5861b1',//id+0x01
           _name: 'main',
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
-            cellsH: 6,
-            cellsV: 6,
+            cellsH: 7,
+            cellsV: 8,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.MOB_CONTAINER]
+                ExcludedFilter: [BaseClasses.SIMPLE_CONTAINER,BaseClasses.MOB_CONTAINER,BaseClasses.BACKPACK]
               }
             ],
             isSortingTable: false,
@@ -73,7 +69,7 @@ export default function addNewItemSpecialSecureContainer(logger: ILogger,customI
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialSecureContainer，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialBigBackpack，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -93,11 +89,9 @@ export default function addNewItemSpecialSecureContainer(logger: ILogger,customI
   assort.loyal_level_items[assortId] = 1;
   assort.barter_scheme[assortId] = [
     [
-      {_tpl: ItemTpl.MONEY_ROUBLES,count: 2_0000_0000},
-      {_tpl: ItemTpl.MONEY_DOLLARS,count: 100_0000},
-      {_tpl: ItemTpl.MONEY_EUROS,count: 100_0000}
+      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
     ]
   ];
-
-  logger.success('[MyCustomSPTAKI]: 已加入 SpecialSecureContainer，ID：' + createResult.itemId);
+  
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialBigBackpack，ID：' + createResult.itemId);
 }

@@ -11,6 +11,10 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     if(!template || template._type !== "Item") {continue;}
     //template._props.CanSellOnRagfair = true;
     template._props.Weight = 0;
+    template._props.Width = 1;
+    template._props.Height = 1;
+    template._props.Grids[0]._props.cellsH = 14;
+    template._props.Grids[0]._props.cellsV = 14;
   }
 
   const idArray2 = [ItemTpl.CONTAINER_LUCKY_SCAV_JUNK_BOX];
@@ -20,7 +24,7 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     template._props.CanSellOnRagfair = true;
     template._props.Weight = 0;
     template._props.Grids[0]._props.cellsH = 24;
-    //template._props.Grids[0]._props.cellsV = 14;
+    template._props.Grids[0]._props.cellsV = 14;
   }
 
   logger.success('[MyCustomSPTAKI]: BaseClasses.SIMPLE_CONTAINER 已调整');

@@ -88,6 +88,9 @@ import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNigh
 import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
 import addNewItemSpecialContainerArmband from './modifies/addNewItemSpecialContainerArmband';
 import addNewItemBigBuffInjector from './modifies/addNewItemBigBuffInjector';
+import addNewItemSpecialSmallBackpack from './modifies/addNewItemSpecialSmallBackpack';
+import addNewItemSpecialBigBackpack from './modifies/addNewItemSpecialBigBackpack';
+import addNewItemSpecialMeleeWeapon from './modifies/addNewItemSpecialMeleeWeapon';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -318,6 +321,13 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制空间臂带
     addNewItemSpecialContainerArmband(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制背包，7x4 和 7x8
+    addNewItemSpecialSmallBackpack(this.logger,this.customItemService,tables);
+    addNewItemSpecialBigBackpack(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制近战武器
+    addNewItemSpecialMeleeWeapon(this.logger,this.customItemService,tables);
 
     //
     this.logger.success('[MyCustomSPTAKI]: 处理完成');
