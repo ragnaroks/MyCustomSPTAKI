@@ -205,7 +205,7 @@ export default function addNewItemSpecialAssaultRifle(logger: ILogger,customItem
           _props: templateItem._props.Slots.find(x => x._name === 'mod_charge')._props
         }
       ],
-      bFirerate: 1000,
+      bFirerate: 900,
       weapFireType: ['single','burst','fullauto']
     }
   };

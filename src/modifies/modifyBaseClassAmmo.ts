@@ -11,7 +11,7 @@ export default function modifyBaseClassAmmo(logger: ILogger,itemHelper: ItemHelp
     if(!template || template._type !== "Item") {continue;}
     //template._props.CanSellOnRagfair = true;
     template._props.StackMaxSize = 9600;
-    template._props.DurabilityBurnModificator = 0;
+    template._props.DurabilityBurnModificator = 0.01;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.AMMO 已调整');
 
