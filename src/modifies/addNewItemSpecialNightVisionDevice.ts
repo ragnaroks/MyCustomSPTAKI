@@ -100,5 +100,15 @@ export default function addNewItemSpecialNightVisionDevice(logger: ILogger,custo
     }
   }
 
+  const template = tables.templates.items[ItemTpl.MOUNT_PVS7_WILCOX_ADAPTER] || null;
+  if(template && template._props.Slots && template._props.Slots.length > 0) {
+    for(const slot of template._props.Slots) {
+      if(slot._name !== 'mod_nvg') {continue;}
+      if(!slot._props.filters[0].Filter.includes(ItemTpl.THERMALVISION_T7_THERMAL_GOGGLES_WITH_A_NIGHT_VISION_MOUNT)) {continue;}
+      slot._props.filters[0].Filter.push(createResult.itemId);
+      break;
+    }
+  }
+
   logger.success('[MyCustomSPTAKI]: 已加入 SpecialNightVisionDevice，ID：' + createResult.itemId);
 }

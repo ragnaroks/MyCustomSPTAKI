@@ -87,6 +87,7 @@ import enhancedMPR45 from './modifies/enhancedMPR45';
 import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNightVisionDevice';
 import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
 import addNewItemSpecialContainerArmband from './modifies/addNewItemSpecialContainerArmband';
+import addNewItemBigBuffInjector from './modifies/addNewItemBigBuffInjector';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -245,6 +246,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：超大治疗针
     addNewItemBigHealingInjector(this.logger,this.customItemService,this.itemHelper,tables);
+
+    // 自定义物品：超大状态针
+    addNewItemBigBuffInjector(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：超大水
     addNewItemBigDrink(this.logger,this.customItemService,this.itemHelper,tables);

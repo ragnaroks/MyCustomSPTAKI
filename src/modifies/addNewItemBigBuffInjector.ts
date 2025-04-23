@@ -8,13 +8,13 @@ import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {IBuff} from '@spt/models/eft/common/IGlobals';
 import {ItemHelper} from '@spt/helpers/ItemHelper';
 
-const newId: string = '67eb1cb18609418ea4389d10';
+const newId: string = '6808c0ee4460ff170849d800';
 
-const assortId: string = '67eb1cb18609418ea4389d20';
+const assortId: string = '6808c0ee4460ff170849d810';
 
-export default function addNewItemBigHealingInjector(logger: ILogger,customItemService: CustomItemService,itemHelper: ItemHelper,tables: IDatabaseTables): void {
+export default function addNewItemBigBuffInjector(logger: ILogger,customItemService: CustomItemService,itemHelper: ItemHelper,tables: IDatabaseTables): void {
   const newItem: NewItemFromCloneDetails = {
-    itemTplToClone: ItemTpl.STIM_ETGCHANGE_REGENERATIVE_STIMULANT_INJECTOR,
+    itemTplToClone: ItemTpl.STIM_OBDOLBOS_COCKTAIL_INJECTOR,
     newId: newId,
     parentId: BaseClasses.STIMULATOR,
     fleaPriceRoubles: 625_0000,
@@ -22,14 +22,14 @@ export default function addNewItemBigHealingInjector(logger: ILogger,customItemS
     handbookParentId: '5b47574386f77428ca22b33a',
     locales: {
       en: {
-        name: 'BigHealingInjector',
-        shortName: 'Healing',
-        description: 'just a big healing injector'
+        name: 'BigBuffInjector',
+        shortName: 'Buff',
+        description: 'just a big buff injector'
       },
       ch: {
-        name: '大治疗针',
-        shortName: '治疗针',
-        description: '大治疗针'
+        name: '大状态针',
+        shortName: '状态针',
+        description: '大状态针'
       }
     },
     overrideProperties: {
@@ -43,16 +43,20 @@ export default function addNewItemBigHealingInjector(logger: ILogger,customItemS
       LootExperience: 500,
       MaxHpResource: 100,
       hpResourceRate: 0,
-      StimulatorBuffs: 'Buffs_BigHealingInjector',
+      StimulatorBuffs: 'Buffs_BigBuffInjector',
       BackgroundColor: 'red',
-      effects_damage: {},
+      effects_damage: {
+        Pain: {cost: 0,delay: 0,duration: 300,fadeOut: 0},
+        Contusion: {cost: 0,delay: 0,duration: 300,fadeOut: 0},
+        //Intoxication: {cost: 0,delay: 0,duration: 0,fadeOut: 0},
+      },
       effects_health: {}
     }
   };
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 BigHealingInjector，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 BigBuffInjector，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -84,11 +88,14 @@ export default function addNewItemBigHealingInjector(logger: ILogger,customItemS
     }
   }
 
-  tables.globals.config.Health.Effects.Stimulator.Buffs['Buffs_BigHealingInjector'] = [
-    {AbsoluteValue: true,BuffType: 'HealthRate',Chance: 1,Delay: 1,Duration: 60,SkillName: '',Value: 30},
-    {AbsoluteValue: true,BuffType: 'EnergyRate',Chance: 1,Delay: 1,Duration: 60,SkillName: '',Value: -0.1},
-    {AbsoluteValue: true,BuffType: 'HydrationRate',Chance: 1,Delay: 1,Duration: 60,SkillName: '',Value: -0.2},
+  tables.globals.config.Health.Effects.Stimulator.Buffs['Buffs_BigBuffInjector'] = [
+    {AbsoluteValue: true,BuffType: 'MaxStamina',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value:300},
+    {AbsoluteValue: true,BuffType: 'StaminaRate',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value:10},
+    {AbsoluteValue: true,BuffType: 'RemoveAllBloodLosses',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value:0},
+    {AbsoluteValue: true,BuffType: 'Antidote',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value:0},
+    {AbsoluteValue: true,BuffType: 'EnergyRate',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value: -0.1},
+    {AbsoluteValue: true,BuffType: 'HydrationRate',Chance: 1,Delay: 1,Duration: 300,SkillName: '',Value: -0.2},
   ];
 
-  logger.success('[MyCustomSPTAKI]: 已加入 BigHealingInjector，ID：' + createResult.itemId);
+  logger.success('[MyCustomSPTAKI]: 已加入 BigBuffInjector，ID：' + createResult.itemId);
 }

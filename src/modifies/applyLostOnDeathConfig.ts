@@ -5,8 +5,6 @@ export default function applyLostOnDeathConfig(logger:ILogger,lostOnDeathConfig:
   lostOnDeathConfig.questItems = false;
   lostOnDeathConfig.specialSlotItems = false;
   lostOnDeathConfig.equipment.ArmBand = false;
-  lostOnDeathConfig.equipment.TacticalVest = false;
-  lostOnDeathConfig.equipment.PocketItems = false;
   lostOnDeathConfig.equipment.Holster = false;
   lostOnDeathConfig.equipment.Scabbard = false;
 
