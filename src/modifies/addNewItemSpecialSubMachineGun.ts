@@ -203,7 +203,7 @@ export default function addNewItemSpecialSubMachineGun(logger:ILogger,customItem
           _props: templateItem._props.Slots.find(x=>x._name==='mod_tactical_000')._props
         }
       ],
-      bFirerate: 1000,
+      bFirerate: 1080,
       weapFireType: ['single','burst','fullauto']
     }
   };

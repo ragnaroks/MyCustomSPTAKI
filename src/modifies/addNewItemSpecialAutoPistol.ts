@@ -211,7 +211,7 @@ export default function addNewItemSpecialAutoPistol(logger: ILogger,customItemSe
           _props: templateItem._props.Slots.find(x => x._name === 'mod_stock')._props
         }
       ],
-      bFirerate: 1000,
+      bFirerate: 1200,
       weapFireType: ['single','burst','fullauto']
     }
   };
