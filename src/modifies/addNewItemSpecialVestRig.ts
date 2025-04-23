@@ -15,8 +15,8 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
     itemTplToClone: ItemTpl.VEST_POYASA_POYASB_GEAR_RIG,
     newId: newId,
     parentId: BaseClasses.VEST,
-    fleaPriceRoubles: 12_5000,
-    handbookPriceRoubles: 10_0000,
+    fleaPriceRoubles: 62_5000,
+    handbookPriceRoubles: 50_0000,
     handbookParentId: '5b5f6f8786f77447ed563642',
     locales: {
       en: {
@@ -38,8 +38,8 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
-      ExamineExperience: 30,
-      LootExperience: 30,
+      ExamineExperience: 50,
+      LootExperience: 50,
       BackgroundColor: 'red',
       RigLayoutName:'SATL_Bridger',
       Grids: [
@@ -53,7 +53,24 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 2,
             filters: [
               {
-                Filter: [BaseClasses.THROW_WEAPON],
+                Filter: [
+                  ItemTpl.GRENADE_F1_HAND,
+                  ItemTpl.GRENADE_M18_SMOKE_GRENADE_GREEN,
+                  ItemTpl.GRENADE_M67_HAND,
+                  ItemTpl.GRENADE_MODEL_7290_FLASH_BANG,
+                  ItemTpl.GRENADE_RDG2B_SMOKE,
+                  ItemTpl.GRENADE_RGD5_HAND,
+                  ItemTpl.GRENADE_V40_MINI,
+                  ItemTpl.GRENADE_VOG17_KHATTABKA_IMPROVISED_HAND,
+                  ItemTpl.GRENADE_ZARYA_STUN,
+                  ItemTpl.FLARE_ROP30_REACTIVE_FLARE_CARTRIDGE_WHITE,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_BLUE,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_FIREWORK,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_GREEN,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_RED,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_SPECIAL_YELLOW,
+                  ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_YELLOW,
+                ],
                 ExcludedFilter: []
               }
             ],
@@ -72,7 +89,7 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 4,
             filters: [
               {
-                Filter: [BaseClasses.AMMO],
+                Filter: [BaseClasses.MAGAZINE],
                 ExcludedFilter: []
               }
             ],
@@ -91,7 +108,18 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 4,
             filters: [
               {
-                Filter: [BaseClasses.MAGAZINE],
+                Filter: [
+                  ItemTpl.GRENADE_RGO_HAND,
+                  ItemTpl.GRENADE_RGN_HAND,
+                  ItemTpl.AMMO_40MMRU_VOG25,
+                  ItemTpl.AMMO_40X46_M381,
+                  ItemTpl.AMMO_40X46_M386,
+                  ItemTpl.AMMO_40X46_M406,
+                  ItemTpl.AMMO_40X46_M433,
+                  ItemTpl.AMMO_40X46_M441,
+                  ItemTpl.AMMO_40X46_M576,
+                  ItemTpl.AMMO_40X46_M716,
+                ],
                 ExcludedFilter: []
               }
             ],
