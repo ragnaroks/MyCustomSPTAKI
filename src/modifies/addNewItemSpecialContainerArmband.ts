@@ -32,7 +32,7 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
     },
     overrideProperties: {
       CanSellOnRagfair: false,
-      Weight: 0,
+      Weight: -10000,
       Width: 1,
       Height: 1,
       mousePenalty:0,
@@ -44,6 +44,7 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
       RigLayoutName:'',
       Unlootable: true,
       InsuranceDisabled: false,
+      isSecured:true,
       Grids: [
         {
           _id: '67f9fbe1727f56bdc866b021',//id+0x01

@@ -32,9 +32,9 @@ export default function addNewItemSpecialSecureContainer(logger:ILogger,customIt
     },
     overrideProperties: {
       CanSellOnRagfair: false,
-      Weight: -1_0000,
-      Width: 2,
-      Height: 2,
+      Weight: 0,
+      Width: 3,
+      Height: 3,
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
