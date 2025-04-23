@@ -14,10 +14,10 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.ARMBAND_DEADSKUL,
     newId: newId,
-    parentId: BaseClasses.ARMBAND,
-    fleaPriceRoubles: 625_0000,
-    handbookPriceRoubles: 500_0000,
-    handbookParentId: '5b5f704686f77447ec5d76d7',
+    parentId: BaseClasses.MOB_CONTAINER,
+    fleaPriceRoubles: 6250_0000,
+    handbookPriceRoubles: 5000_0000,
+    handbookParentId: '5b5f6fd286f774093f2ecf0d',
     locales: {
       en: {
         name: 'special container armband',
@@ -38,8 +38,8 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
-      ExamineExperience: 500,
-      LootExperience: 500,
+      ExamineExperience: 5000,
+      LootExperience: 5000,
       BackgroundColor: 'red',
       RigLayoutName:'',
       Unlootable: true,
