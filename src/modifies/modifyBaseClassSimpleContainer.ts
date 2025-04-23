@@ -49,8 +49,40 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     if(!template || template._type !== "Item") {continue;}
     template._props.CanSellOnRagfair = true;
     template._props.Weight = 0;
+    //template._props.Width = 2; 3.12 的时候再应用
+    //template._props.Height = 2; 3.12 的时候再应用
     template._props.Grids[0]._props.cellsH = 24;
     template._props.Grids[0]._props.cellsV = 14;
+  }
+
+  const itemCase = tables.templates.items[ItemTpl.CONTAINER_ITEM_CASE] || null;
+  if(itemCase){
+    for (const grid of itemCase._props.Grids) {
+      for (const filter of grid._props.filters) {
+        filter.Filter = [BaseClasses.ITEM];
+        filter.ExcludedFilter = [
+          BaseClasses.MOB_CONTAINER,
+          ItemTpl.CONTAINER_ITEM_CASE,
+          ItemTpl.CONTAINER_THICC_ITEM_CASE,
+          ItemTpl.CONTAINER_THICC_WEAPON_CASE,
+          ItemTpl.CONTAINER_LUCKY_SCAV_JUNK_BOX
+        ];
+      }
+    }
+  }
+
+  const thiccItemCase = tables.templates.items[ItemTpl.CONTAINER_THICC_ITEM_CASE] || null;
+  if(itemCase){
+    for (const grid of itemCase._props.Grids) {
+      for (const filter of grid._props.filters) {
+        filter.Filter = [BaseClasses.ITEM];
+        filter.ExcludedFilter = [
+          BaseClasses.MOB_CONTAINER,
+          ItemTpl.CONTAINER_THICC_ITEM_CASE,
+          ItemTpl.CONTAINER_THICC_WEAPON_CASE
+        ];
+      }
+    }
   }
 
   logger.success('[MyCustomSPTAKI]: BaseClasses.SIMPLE_CONTAINER 已调整');

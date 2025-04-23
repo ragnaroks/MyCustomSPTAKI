@@ -283,7 +283,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制弹药箱
     addNewItemSpecialAmmoContainer(this.logger,this.customItemService,tables);
-
+    
     // 自定义物品：特制手榴弹箱
     addNewItemSpecialGrenadeContainer(this.logger,this.customItemService,tables);
 
