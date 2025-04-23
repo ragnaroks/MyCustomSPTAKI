@@ -14,10 +14,10 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.ARMBAND_DEADSKUL,
     newId: newId,
-    parentId: BaseClasses.VEST,
+    parentId: BaseClasses.ARMBAND,
     fleaPriceRoubles: 625_0000,
     handbookPriceRoubles: 500_0000,
-    handbookParentId: '5b47574386f77428ca22b33f',
+    handbookParentId: '5b5f704686f77447ec5d76d7',
     locales: {
       en: {
         name: 'special container armband',
@@ -32,7 +32,7 @@ export default function addNewItemSpecialContainerArmband(logger:ILogger,customI
     },
     overrideProperties: {
       CanSellOnRagfair: false,
-      Weight: -10000,
+      Weight: 0,//力量满级会忽略装备重量，负数无效
       Width: 1,
       Height: 1,
       mousePenalty:0,
