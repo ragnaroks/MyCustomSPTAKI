@@ -33,8 +33,8 @@ export default function addNewItemSpecialSecureContainer(logger:ILogger,customIt
     overrideProperties: {
       CanSellOnRagfair: false,
       Weight: -10000,
-      Width: 3,
-      Height: 3,
+      Width: 4,
+      Height: 4,
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
@@ -49,7 +49,7 @@ export default function addNewItemSpecialSecureContainer(logger:ILogger,customIt
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
             cellsH: 6,
-            cellsV: 3,
+            cellsV: 4,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],
