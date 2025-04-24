@@ -62,6 +62,7 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
                   ItemTpl.GRENADE_RGD5_HAND,
                   ItemTpl.GRENADE_V40_MINI,
                   ItemTpl.GRENADE_VOG17_KHATTABKA_IMPROVISED_HAND,
+                  ItemTpl.GRENADE_VOG25_KHATTABKA_IMPROVISED_HAND,
                   ItemTpl.GRENADE_ZARYA_STUN,
                   ItemTpl.FLARE_ROP30_REACTIVE_FLARE_CARTRIDGE_WHITE,
                   ItemTpl.FLARE_RSP30_REACTIVE_SIGNAL_CARTRIDGE_BLUE,
