@@ -15,8 +15,8 @@ export default function addNewItemSpecialSmallBackpack(logger:ILogger,customItem
     itemTplToClone: ItemTpl.BACKPACK_SANITARS_BAG,
     newId: newId,
     parentId: BaseClasses.BACKPACK,
-    fleaPriceRoubles: 62_5000,
-    handbookPriceRoubles: 50_0000,
+    fleaPriceRoubles: 6_2500,
+    handbookPriceRoubles: 5_0000,
     handbookParentId: '5b5f6f6c86f774093f2ecf0b',
     locales: {
       en: {
@@ -38,8 +38,8 @@ export default function addNewItemSpecialSmallBackpack(logger:ILogger,customItem
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
-      ExamineExperience: 50,
-      LootExperience: 50,
+      ExamineExperience: 5,
+      LootExperience: 5,
       BackgroundColor: 'red',
       RigLayoutName:'',
       Grids: [
@@ -49,12 +49,12 @@ export default function addNewItemSpecialSmallBackpack(logger:ILogger,customItem
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
-            cellsH: 7,
+            cellsH: 6,
             cellsV: 4,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.SIMPLE_CONTAINER,BaseClasses.MOB_CONTAINER,BaseClasses.BACKPACK]
+                ExcludedFilter: [BaseClasses.MOB_CONTAINER]
               }
             ],
             isSortingTable: false,

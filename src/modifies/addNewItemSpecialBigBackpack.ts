@@ -15,8 +15,8 @@ export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemSe
     itemTplToClone: ItemTpl.BACKPACK_PARTISANS_BAG,
     newId: newId,
     parentId: BaseClasses.BACKPACK,
-    fleaPriceRoubles: 125_0000,
-    handbookPriceRoubles: 100_0000,
+    fleaPriceRoubles: 18_7500,
+    handbookPriceRoubles: 15_0000,
     handbookParentId: '5b5f6f6c86f774093f2ecf0b',
     locales: {
       en: {
@@ -38,8 +38,8 @@ export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemSe
       mousePenalty:0,
       speedPenaltyPercent:0,
       weaponErgonomicPenalty:0,
-      ExamineExperience: 100,
-      LootExperience: 100,
+      ExamineExperience: 15,
+      LootExperience: 15,
       BackgroundColor: 'red',
       RigLayoutName:'',
       Grids: [
@@ -49,12 +49,12 @@ export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemSe
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
-            cellsH: 7,
+            cellsH: 6,
             cellsV: 8,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.SIMPLE_CONTAINER,BaseClasses.MOB_CONTAINER,BaseClasses.BACKPACK]
+                ExcludedFilter: [BaseClasses.MOB_CONTAINER]
               }
             ],
             isSortingTable: false,
