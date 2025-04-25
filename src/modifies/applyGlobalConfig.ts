@@ -1,7 +1,10 @@
 import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
+import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
+import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
+import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
 
-export default function applyGlobalConfig(logger:ILogger,tables:IDatabaseTables) : void {
+export default function applyGlobalConfig(logger:ILogger,hideoutConfig:IHideoutConfig,lostOnDeathConfig:ILostOnDeathConfig,ragfairConfig:IRagfairConfig,tables:IDatabaseTables,allowList:Array<string>) : void {
   tables.globals.config.BaseCheckTime = 0.0;
   tables.globals.config.BaseLoadTime = 0.0;
   tables.globals.config.BaseUnloadTime = 0.0;
@@ -12,13 +15,43 @@ export default function applyGlobalConfig(logger:ILogger,tables:IDatabaseTables)
   tables.globals.config.SavagePlayCooldown = 60;
   tables.globals.config.SavagePlayCooldownNdaFree = 60;
   tables.globals.config.AimPunchMagnitude = 0;
-
-  //tables.globals.config.MaxBotsAliveOnMap = 6;
+  //tables.globals.config.MaxBotsAliveOnMap = 9;
   //tables.globals.config.MaxBotsAliveOnMapPvE = 9;
-  
   tables.globals.config.TripwiresSettings.InertSeconds = 600;
-
   tables.globals.config.RagFair.isOnlyFoundInRaidAllowed = true;
+
+  // 藏身处
+  hideoutConfig.overrideBuildTimeSeconds = 30;
+  hideoutConfig.overrideCraftTimeSeconds = 60;
+  
+  hideoutConfig.cultistCircle.craftTimeOverride = 30;
+
+  // 保险
+  for(const traderKey of Object.keys(tables.traders)) {
+    const trader = tables.traders[traderKey] || null;
+    if(!trader || !trader.base.insurance.availability) {continue;}
+    trader.base.insurance.max_return_hour = 0.1;
+    trader.base.insurance.min_return_hour = 0;
+    trader.base.insurance.max_storage_time = 30*24;
+  }
+
+  // 跳蚤市场
+  ragfairConfig.dynamic.purchasesAreFoundInRaid = false;
+  if(allowList && allowList.length){
+    for (const id of allowList) {
+      const template = tables.templates.items[id] || null;
+      if(!template){continue;}
+      template._props.CanSellOnRagfair = true;
+    }
+  }
+
+  // 死亡掉落
+  lostOnDeathConfig.questItems = false;
+  lostOnDeathConfig.specialSlotItems = false;
+  lostOnDeathConfig.equipment.PocketItems = false;
+  lostOnDeathConfig.equipment.ArmBand = false;
+  lostOnDeathConfig.equipment.Holster = false;
+  lostOnDeathConfig.equipment.Scabbard = false;
 
   logger.success('[MyCustomSPTAKI]: 全局配置 已调整');
 }

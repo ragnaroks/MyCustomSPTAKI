@@ -11,15 +11,11 @@ import {ConfigServer} from '@spt/servers/ConfigServer';
 import {ConfigTypes} from '@spt/models/enums/ConfigTypes';
 import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
 import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
+import {IBotConfig} from '@spt/models/spt/config/IBotConfig';
 import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import myConfig from './config.json';
 import applyGlobalConfig from './modifies/applyGlobalConfig';
-import applyLostOnDeathConfig from './modifies/applyLostOnDeathConfig';
-import applyRagfairConfig from './modifies/applyRagfairConfig';
-import applyHideoutConfig from './modifies/applyHideoutConfig';
-import applyExfilConfig from './modifies/applyExfilConfig';
-import applyInsuranceConfig from './modifies/applyInsuranceConfig';
 import modifyBaseClassBackpack from './modifies/modifyBaseClassBackpack';
 import modifyBaseClassSimpleContainer from './modifies/modifyBaseClassSimpleContainer';
 import modifyBaseClassLockableContainer from './modifies/modifyBaseClassLockableContainer';
@@ -91,6 +87,7 @@ import addNewItemBigBuffInjector from './modifies/addNewItemBigBuffInjector';
 import addNewItemSpecialSmallBackpack from './modifies/addNewItemSpecialSmallBackpack';
 import addNewItemSpecialBigBackpack from './modifies/addNewItemSpecialBigBackpack';
 import addNewItemSpecialMeleeWeapon from './modifies/addNewItemSpecialMeleeWeapon';
+import applyLocationConfig from './modifies/applyLocationConfig';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -116,24 +113,10 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     const lostOnDeathConfig: ILostOnDeathConfig = this.configServer.getConfig<ILostOnDeathConfig>(ConfigTypes.LOST_ON_DEATH);
     const ragfairConfig: IRagfairConfig = this.configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
     const hideoutConfig: IHideoutConfig = this.configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
+    const botConfig: IBotConfig = this.configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
     // global
-    myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,tables);
-
-    // lostOnDeathConfig
-    myConfig.applyLostOnDeathConfig && applyLostOnDeathConfig(this.logger,lostOnDeathConfig);
-
-    // ragfairConfig
-    myConfig.applyRagfairConfig && applyRagfairConfig(this.logger,ragfairConfig,tables,myConfig.allowRagfairList);
-
-    // hideoutConfig
-    myConfig.applyHideoutConfig && applyHideoutConfig(this.logger,hideoutConfig);
-
-    // exfil
-    myConfig.applyExfilConfig && applyExfilConfig(this.logger,tables,myConfig.escapeTimeLimit);
-
-    // 保险归还
-    myConfig.applyInsuranceConfig && applyInsuranceConfig(this.logger,tables);
+    myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,hideoutConfig,lostOnDeathConfig,ragfairConfig,tables,myConfig.allowRagfairList);
 
     // 背包
     myConfig.modifyBaseClassBackpack && modifyBaseClassBackpack(this.logger,this.itemHelper,tables);
