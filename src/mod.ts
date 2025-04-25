@@ -87,7 +87,7 @@ import addNewItemBigBuffInjector from './modifies/addNewItemBigBuffInjector';
 import addNewItemSpecialSmallBackpack from './modifies/addNewItemSpecialSmallBackpack';
 import addNewItemSpecialBigBackpack from './modifies/addNewItemSpecialBigBackpack';
 import addNewItemSpecialMeleeWeapon from './modifies/addNewItemSpecialMeleeWeapon';
-import applyLocationConfig from './modifies/applyLocationConfig';
+import addNewItemSpecialAmmoArmband from './modifies/addNewItemSpecialAmmoArmband';
 
 // example：https://dev.sp-tarkov.com/chomp/ModExamples/
 
@@ -116,7 +116,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     const botConfig: IBotConfig = this.configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
     // global
-    myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,hideoutConfig,lostOnDeathConfig,ragfairConfig,tables,myConfig.allowRagfairList);
+    myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,hideoutConfig,lostOnDeathConfig,ragfairConfig,tables,myConfig.allowRagfairList,myConfig.escapeTimeLimit);
 
     // 背包
     myConfig.modifyBaseClassBackpack && modifyBaseClassBackpack(this.logger,this.itemHelper,tables);
@@ -305,7 +305,10 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 自定义物品：特制空间臂带
     addNewItemSpecialContainerArmband(this.logger,this.customItemService,tables);
 
-    // 自定义物品：特制背包，7x4 和 7x8
+    // 自定义物品：特制子弹臂带
+    addNewItemSpecialAmmoArmband(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制背包，6x4 和 6x8
     addNewItemSpecialSmallBackpack(this.logger,this.customItemService,tables);
     addNewItemSpecialBigBackpack(this.logger,this.customItemService,tables);
 

@@ -5,11 +5,13 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
+import idcalc from '../helpers/idcalc';
+
+const newId: string = '67dccdd9a480dda56ab15bba';
+const assortId1: string = idcalc(newId,0xff);
+const assortId2: string = idcalc(newId,0xfe);
 
 export default function addNewItemSpecialAmmoContainer(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
-  const newId: string = '67dccdd9a480dda56ab15bba';
-  const assortId: string = '67dccdd9a480dda56ab15bca';
-
   const newItem: NewItemFromCloneDetails = {
     itemTplToClone: ItemTpl.CONTAINER_THICC_ITEM_CASE,
     newId: newId,
@@ -43,7 +45,7 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
       LootExperience: 100,
       Grids: [
         {
-          _id: '67dccdd9a480dda56ab15bbb',//id+0x01
+          _id: idcalc(newId,0x01),
           _name: 'main',
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
@@ -72,25 +74,45 @@ export default function addNewItemSpecialAmmoContainer(logger: ILogger,customIte
     return;
   }
 
-  const assort = tables.traders[Traders.REF].assort;
-  assort.items.push({
-    _id: assortId,
-    _tpl: createResult.itemId,
-    parentId: 'hideout',
-    slotId: 'hideout',
-    upd: {
-      UnlimitedCount: true,
-      StackObjectsCount: 9999999,
-      BuyRestrictionMax: 1,
-      BuyRestrictionCurrent: 0
-    }
-  });
-  assort.loyal_level_items[assortId] = 1;
-  assort.barter_scheme[assortId] = [
-    [
-      {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
-    ]
-  ];
+  const assort1 = tables.traders[Traders.REF].assort;
+    assort1.items.push({
+      _id: assortId1,
+      _tpl: createResult.itemId,
+      parentId: 'hideout',
+      slotId: 'hideout',
+      upd: {
+        UnlimitedCount: true,
+        StackObjectsCount: 9999999,
+        BuyRestrictionMax: 1,
+        BuyRestrictionCurrent: 0
+      }
+    });
+    assort1.loyal_level_items[assortId1] = 1;
+    assort1.barter_scheme[assortId1] = [
+      [
+        {_tpl: ItemTpl.MONEY_GP_COIN,count: Math.floor(newItem.handbookPriceRoubles / 7500)}
+      ]
+    ];
+  
+    const assort2 = tables.traders[Traders.MECHANIC].assort;
+    assort2.items.push({
+      _id: assortId2,
+      _tpl: createResult.itemId,
+      parentId: 'hideout',
+      slotId: 'hideout',
+      upd: {
+        UnlimitedCount: true,
+        StackObjectsCount: 9999999,
+        BuyRestrictionMax: 3,
+        BuyRestrictionCurrent: 0
+      }
+    });
+    assort2.loyal_level_items[assortId2] = 2;
+    assort2.barter_scheme[assortId2] = [
+      [
+        {_tpl: ItemTpl.MONEY_ROUBLES,count: newItem.handbookPriceRoubles}
+      ]
+    ];
 
   logger.success('[MyCustomSPTAKI]: 已加入 SpecialAmmoContainer，ID：' + createResult.itemId);
 }

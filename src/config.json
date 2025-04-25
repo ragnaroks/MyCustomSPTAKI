@@ -14,7 +14,7 @@
     "5ca2113f86f7740b2547e1d2"
   ],
   "applyLocationConfig":true,
-  "escapeTimeLimit": 60,
+  "escapeTimeLimit": 90,
   "modifyBaseClassBackpack":true,
   "modifyBaseClassSimpleContainer":true,
   "modifyBaseClassLockableContainer":true,

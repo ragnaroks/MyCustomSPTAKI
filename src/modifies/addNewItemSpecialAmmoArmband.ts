@@ -7,33 +7,33 @@ import {CustomItemService} from '@spt/services/mod/CustomItemService';
 import {Traders} from '@spt/models/enums/Traders';
 import idcalc from '../helpers/idcalc';
 
-const newId: string = '67f9fbe1727f56bdc866b020';
+const newId: string = '680b992ddb2d7f5fd00e7a00';
 const assortId1: string = idcalc(newId,0xff);
 const assortId2: string = idcalc(newId,0xfe);
 
-export default function addNewItemSpecialContainerArmband(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
+export default function addNewItemSpecialAmmoArmband(logger: ILogger,customItemService: CustomItemService,tables: IDatabaseTables) {
   const newItem: NewItemFromCloneDetails = {
-    itemTplToClone: ItemTpl.ARMBAND_DEADSKUL,
+    itemTplToClone: ItemTpl.ARMBAND_EVASION,
     newId: newId,
     parentId: BaseClasses.MOB_CONTAINER,
-    fleaPriceRoubles: 1250_0000,
-    handbookPriceRoubles: 1000_0000,
+    fleaPriceRoubles: 625_0000,
+    handbookPriceRoubles: 500_0000,
     handbookParentId: '5b5f6fd286f774093f2ecf0d',
     locales: {
       en: {
-        name: 'special container armband',
-        shortName: 'SCA',
-        description: 'special container armband'
+        name: 'special ammo armband',
+        shortName: 'SAA',
+        description: 'special ammo armband'
       },
       ch: {
-        name: '特制空间臂带',
-        shortName: '空间臂带',
-        description: '特制空间臂带'
+        name: '特制子弹臂带',
+        shortName: '子弹臂带',
+        description: '特制子弹臂带'
       }
     },
     overrideProperties: {
       CanSellOnRagfair: false,
-      Weight: 0,//力量满级会忽略装备重量，负数无效
+      Weight: 0,
       Width: 1,
       Height: 1,
       mousePenalty: 0,
@@ -41,7 +41,7 @@ export default function addNewItemSpecialContainerArmband(logger: ILogger,custom
       weaponErgonomicPenalty: 0,
       ExaminedByDefault: true,
       ExamineExperience: 0,
-      LootExperience: 1000,
+      LootExperience: 500,
       BackgroundColor: 'red',
       RigLayoutName: '',
       Unlootable: true,
@@ -54,12 +54,12 @@ export default function addNewItemSpecialContainerArmband(logger: ILogger,custom
           _parent: newId,
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
-            cellsH: 14,
-            cellsV: 14,
+            cellsH: 24,
+            cellsV: 6,
             filters: [
               {
-                Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [BaseClasses.SIMPLE_CONTAINER,BaseClasses.MOB_CONTAINER,BaseClasses.BACKPACK,BaseClasses.VEST]
+                Filter: [BaseClasses.AMMO,BaseClasses.AMMO_BOX],
+                ExcludedFilter: []
               }
             ],
             isSortingTable: false,
@@ -74,7 +74,7 @@ export default function addNewItemSpecialContainerArmband(logger: ILogger,custom
 
   const createResult = customItemService.createItemFromClone(newItem);
   if(!createResult.success) {
-    logger.error('[MyCustomSPTAKI]: 未加入 SpecialContainerArmband，错误：' + createResult.errors.join('、'));
+    logger.error('[MyCustomSPTAKI]: 未加入 SpecialAmmoArmband，错误：' + createResult.errors.join('、'));
     return;
   }
 
@@ -127,5 +127,5 @@ export default function addNewItemSpecialContainerArmband(logger: ILogger,custom
     }
   }
 
-  logger.success('[MyCustomSPTAKI]: 已加入 SpecialContainerArmband，ID：' + createResult.itemId);
+  logger.success('[MyCustomSPTAKI]: 已加入 SpecialAmmoArmband，ID：' + createResult.itemId);
 }
