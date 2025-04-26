@@ -116,7 +116,16 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     const botConfig: IBotConfig = this.configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
 
     // global
-    myConfig.applyGlobalConfig && applyGlobalConfig(this.logger,hideoutConfig,lostOnDeathConfig,ragfairConfig,tables,myConfig.allowRagfairList,myConfig.escapeTimeLimit);
+    myConfig.applyGlobalConfig && applyGlobalConfig(
+      this.logger,
+      hideoutConfig,
+      lostOnDeathConfig,
+      ragfairConfig,
+      botConfig,
+      tables,
+      myConfig.allowRagfairList,
+      myConfig.escapeTimeLimit
+    );
 
     // 背包
     myConfig.modifyBaseClassBackpack && modifyBaseClassBackpack(this.logger,this.itemHelper,tables);

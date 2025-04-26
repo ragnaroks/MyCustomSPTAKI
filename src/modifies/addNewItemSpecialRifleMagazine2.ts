@@ -146,13 +146,11 @@ export default function addNewItemSpecialRifleMagazine2(logger:ILogger,customIte
       ExtraSizeLeft:0,
       ExtraSizeRight:0,
       ExtraSizeUp:0,
-      Height:1,
       LoadUnloadModifier:20,
       MalfunctionChance:0,
       Rarity:'Superrare',
       RarityPvE:'Superrare',
-      Recoil:0,
-      Width:1
+      Recoil:0
     }
   };
   

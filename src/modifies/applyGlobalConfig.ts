@@ -4,10 +4,12 @@ import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
 import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
 import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
 import {ILocation} from '@spt/models/eft/common/ILocation';
+import {IBotConfig} from '@spt/models/spt/config/IBotConfig';
+import {ItemTpl} from '@spt/models/enums/ItemTpl';
 
 const mapArray: Array<string> = ['sandbox','sandbox_high','bigmap','factory4_day','factory4_night','interchange','laboratory','lighthouse','rezervbase','shoreline','tarkovstreets','woods'];
 
-export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideoutConfig,lostOnDeathConfig: ILostOnDeathConfig,ragfairConfig: IRagfairConfig,tables: IDatabaseTables,allowList: Array<string>,escapeTimeLimit: number): void {
+export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideoutConfig,lostOnDeathConfig: ILostOnDeathConfig,ragfairConfig: IRagfairConfig,botConfig: IBotConfig,tables: IDatabaseTables,allowList: Array<string>,escapeTimeLimit: number): void {
   tables.globals.config.BaseCheckTime = 0.0;
   tables.globals.config.BaseLoadTime = 0.0;
   tables.globals.config.BaseUnloadTime = 0.0;
@@ -18,15 +20,31 @@ export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideou
   tables.globals.config.SavagePlayCooldown = 60;
   tables.globals.config.SavagePlayCooldownNdaFree = 60;
   tables.globals.config.AimPunchMagnitude = 0;
-  //tables.globals.config.MaxBotsAliveOnMap = 9;
-  //tables.globals.config.MaxBotsAliveOnMapPvE = 9;
+  tables.globals.config.MaxBotsAliveOnMap = 9;
+  tables.globals.config.MaxBotsAliveOnMapPvE = tables.globals.config.MaxBotsAliveOnMap;
   tables.globals.config.TripwiresSettings.InertSeconds = 600;
   tables.globals.config.RagFair.isOnlyFoundInRaidAllowed = true;
+
+  // bot
+  for(const key of Object.keys(botConfig.maxBotCap)) {
+    botConfig.maxBotCap[key] = tables.globals.config.MaxBotsAliveOnMap;
+  }
+  for(const key of Object.keys(botConfig.assaultBrainType)) {
+    botConfig.assaultBrainType[key] = {
+      followerGluharAssault: 1
+    };
+  }
+  for(const key of Object.keys(botConfig.playerScavBrainType)) {
+    botConfig.playerScavBrainType[key] = {
+      followerGluharAssault: 1,
+      bossKilla: 1,
+      pmcBot: 1
+    };
+  }
 
   // 藏身处
   hideoutConfig.overrideBuildTimeSeconds = 30;
   hideoutConfig.overrideCraftTimeSeconds = 60;
-
   hideoutConfig.cultistCircle.craftTimeOverride = 30;
 
   // 保险
@@ -80,10 +98,16 @@ export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideou
       exit.ExfiltrationTimePVE = 15;
     }
     for(const spawn of location.base.BossLocationSpawn) {
+      if(spawn.BossName === 'gifter') {continue;}
       spawn.BossChance = 100;
       spawn.IgnoreMaxBots = true;
       spawn.ForceSpawn = true;
       spawn.BossDifficult = 'impossible';
+    }
+    if(map !== 'factory4_night' && map !== 'factory4_day') {
+      location.base.NewSpawn = true;
+      location.base.NewSpawnForPlayers = true;
+      location.base.OfflineNewSpawn = true;
     }
   }
 
