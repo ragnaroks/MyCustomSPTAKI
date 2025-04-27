@@ -1,11 +1,12 @@
 import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 
-export default function modifyBotHealth(logger:ILogger,tables: IDatabaseTables,scale:number) {
-  if(scale<=0){return;}
+export default function modifyBotHealth(logger: ILogger,tables: IDatabaseTables,scale: number) {
+  if(scale <= 0) {return;}
   for(const botType in tables.bots.types) {
     if(botType === 'test') {continue;}
     const character = tables.bots.types[botType];
+    if(botType.startsWith('boss')) {scale *= 2;}
     for(const bodyPartItem of character.health.BodyParts) {
       //bodyPartItem.Head.max *= 2;
       //bodyPartItem.Head.min *= 2;
@@ -22,6 +23,6 @@ export default function modifyBotHealth(logger:ILogger,tables: IDatabaseTables,s
       bodyPartItem.RightLeg.max *= scale;
       bodyPartItem.RightLeg.min *= scale;
     }
+    logger.success('[MyCustomSPTAKI]: AI [' + botType + '] 已获得 ' + scale + ' 倍生命值');
   }
-  logger.success('[MyCustomSPTAKI]: AI ' + Object.keys(tables.bots.types).join('/') + ' 已获得 '+scale+' 倍生命值');
 }

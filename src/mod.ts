@@ -234,7 +234,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     myConfig.enhancedMPR45 && enhancedMPR45(this.logger,this.itemHelper,tables);
 
     // AI 生命值修改，不修改头部
-    modifyBotHealth(this.logger,tables,myConfig.modifyBotHealth);
+    modifyBotHealth(this.logger,tables,myConfig.modifyBotHealthMultiple);
 
     // 自定义物品：超大医疗包
     addNewItemBigMedkit(this.logger,this.customItemService,this.itemHelper,tables);

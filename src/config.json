@@ -54,6 +54,6 @@
   "modifyBaseClassInventory":true,
   "modifyBaseClassItem":true,
   "enhancedMPR45":true,
-  "modifyBotHealth":3,
-  "modifyPlayerHealth":3
+  "modifyBotHealthMultiple":3,
+  "modifyPlayerHealth":[150,150,150,150,150]
 }
