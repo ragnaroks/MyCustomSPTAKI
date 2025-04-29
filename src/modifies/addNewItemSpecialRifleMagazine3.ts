@@ -132,7 +132,11 @@ export default function addNewItemSpecialRifleMagazine3(logger:ILogger,customIte
                   ItemTpl.AMMO_762X54R_PS,
                   ItemTpl.AMMO_762X54R_SNB,
                   ItemTpl.AMMO_762X54R_SP_BT,
-                  ItemTpl.AMMO_762X54R_T46M
+                  ItemTpl.AMMO_762X54R_T46M,
+                  // 12.7x55
+                  ItemTpl.AMMO_127X55_PS12,
+                  ItemTpl.AMMO_127X55_PS12A,
+                  ItemTpl.AMMO_127X55_PS12B,
                 ]
               }
             ]

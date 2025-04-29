@@ -90,10 +90,10 @@ export default function addNewItemSpecialPistolMagazine2(logger: ILogger,customI
                   ItemTpl.AMMO_45ACP_HYDRASHOK,
                   ItemTpl.AMMO_45ACP_RIP,
                   // .50
-                  //ItemTpl.AMMO_127X33_FMJ,
-                  //ItemTpl.AMMO_127X33_COPPER,
-                  //ItemTpl.AMMO_127X33_HAWK_JSP,
-                  //ItemTpl.AMMO_127X33_JHP,
+                  ItemTpl.AMMO_127X33_FMJ,
+                  ItemTpl.AMMO_127X33_COPPER,
+                  ItemTpl.AMMO_127X33_HAWK_JSP,
+                  ItemTpl.AMMO_127X33_JHP,
                   // 5.7x28
                   ItemTpl.AMMO_57X28_SS190,
                   ItemTpl.AMMO_57X28_L191,

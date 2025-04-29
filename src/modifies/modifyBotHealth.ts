@@ -6,23 +6,23 @@ export default function modifyBotHealth(logger: ILogger,tables: IDatabaseTables,
   for(const botType in tables.bots.types) {
     if(botType === 'test') {continue;}
     const character = tables.bots.types[botType];
-    if(botType.startsWith('boss')) {scale *= 2;}
+    let multiple = botType.startsWith('boss') ? scale * 2 : scale;
     for(const bodyPartItem of character.health.BodyParts) {
-      //bodyPartItem.Head.max *= 2;
-      //bodyPartItem.Head.min *= 2;
-      bodyPartItem.Chest.max *= scale;
-      bodyPartItem.Chest.min *= scale;
-      bodyPartItem.Stomach.max *= scale;
-      bodyPartItem.Stomach.min *= scale;
-      bodyPartItem.LeftArm.max *= scale;
-      bodyPartItem.LeftArm.min *= scale;
-      bodyPartItem.RightArm.max *= scale;
-      bodyPartItem.RightArm.min *= scale;
-      bodyPartItem.LeftLeg.max *= scale;
-      bodyPartItem.LeftLeg.min *= scale;
-      bodyPartItem.RightLeg.max *= scale;
-      bodyPartItem.RightLeg.min *= scale;
+      //bodyPartItem.Head.max *= multiple;
+      //bodyPartItem.Head.min *= multiple;
+      bodyPartItem.Chest.max *= multiple;
+      bodyPartItem.Chest.min *= multiple;
+      bodyPartItem.Stomach.max *= multiple;
+      bodyPartItem.Stomach.min *= multiple;
+      bodyPartItem.LeftArm.max *= multiple;
+      bodyPartItem.LeftArm.min *= multiple;
+      bodyPartItem.RightArm.max *= multiple;
+      bodyPartItem.RightArm.min *= multiple;
+      bodyPartItem.LeftLeg.max *= multiple;
+      bodyPartItem.LeftLeg.min *= multiple;
+      bodyPartItem.RightLeg.max *= multiple;
+      bodyPartItem.RightLeg.min *= multiple;
     }
-    logger.success('[MyCustomSPTAKI]: AI [' + botType + '] 已获得 ' + scale + ' 倍生命值');
+    logger.success('[MyCustomSPTAKI]: AI [' + botType + '] 已获得 ' + multiple + ' 倍生命值');
   }
 }
