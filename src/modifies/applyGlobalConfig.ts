@@ -111,5 +111,53 @@ export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideou
     }
   }
 
+  // 任务
+  for(const id of Object.keys(tables.templates.quests)) {
+    const quest = tables.templates.quests[id] || null;
+    if(!quest) {continue;}
+    for(const condition of quest.conditions.AvailableForStart) {
+      condition.availableAfter = 5;
+    }
+    for(const condition1 of quest.conditions.AvailableForFinish) {
+      switch(condition1.conditionType) {
+        case 'Quest':
+          break;
+        case 'LeaveItemAtLocation':
+          condition1.plantTime = 5;
+          break;
+        case 'CounterCreator':
+          const condition2s = condition1.counter.conditions.filter(x => x.conditionType !== 'InZone');
+          for(const condition2 of condition2s) {
+            switch(condition2.conditionType) {
+              case 'VisitPlace':
+              case 'ExitStatus':
+              case 'Location':
+              case 'ExitName':
+              case 'LaunchFlare':
+              case 'UnderArtilleryFire':
+              case 'Equipment':
+                break;
+              case 'Kills':
+                condition2.bodyPart = [];
+                condition2.daytime = {from: 0,to: 0};
+                condition2.distance = {compareMethod: '>=',value: 0};
+                condition2.enemyEquipmentExclusive = [];
+                condition2.enemyEquipmentInclusive = [];
+                condition2.enemyHealthEffects = [];
+                //condition2.weapon = [];
+                condition2.weaponCaliber = [];
+                condition2.weaponModsExclusive = [];
+                condition2.weaponModsInclusive = [];
+                break;
+              default: break;
+            }
+          }
+          condition1.counter.conditions = condition2s;
+          break;
+        default: break;
+      }
+    }
+  }
+
   logger.success('[MyCustomSPTAKI]: 全局配置 已调整');
 }

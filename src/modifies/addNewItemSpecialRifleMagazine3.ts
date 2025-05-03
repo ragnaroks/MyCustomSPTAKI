@@ -40,6 +40,8 @@ export default function addNewItemSpecialRifleMagazine3(logger:ILogger,customIte
       ExamineExperience: 30,
       LootExperience: 30,
       BackgroundColor: 'red',
+      Width:1,
+      Height:1,
       Cartridges: [
         {
           _id:'67dd1e75c58c32a1669b2e71',// id+0x01

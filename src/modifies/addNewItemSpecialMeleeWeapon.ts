@@ -50,7 +50,7 @@ export default function addNewItemSpecialMeleeWeapon(logger: ILogger,customItemS
       SlashPenetration:1,
       StabPenetration:1,
       StaminaBurnRate:2,
-      StimulatorBuffs:'Buffs_hultafors',
+      //StimulatorBuffs:'Buffs_hultafors',
       knifeHitDelay:0,
       knifeHitRadius:1,
       knifeHitSlashDam:2000,

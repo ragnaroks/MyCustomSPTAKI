@@ -40,6 +40,8 @@ export default function addNewItemSpecialPistolMagazine2(logger: ILogger,customI
       BackgroundColor: 'red',
       ExamineExperience: 10,
       LootExperience: 10,
+      Width:1,
+      Height:1,
       Cartridges: [
         {
           _id: '67dd07553f86d487ade69a71',// id+0x01
