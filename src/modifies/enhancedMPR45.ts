@@ -2,6 +2,7 @@ import {IDatabaseTables} from '@spt/models/spt/server/IDatabaseTables';
 import {ILogger} from '@spt/models/spt/utils/ILogger';
 import {ItemHelper} from '@spt/helpers/ItemHelper';
 import {ItemTpl} from '@spt/models/enums/ItemTpl';
+import {BaseClasses} from '@spt/models/enums/BaseClasses';
 
 export default function enhancedMPR45(logger:ILogger,itemHelper:ItemHelper,tables: IDatabaseTables): void {
   const mpr45 = tables.templates.items[ItemTpl.MOUNT_NCSTAR_MPR45_BACKUP] || null;
@@ -52,6 +53,23 @@ export default function enhancedMPR45(logger:ILogger,itemHelper:ItemHelper,table
       }
     }
   }
+
+  /*
+  const bravo4 = tables.templates.items[ItemTpl.ASSAULTSCOPE_SIG_SAUER_BRAVO4_4X30_SCOPE] || null;
+  if(bravo4){
+    for (const slot of bravo4._props.Slots) {
+      if(slot._name!=='mod_scope'){continue;}
+      slot._props.filters[0].Filter.push(
+        ItemTpl.COLLIMATOR_VOMZ_PILAD_P1X42_WEAVER_REFLEX_SIGHT,
+        ItemTpl.COLLIMATOR_WALTHER_MRS_REFLEX_SIGHT,
+        ItemTpl.COMPACTCOLLIMATOR_BELOMO_PK06_REFLEX_SIGHT,
+        ItemTpl.COLLIMATOR_TRIJICON_SRS02_REFLEX_SIGHT,
+        ItemTpl.COLLIMATOR_LEAPERS_UTG_REFLEX_SIGHT,
+      );
+      break;
+    }
+  }
+  */
 
   logger.success('[MyCustomSPTAKI]: 已调整 MPR45 侧轨');
 }

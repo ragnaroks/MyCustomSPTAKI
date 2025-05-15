@@ -4,7 +4,7 @@ import {ILogger} from '@spt/models/spt/utils/ILogger';
 export default function modifyBotHealth(logger: ILogger,tables: IDatabaseTables,scale: number) {
   if(scale <= 0) {return;}
   for(const botType in tables.bots.types) {
-    if(botType === 'test') {continue;}
+    if(botType.includes('test')) {continue;}
     const character = tables.bots.types[botType];
     let multiple = botType.startsWith('boss') ? scale * 2 : scale;
     for(const bodyPartItem of character.health.BodyParts) {
