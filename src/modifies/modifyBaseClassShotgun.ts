@@ -14,6 +14,7 @@ export default function modifyBaseClassShotgun(logger:ILogger,itemHelper:ItemHel
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.SHOTGUN 已调整');
 }

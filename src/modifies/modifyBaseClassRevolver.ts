@@ -14,6 +14,7 @@ export default function modifyBaseClassRevolver(logger:ILogger,itemHelper:ItemHe
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.REVOLVER 已调整');
 }

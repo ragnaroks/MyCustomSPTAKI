@@ -21,6 +21,7 @@ export default function modifyBaseClassGrenadeLauncher(logger:ILogger,itemHelper
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
     for(const container of template._props.Chambers) {
       container._props.filters[0].Filter = [
         ItemTpl.AMMO_40X46_M381,

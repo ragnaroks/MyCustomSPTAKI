@@ -14,6 +14,7 @@ export default function modifyBaseClassMarksmanRifle(logger:ILogger,itemHelper:I
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.MARKSMAN_RIFLE 已调整');
 }

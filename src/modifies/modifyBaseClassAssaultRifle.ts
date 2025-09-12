@@ -14,6 +14,7 @@ export default function modifyBaseClassAssaultRifle(logger:ILogger,itemHelper:It
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.ASSAULT_RIFLE 已调整');
 }

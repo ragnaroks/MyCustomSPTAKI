@@ -25,6 +25,7 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     ItemTpl.CONTAINER_WEAPON_CASE,
     //ItemTpl.CONTAINER_SIMPLE_WALLET,
     //ItemTpl.CONTAINER_WZ_WALLET,
+    ItemTpl.CONTAINER_LUCKY_SCAV_JUNK_BOX
   ];
 
   for(const id of idArray) {
@@ -34,25 +35,8 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
     template._props.Weight = 0;
     template._props.Width = 1;
     template._props.Height = 1;
-    template._props.Grids[0]._props.cellsH = 14;
-    template._props.Grids[0]._props.cellsV = 14;
-  }
-
-  const idArray2 = [
-    ItemTpl.CONTAINER_LUCKY_SCAV_JUNK_BOX,//3.12 的时候移到上面去
-    //ItemTpl.CONTAINER_THICC_ITEM_CASE, 3.12 的时候再应用
-    //ItemTpl.CONTAINER_THICC_WEAPON_CASE, 3.12 的时候再应用
-  ];
-
-  for(const id of idArray2) {
-    const template = tables.templates.items[id] || null;
-    if(!template || template._type !== "Item") {continue;}
-    template._props.CanSellOnRagfair = true;
-    template._props.Weight = 0;
-    //template._props.Width = 2; 3.12 的时候再应用
-    //template._props.Height = 2; 3.12 的时候再应用
-    template._props.Grids[0]._props.cellsH = 24;
-    template._props.Grids[0]._props.cellsV = 14;
+    template._props.Grids[0]._props.cellsH = 14; // SPT 3.12 取消
+    template._props.Grids[0]._props.cellsV = 14; // SPT 3.12 取消
   }
 
   const itemCase = tables.templates.items[ItemTpl.CONTAINER_ITEM_CASE] || null;
@@ -72,8 +56,8 @@ export default function modifyBaseClassSimpleContainer(logger:ILogger,itemHelper
   }
 
   const thiccItemCase = tables.templates.items[ItemTpl.CONTAINER_THICC_ITEM_CASE] || null;
-  if(itemCase){
-    for (const grid of itemCase._props.Grids) {
+  if(thiccItemCase){
+    for (const grid of thiccItemCase._props.Grids) {
       for (const filter of grid._props.filters) {
         filter.Filter = [BaseClasses.ITEM];
         filter.ExcludedFilter = [

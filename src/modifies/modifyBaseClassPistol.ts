@@ -14,6 +14,7 @@ export default function modifyBaseClassPistol(logger:ILogger,itemHelper:ItemHelp
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.PISTOL 已调整');
 }

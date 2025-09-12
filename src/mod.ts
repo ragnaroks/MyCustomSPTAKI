@@ -12,8 +12,10 @@ import {ConfigTypes} from '@spt/models/enums/ConfigTypes';
 import {IRagfairConfig} from '@spt/models/spt/config/IRagfairConfig';
 import {IHideoutConfig} from '@spt/models/spt/config/IHideoutConfig';
 import {IBotConfig} from '@spt/models/spt/config/IBotConfig';
+import {ISeasonalEventConfig} from '@spt/models/spt/config/ISeasonalEventConfig';
 import {ILostOnDeathConfig} from '@spt/models/spt/config/ILostOnDeathConfig';
 import {CustomItemService} from '@spt/services/mod/CustomItemService';
+import {HandbookHelper} from '@spt/helpers/HandbookHelper';
 import myConfig from './config.json';
 import applyGlobalConfig from './modifies/applyGlobalConfig';
 import modifyBaseClassBackpack from './modifies/modifyBaseClassBackpack';
@@ -34,9 +36,6 @@ import modifyBaseClassMoney from './modifies/modifyBaseClassMoney';
 import modifyBaseClassAmmo from './modifies/modifyBaseClassAmmo';
 import modifyBaseClassThrowWeapon from './modifies/modifyBaseClassThrowWeapon';
 import modifyBaseClassMagazine from './modifies/modifyBaseClassMagazine';
-import modifyBaseClassPistolGrip from './modifies/modifyBaseClassPistolGrip';
-import modifyBaseClassForeGrip from './modifies/modifyBaseClassForeGrip';
-import modifyBaseClassStock from './modifies/modifyBaseClassStock';
 import modifyBaseClassIronSight from './modifies/modifyBaseClassIronSight';
 import modifyBaseClassQuickSight from './modifies/modifyBaseClassQuickSight';
 import modifyBaseClassOpticSight from './modifies/modifyBaseClassOpticSight';
@@ -89,13 +88,14 @@ import addNewItemSpecialBigBackpack from './modifies/addNewItemSpecialBigBackpac
 import addNewItemSpecialMeleeWeapon from './modifies/addNewItemSpecialMeleeWeapon';
 import addNewItemSpecialAmmoArmband from './modifies/addNewItemSpecialAmmoArmband';
 
-// example：https://dev.sp-tarkov.com/chomp/ModExamples/
+// example：https://github.com/sp-tarkov/mod-examples
 
 class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
   private logger: ILogger;
   private databaseServer: DatabaseServer;
   private profileHelper: ProfileHelper;
   private itemHelper: ItemHelper;
+  private handbookHelper: HandbookHelper;
   private configServer: ConfigServer;
   private customItemService: CustomItemService;
 
@@ -104,6 +104,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     this.databaseServer = container.resolve<DatabaseServer>('DatabaseServer');
     this.profileHelper = container.resolve<ProfileHelper>('ProfileHelper');
     this.itemHelper = container.resolve<ItemHelper>('ItemHelper');
+    this.handbookHelper = container.resolve<HandbookHelper>('HandbookHelper');
     this.configServer = container.resolve<ConfigServer>('ConfigServer');
     this.customItemService = container.resolve<CustomItemService>('CustomItemService');
   }
@@ -114,6 +115,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     const ragfairConfig: IRagfairConfig = this.configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
     const hideoutConfig: IHideoutConfig = this.configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
     const botConfig: IBotConfig = this.configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
+    const seasonalEventConfig:ISeasonalEventConfig = this.configServer.getConfig<ISeasonalEventConfig>(ConfigTypes.SEASONAL_EVENT);
 
     // global
     myConfig.applyGlobalConfig && applyGlobalConfig(
@@ -122,6 +124,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
       lostOnDeathConfig,
       ragfairConfig,
       botConfig,
+      seasonalEventConfig,
       tables,
       myConfig.allowRagfairList,
       myConfig.escapeTimeLimit
@@ -187,15 +190,6 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 弹匣，不包括转轮手枪弹巢
     myConfig.modifyBaseClassMagazine && modifyBaseClassMagazine(this.logger,this.itemHelper,tables);
-
-    // 手枪式握把
-    myConfig.modifyBaseClassPistolGrip && modifyBaseClassPistolGrip(this.logger,this.itemHelper,tables);
-
-    // 前握把
-    myConfig.modifyBaseClassForeGrip && modifyBaseClassForeGrip(this.logger,this.itemHelper,tables);
-
-    // 枪托
-    myConfig.modifyBaseClassStock && modifyBaseClassStock(this.logger,this.itemHelper,tables);
 
     // 瞄具
     myConfig.modifyBaseClassIronSight && modifyBaseClassIronSight(this.logger,this.itemHelper,tables);

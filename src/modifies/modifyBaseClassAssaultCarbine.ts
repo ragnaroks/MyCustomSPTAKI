@@ -14,6 +14,7 @@ export default function modifyBaseClassAssaultCarbine(logger:ILogger,itemHelper:
     template._props.AllowMisfire = false;
     template._props.AllowSlide = false;
     template._props.AllowOverheat = false;
+    template._props.Ergonomics = 100;
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.ASSAULT_CARBINE 已调整');
 }
