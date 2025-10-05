@@ -25,12 +25,12 @@ export default function addNewItemSpecialRifleMagazine1(logger:ILogger,customIte
     handbookParentId: '5b5f754a86f774094242f19b',
     locales: {
       en: {
-        name: 'special rifle magazine type 1',
+        name: 'special rifle magazine',
         shortName: 'SRM1',
         description: 'special rifle magazine, can load any assault rifle ammo but only work with SAR'
       },
       ch: {
-        name: '特制步枪弹匣 1 型',
+        name: '特制步枪弹匣',
         shortName: 'SRM1',
         description: '特制步枪弹匣，可以使用任何突击步枪弹药，只适用于特制突击步枪'
       }
@@ -48,7 +48,7 @@ export default function addNewItemSpecialRifleMagazine1(logger:ILogger,customIte
           _name:'cartridges',
           _parent:newId,
           _proto:'5748538b2459770af276a261',
-          _max_count: 100,
+          _max_count: 300,
           _props:{
             filters:[
               {

@@ -65,19 +65,13 @@ import addNewItemSpecialAssaultRifle from './modifies/addNewItemSpecialAssaultRi
 import addNewItemSpecialGrenadeContainer from './modifies/addNewItemSpecialGrenadeContainer';
 import addNewItemSpecialItemContainer from './modifies/addNewItemSpecialItemContainer';
 import addNewItemSpecialPistolMagazine1 from './modifies/addNewItemSpecialPistolMagazine1';
-import addNewItemSpecialPistolMagazine2 from './modifies/addNewItemSpecialPistolMagazine2';
-import addNewItemSpecialRifleMagazine2 from './modifies/addNewItemSpecialRifleMagazine2';
-import addNewItemSpecialRifleMagazine3 from './modifies/addNewItemSpecialRifleMagazine3';
-import addNewItemSpecialPistolMagazine3 from './modifies/addNewItemSpecialPistolMagazine3';
 import addNewItemSpecialWeaponContainer from './modifies/addNewItemSpecialWeaponContainer';
-import modifyBaseClassArmorPlant from './modifies/modifyBaseClassArmorPlant';
 import addNewItemSpecialLightPlateCarrier from './modifies/addNewItemSpecialLightPlateCarrier';
 import addNewItemSpecialHeavyPlateCarrier from './modifies/addNewItemSpecialHeavyPlateCarrier';
 import modifyBaseClassItem from './modifies/modifyBaseClassItem';
 import modifyBaseClassNightVision from './modifies/modifyBaseClassNightVision';
 import modifyBaseClassThermalVision from './modifies/modifyBaseClassThermalVision';
 import addNewItemBigHealingInjector from './modifies/addNewItemBigHealingInjector';
-import addNewItemSpecialPlateContainer from './modifies/addNewItemSpecialPlateContainer';
 import enhancedMPR45 from './modifies/enhancedMPR45';
 import addNewItemSpecialNightVisionDevice from './modifies/addNewItemSpecialNightVisionDevice';
 import addNewItemSpecialThermalVisionDevice from './modifies/addNewItemSpecialThermalVisionDevice';
@@ -87,6 +81,10 @@ import addNewItemSpecialSmallBackpack from './modifies/addNewItemSpecialSmallBac
 import addNewItemSpecialBigBackpack from './modifies/addNewItemSpecialBigBackpack';
 import addNewItemSpecialMeleeWeapon from './modifies/addNewItemSpecialMeleeWeapon';
 import addNewItemSpecialAmmoArmband from './modifies/addNewItemSpecialAmmoArmband';
+import addNewItemSpecialGrenadeLauncher from './modifies/addNewItemSpecialGrenadeLauncher';
+import addNewItemSpecialGrenadeLauncherMagazine from './modifies/addNewItemSpecialGrenadeLauncherMagazine';
+import addNewItemSpecialArmorPlate5 from './modifies/addNewItemSpecialArmorPlate5';
+import addNewItemSpecialArmorPlate6 from './modifies/addNewItemSpecialArmorPlate6';
 
 // example：https://github.com/sp-tarkov/mod-examples
 
@@ -115,7 +113,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     const ragfairConfig: IRagfairConfig = this.configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
     const hideoutConfig: IHideoutConfig = this.configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
     const botConfig: IBotConfig = this.configServer.getConfig<IBotConfig>(ConfigTypes.BOT);
-    const seasonalEventConfig:ISeasonalEventConfig = this.configServer.getConfig<ISeasonalEventConfig>(ConfigTypes.SEASONAL_EVENT);
+    const seasonalEventConfig: ISeasonalEventConfig = this.configServer.getConfig<ISeasonalEventConfig>(ConfigTypes.SEASONAL_EVENT);
 
     // global
     myConfig.applyGlobalConfig && applyGlobalConfig(
@@ -202,9 +200,6 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 护甲
     myConfig.modifyBaseClassArmor && modifyBaseClassArmor(this.logger,this.itemHelper,tables);
 
-    // 护甲插板
-    myConfig.modifyBaseClassArmorPlant && modifyBaseClassArmorPlant(this.logger,this.itemHelper,tables);
-
     // 头盔
     myConfig.modifyBaseClassHeadwear && modifyBaseClassHeadwear(this.logger,this.itemHelper,tables);
 
@@ -227,7 +222,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // MPR45 侧轨增强
     myConfig.enhancedMPR45 && enhancedMPR45(this.logger,this.itemHelper,tables);
 
-    // AI 生命值修改，不修改头部
+    // AI 生命值修改
     modifyBotHealth(this.logger,tables,myConfig.modifyBotHealthMultiple);
 
     // 自定义物品：超大医疗包
@@ -246,12 +241,14 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     addNewItemBigFood(this.logger,this.customItemService,this.itemHelper,tables);
 
     // 自定义物品：特制口袋
-    addNewItemSpecialPocket(this.logger,this.customItemService,tables);
+    //addNewItemSpecialPocket(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制胸挂
     addNewItemSpecialVestRig(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制插板背心
+    addNewItemSpecialArmorPlate5(this.logger,this.customItemService,tables);
+    addNewItemSpecialArmorPlate6(this.logger,this.customItemService,tables);
     addNewItemSpecialLightPlateCarrier(this.logger,this.customItemService,tables);
     addNewItemSpecialHeavyPlateCarrier(this.logger,this.customItemService,tables);
 
@@ -269,12 +266,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制弹药箱
     addNewItemSpecialAmmoContainer(this.logger,this.customItemService,tables);
-    
-    // 自定义物品：特制手榴弹箱
-    addNewItemSpecialGrenadeContainer(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制手榴弹箱
-    addNewItemSpecialPlateContainer(this.logger,this.customItemService,tables);
+    addNewItemSpecialGrenadeContainer(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制武器箱
     addNewItemSpecialWeaponContainer(this.logger,this.customItemService,tables);
@@ -284,11 +278,8 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制武器适用弹匣
     addNewItemSpecialPistolMagazine1(this.logger,this.customItemService,tables);
-    addNewItemSpecialPistolMagazine2(this.logger,this.customItemService,tables);
-    addNewItemSpecialPistolMagazine3(this.logger,this.customItemService,tables);
     addNewItemSpecialRifleMagazine1(this.logger,this.customItemService,tables);
-    addNewItemSpecialRifleMagazine2(this.logger,this.customItemService,tables);
-    addNewItemSpecialRifleMagazine3(this.logger,this.customItemService,tables);
+    addNewItemSpecialGrenadeLauncherMagazine(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制手枪
     addNewItemSpecialAutoPistol(this.logger,this.customItemService,tables);
@@ -298,6 +289,9 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
 
     // 自定义物品：特制突击步枪
     addNewItemSpecialAssaultRifle(this.logger,this.customItemService,tables);
+
+    // 自定义物品：特制榴弹发射器
+    addNewItemSpecialGrenadeLauncher(this.logger,this.customItemService,tables);
 
     // 自定义物品：特制夜视仪
     addNewItemSpecialNightVisionDevice(this.logger,this.customItemService,this.itemHelper,tables);
@@ -311,7 +305,7 @@ class Mod implements IPreSptLoadMod,IPostDBLoadMod,IPostSptLoadMod {
     // 自定义物品：特制子弹臂带
     addNewItemSpecialAmmoArmband(this.logger,this.customItemService,tables);
 
-    // 自定义物品：特制背包，6x4 和 6x8
+    // 自定义物品：特制背包，6x6 和 6x12
     addNewItemSpecialSmallBackpack(this.logger,this.customItemService,tables);
     addNewItemSpecialBigBackpack(this.logger,this.customItemService,tables);
 

@@ -53,15 +53,15 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 2,
             filters: [
               {
-                Filter: [BaseClasses.ITEM],
-                ExcludedFilter: [
-                  BaseClasses.MOB_CONTAINER,
-                  BaseClasses.SIMPLE_CONTAINER,
-                  BaseClasses.BACKPACK,
-                  BaseClasses.VEST,
-                  BaseClasses.MAGAZINE,
-                  BaseClasses.AMMO
-                ]
+                Filter: [
+                  ItemTpl.GRENADE_F1_HAND,
+                  ItemTpl.GRENADE_M67_HAND,
+                  ItemTpl.GRENADE_RGD5_HAND,
+                  ItemTpl.GRENADE_V40_MINI,
+                  ItemTpl.GRENADE_VOG17_KHATTABKA_IMPROVISED_HAND,
+                  ItemTpl.GRENADE_VOG25_KHATTABKA_IMPROVISED_HAND
+                ],
+                ExcludedFilter: []
               }
             ],
             isSortingTable: false,
@@ -79,7 +79,10 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 4,
             filters: [
               {
-                Filter: [BaseClasses.MAGAZINE],
+                Filter: [
+                  BaseClasses.MAGAZINE,
+                  BaseClasses.SPECIAL_WEAPON
+                ],
                 ExcludedFilter: []
               }
             ],
@@ -98,7 +101,15 @@ export default function addNewItemSpecialVestRig(logger:ILogger,customItemServic
             cellsV: 4,
             filters: [
               {
-                Filter: [BaseClasses.AMMO],
+                Filter: [
+                  BaseClasses.AMMO,
+                  ItemTpl.GRENADE_M18_SMOKE_GRENADE_GREEN,
+                  ItemTpl.GRENADE_MODEL_7290_FLASH_BANG,
+                  ItemTpl.GRENADE_RDG2B_SMOKE,
+                  ItemTpl.GRENADE_RGN_HAND,
+                  ItemTpl.GRENADE_RGO_HAND,
+                  ItemTpl.GRENADE_ZARYA_STUN
+                ],
                 ExcludedFilter: []
               }
             ],

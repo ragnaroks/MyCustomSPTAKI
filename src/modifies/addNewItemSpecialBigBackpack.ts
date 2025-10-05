@@ -15,8 +15,8 @@ export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemSe
     itemTplToClone: ItemTpl.BACKPACK_PARTISANS_BAG,
     newId: newId,
     parentId: BaseClasses.BACKPACK,
-    fleaPriceRoubles: 18_7500,
-    handbookPriceRoubles: 15_0000,
+    fleaPriceRoubles: 45_0000,
+    handbookPriceRoubles: 30_0000,
     handbookParentId: '5b5f6f6c86f774093f2ecf0b',
     locales: {
       en: {
@@ -50,7 +50,7 @@ export default function addNewItemSpecialBigBackpack(logger:ILogger,customItemSe
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
             cellsH: 6,
-            cellsV: 8,
+            cellsV: 12,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],

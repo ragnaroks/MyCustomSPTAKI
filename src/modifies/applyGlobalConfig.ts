@@ -32,13 +32,11 @@ export default function applyGlobalConfig(logger: ILogger,hideoutConfig: IHideou
   }
   for(const key of Object.keys(botConfig.assaultBrainType)) {
     botConfig.assaultBrainType[key] = {
-      followerGluharAssault: 1
+      pmcBot: 1
     };
   }
   for(const key of Object.keys(botConfig.playerScavBrainType)) {
     botConfig.playerScavBrainType[key] = {
-      followerGluharAssault: 1,
-      bossKilla: 1,
       pmcBot: 1
     };
   }

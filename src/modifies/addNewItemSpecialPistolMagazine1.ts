@@ -25,12 +25,12 @@ export default function addNewItemSpecialPistolMagazine1(logger: ILogger,customI
     handbookParentId: '5b5f754a86f774094242f19b',
     locales: {
       en: {
-        name: 'special pistol magazine type 1',
+        name: 'special pistol magazine',
         shortName: 'SPM1',
         description: 'special pistol magazine, can load any pistol ammo but only work with SAP and SSMG'
       },
       ch: {
-        name: '特制手枪弹匣 1 型',
+        name: '特制手枪弹匣',
         shortName: 'SPM1',
         description: '特制手枪弹匣，可以使用任何手枪弹药，只能用于特制手枪和特制冲锋枪'
       }
@@ -48,7 +48,7 @@ export default function addNewItemSpecialPistolMagazine1(logger: ILogger,customI
           _name: 'cartridges',
           _parent: newId,
           _proto: '5748538b2459770af276a261',
-          _max_count: 100,
+          _max_count: 300,
           _props: {
             filters: [
               {

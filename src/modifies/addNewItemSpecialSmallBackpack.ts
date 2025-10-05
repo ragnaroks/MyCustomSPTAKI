@@ -15,8 +15,8 @@ export default function addNewItemSpecialSmallBackpack(logger:ILogger,customItem
     itemTplToClone: ItemTpl.BACKPACK_SANITARS_BAG,
     newId: newId,
     parentId: BaseClasses.BACKPACK,
-    fleaPriceRoubles: 6_2500,
-    handbookPriceRoubles: 5_0000,
+    fleaPriceRoubles: 12_5000,
+    handbookPriceRoubles: 10_0000,
     handbookParentId: '5b5f6f6c86f774093f2ecf0b',
     locales: {
       en: {
@@ -50,7 +50,7 @@ export default function addNewItemSpecialSmallBackpack(logger:ILogger,customItem
           _proto: '55d329c24bdc2d892f8b4567',
           _props: {
             cellsH: 6,
-            cellsV: 4,
+            cellsV: 6,
             filters: [
               {
                 Filter: [BaseClasses.ITEM],

@@ -8,7 +8,10 @@ import {Traders} from '@spt/models/enums/Traders';
 import {ISlotFilter} from '@spt/models/eft/common/tables/ITemplateItem';
 
 const plantSlotFilter: ISlotFilter = {
-  Filter: [BaseClasses.ARMOR_PLATE],
+  Filter: [
+    BaseClasses.ARMOR_PLATE,
+    '68e277c17e17026fcff79c00',// SAP5
+  ],
   Plate: ItemTpl.ARMORPLATE_GAC_3S15M_BALLISTIC_PLATE,
   armorColliders: [
     'BackHead','Ears','Eyes','HeadCommon','Jaw','NeckBack','NeckFront','ParietalHead',
@@ -65,7 +68,7 @@ export default function addNewItemSpecialLightPlateCarrier(logger: ILogger,custo
         {
           _id: '67e643969bdc5111d9dbe061',//id+0x01
           _mergeSlotWithChildren: true,
-          _name: 'plate1',
+          _name: 'front',
           _parent: newId,
           _proto: '64479fdf9731c8fadc0642c1',
           _required: false,
@@ -75,87 +78,7 @@ export default function addNewItemSpecialLightPlateCarrier(logger: ILogger,custo
         },{
           _id: '67e643969bdc5111d9dbe062',//id+0x02
           _mergeSlotWithChildren: true,
-          _name: 'plate2',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe063',//id+0x03
-          _mergeSlotWithChildren: true,
-          _name: 'plate3',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe064',//id+0x04
-          _mergeSlotWithChildren: true,
-          _name: 'plate4',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe065',//id+0x05
-          _mergeSlotWithChildren: true,
-          _name: 'plate5',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe066',//id+0x06
-          _mergeSlotWithChildren: true,
-          _name: 'plate6',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe067',//id+0x07
-          _mergeSlotWithChildren: true,
-          _name: 'plate7',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe068',//id+0x08
-          _mergeSlotWithChildren: true,
-          _name: 'plate8',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe069',//id+0x09
-          _mergeSlotWithChildren: true,
-          _name: 'plate9',
-          _parent: newId,
-          _proto: '64479fdf9731c8fadc0642c1',
-          _required: false,
-          _props: {
-            filters: [plantSlotFilter]
-          }
-        },{
-          _id: '67e643969bdc5111d9dbe06a',//id+0x0a
-          _mergeSlotWithChildren: true,
-          _name: 'plate10',
+          _name: 'back',
           _parent: newId,
           _proto: '64479fdf9731c8fadc0642c1',
           _required: false,

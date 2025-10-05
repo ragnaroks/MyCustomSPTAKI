@@ -179,7 +179,7 @@ export default function addNewItemSpecialAssaultRifle(logger: ILogger,customItem
             filters: [
               {
                 AnimationIndex: -1,
-                Filter: ['67dd17915bdad9aa03d95570','67dd1dce40aca0ed6482f8c0','67dd1e75c58c32a1669b2e70']
+                Filter: ['67dd17915bdad9aa03d95570']
               }
             ]
           }

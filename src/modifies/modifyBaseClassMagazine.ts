@@ -16,14 +16,13 @@ export default function modifyBaseClassMagazine(logger:ILogger,itemHelper:ItemHe
     template._props.ExtraSizeDown = 0;
     template._props.ExtraSizeLeft = 0;
     template._props.ExtraSizeRight = 0;
-    const base = Math.floor(template._props.Cartridges[0]._max_count / 10);
-    template._props.Ergonomics = 5 - base;
-    template._props.Recoil = base<2 ? 0 : 2-base;
+    /*
     // 弹匣扩容会导致战局刷出大量弹药
     if(Array.isArray(template._props.Slots) && template._props.Slots.length > 0) {continue;}
     for (const slot of template._props.Cartridges) {
       slot._max_count = slot._max_count * 5;
     }
+    */
   }
   logger.success('[MyCustomSPTAKI]: BaseClasses.MAGAZINE 已调整');
 }

@@ -8,8 +8,8 @@ export default function modifyBotHealth(logger: ILogger,tables: IDatabaseTables,
     const character = tables.bots.types[botType];
     let multiple = botType.startsWith('boss') ? scale * 2 : scale;
     for(const bodyPartItem of character.health.BodyParts) {
-      //bodyPartItem.Head.max *= multiple;
-      //bodyPartItem.Head.min *= multiple;
+      bodyPartItem.Head.max *= multiple;
+      bodyPartItem.Head.min *= multiple;
       bodyPartItem.Chest.max *= multiple;
       bodyPartItem.Chest.min *= multiple;
       bodyPartItem.Stomach.max *= multiple;
