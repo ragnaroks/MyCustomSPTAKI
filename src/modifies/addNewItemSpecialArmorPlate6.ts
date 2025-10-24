@@ -54,8 +54,9 @@ export default function addNewItemSpecialArmorPlate6(logger: ILogger,customItemS
       RepairCost: 100,
       Weight: 0,
       BluntThroughput: 0.15,
-      Durability: 10_0000,
-      MaxDurability: 10_0000,
+      Durability: 1_0000,
+      MaxDurability: 1_0000,
+      InsuranceDisabled:true,
       armorClass: '6',
       armorColliders: [
         'BackHead','Ears','Eyes','HeadCommon','Jaw','NeckBack','NeckFront','ParietalHead',

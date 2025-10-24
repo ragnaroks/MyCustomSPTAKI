@@ -54,9 +54,10 @@ export default function addNewItemSpecialArmorPlate5(logger: ILogger,customItemS
       RepairCost: 100,
       Weight: 0,
       BluntThroughput: 0.25,
-      Durability: 10_0000,
-      MaxDurability: 10_0000,
+      Durability: 1_0000,
+      MaxDurability: 1_0000,
       armorClass: '5',
+      InsuranceDisabled:true,
       armorColliders: [
         'BackHead','Ears','Eyes','HeadCommon','Jaw','NeckBack','NeckFront','ParietalHead',
         //
