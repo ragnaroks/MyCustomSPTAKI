@@ -42,8 +42,8 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 3,
-                CellsV = 6,
+                CellsH = 2,
+                CellsV = 8,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.AMMO],
@@ -63,8 +63,8 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 3,
-                CellsV = 6,
+                CellsH = 2,
+                CellsV = 8,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.FOOD_DRINK],
@@ -85,7 +85,7 @@ public class AddMasterArmband : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 6,
-                CellsV = 6,
+                CellsV = 8,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.MEDS],
@@ -105,12 +105,12 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 6,
-                CellsV = 6,
+                CellsH = 8,
+                CellsV = 8,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.THROW_WEAP],
-                        ExcludedFilter = null
+                        Filter = [BaseClasses.ITEM],
+                        ExcludedFilter = [BaseClasses.MOB_CONTAINER,BaseClasses.POCKETS]
                     }
                 ],
                 IsSortingTable = false,
