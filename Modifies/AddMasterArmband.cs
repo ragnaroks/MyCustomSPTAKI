@@ -10,6 +10,7 @@ using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,8 +42,8 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 6,
-                CellsV = 3,
+                CellsH = 3,
+                CellsV = 6,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.AMMO],
@@ -62,11 +63,11 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 6,
-                CellsV = 3,
+                CellsH = 3,
+                CellsV = 6,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.THROW_WEAP],
+                        Filter = [BaseClasses.FOOD_DRINK],
                         ExcludedFilter = null
                     }
                 ],
@@ -83,11 +84,11 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 3,
+                CellsH = 6,
                 CellsV = 6,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.FOOD_DRINK],
+                        Filter = [BaseClasses.MEDS],
                         ExcludedFilter = null
                     }
                 ],
@@ -108,7 +109,7 @@ public class AddMasterArmband : IOnLoad {
                 CellsV = 6,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.MEDS],
+                        Filter = [BaseClasses.THROW_WEAP],
                         ExcludedFilter = null
                     }
                 ],
@@ -123,7 +124,7 @@ public class AddMasterArmband : IOnLoad {
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.ARMBAND_EVASION,
             NewId = this.NewId,
-            ParentId = BaseClasses.ARM_BAND,
+            ParentId = BaseClasses.MOB_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
             HandbookParentId = "5b5f6fd286f774093f2ecf0d",
@@ -195,6 +196,20 @@ public class AddMasterArmband : IOnLoad {
                 BuyRestrictionCurrent = 0
             }
         });
+
+        Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
+        if(templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT,out TemplateItem? template) is true && template is not null) {
+            if(template.Properties is not null && template.Properties.Slots is not null) {
+                foreach (Slot slot in template.Properties.Slots) {
+                    if(slot.Name is not "ArmBand"){continue;}
+                    if(slot.Properties is null || slot.Properties.Filters is null){continue;}
+                    SlotFilter slotFilter = slot.Properties.Filters.First();
+                    if(slotFilter.Filter is null){continue;}
+                    _ = slotFilter.Filter.Add(this.NewId);
+                    break;
+                }
+            }
+        }
 
         this.Logger.Log(
             LogLevel.Info,
