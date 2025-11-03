@@ -43,7 +43,7 @@ public class AddMasterArmband : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 2,
-                CellsV = 8,
+                CellsV = 7,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.AMMO],
@@ -64,7 +64,7 @@ public class AddMasterArmband : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 2,
-                CellsV = 8,
+                CellsV = 7,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.FOOD_DRINK],
@@ -84,33 +84,12 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 6,
-                CellsV = 8,
+                CellsH = 7,
+                CellsV = 7,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.MEDS],
                         ExcludedFilter = null
-                    }
-                ],
-                IsSortingTable = false,
-                MaxCount = 0,
-                MaxWeight = 0,
-                MinCount = 0
-            }
-        };
-        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
-        Grid colume4 = new() {
-            Id = this.RotateId,
-            Name = "colume4",
-            Parent = this.NewId,
-            Prototype = "55d329c24bdc2d892f8b4567",
-            Properties = new() {
-                CellsH = 8,
-                CellsV = 8,
-                Filters = [
-                    new(){
-                        Filter = [BaseClasses.ITEM],
-                        ExcludedFilter = [BaseClasses.MOB_CONTAINER,BaseClasses.POCKETS]
                     }
                 ],
                 IsSortingTable = false,
@@ -148,7 +127,7 @@ public class AddMasterArmband : IOnLoad {
                 Unlootable = true,
                 InsuranceDisabled = true,
                 IsSecured = true,
-                Grids = [colume1,colume2,colume3,colume4]
+                Grids = [colume1,colume2,colume3]
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
