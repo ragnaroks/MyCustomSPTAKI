@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
 public class AddSmallBackpack : IOnLoad {
     private ISptLogger<AddSmallBackpack> Logger { get; }
     private DatabaseService DatabaseService { get; }

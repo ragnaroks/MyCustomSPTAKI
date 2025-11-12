@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
 public class ModifyBotConfig : IOnLoad {
     private ISptLogger<ModifyBotConfig> Logger { get; }
     private ConfigServer ConfigServer { get; }
@@ -26,7 +26,11 @@ public class ModifyBotConfig : IOnLoad {
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         botConfig.ShowTypeInNickname = true;
         foreach (String key in botConfig.MaxBotCap.Keys) {
-            botConfig.MaxBotCap[key] = 9;
+            if (key is "factory_day" or "factory_night") {
+                botConfig.MaxBotCap[key] = 7;
+            } else {
+                botConfig.MaxBotCap[key] = 11;
+            }            
         }
         /*
         foreach( String key in botConfig.AssaultBrainType.Keys) {

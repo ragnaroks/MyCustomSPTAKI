@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
 public class AddNightVisionGoggles : IOnLoad {
     private ISptLogger<AddNightVisionGoggles> Logger { get; }
     private DatabaseService DatabaseService { get; }

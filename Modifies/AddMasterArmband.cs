@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
 public class AddMasterArmband : IOnLoad {
     private ISptLogger<AddMasterArmband> Logger { get; }
     private DatabaseService DatabaseService { get; }
@@ -109,7 +109,7 @@ public class AddMasterArmband : IOnLoad {
             HandbookParentId = "5b5f6fd286f774093f2ecf0d",
             Locales = new(){
                 {"en",new(){Name = "master armband",ShortName = "Master",Description = "skydust™ master armband"}},
-                {"ch",new(){Name = "大师肩带",ShortName = "大师肩带",Description = "skydust™ 大师肩带"}}
+                {"ch",new(){Name = "大师肩带",ShortName = "大师",Description = "skydust™ 大师肩带"}}
             },
             OverrideProperties = new() {
                 BackgroundColor = "blue",

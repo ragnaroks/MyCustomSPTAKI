@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
 public class ModifyGlobalDatabase : IOnLoad {
     private ISptLogger<ModifyGlobalDatabase> Logger { get; }
     private DatabaseService DatabaseService { get; }
@@ -33,8 +33,8 @@ public class ModifyGlobalDatabase : IOnLoad {
         globals.Configuration.SkillMinEffectiveness = 1D;
         globals.Configuration.SkillFreshEffectiveness = 3D;
         globals.Configuration.SavagePlayCooldown = 60;
-        globals.Configuration.MaxBotsAliveOnMap = 9D;
-        globals.Configuration.MaxBotsAliveOnMapPvE = 9D;
+        //globals.Configuration.MaxBotsAliveOnMap = 11D;
+        //globals.Configuration.MaxBotsAliveOnMapPvE = 11D;
 
         foreach (MaxActiveOfferCount maxActiveOfferCount in globals.Configuration.RagFair.MaxActiveOfferCount) {
             maxActiveOfferCount.Count *= 10;
