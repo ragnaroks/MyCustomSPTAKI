@@ -26,20 +26,21 @@ public class ModifyGlobalDatabase : IOnLoad {
         Globals globals = this.DatabaseService.GetGlobals();
         //globals.Configuration.BaseCheckTime = 0D;
         //globals.Configuration.BaseLoadTime = 0D;
-        globals.Configuration.BaseUnloadTime = 0D;
+        //globals.Configuration.BaseUnloadTime = 0D;
         globals.Configuration.AimPunchMagnitude = 0D;
         globals.Configuration.RestrictionsInRaid = [];
         globals.Configuration.SkillFatiguePerPoint = 0D;
         globals.Configuration.SkillMinEffectiveness = 1D;
         globals.Configuration.SkillFreshEffectiveness = 3D;
         globals.Configuration.SavagePlayCooldown = 60;
-        //globals.Configuration.MaxBotsAliveOnMap = 11D;
-        //globals.Configuration.MaxBotsAliveOnMapPvE = 11D;
 
         foreach (MaxActiveOfferCount maxActiveOfferCount in globals.Configuration.RagFair.MaxActiveOfferCount) {
             maxActiveOfferCount.Count *= 10;
             maxActiveOfferCount.CountForSpecialEditions *= 10;
         }
+
+        // 物品无同时上架数量限制
+        globals.Configuration.RagFair.ItemRestrictions = [];
 
         this.Logger.Log(
             LogLevel.Info,

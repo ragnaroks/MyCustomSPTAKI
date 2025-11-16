@@ -25,12 +25,14 @@ public class ModifyBotConfig : IOnLoad {
     public Task OnLoad () {
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         botConfig.ShowTypeInNickname = true;
+        //this.Logger.Log(LogLevel.Warn,Constants.LoggerPrefix+String.Join("/",botConfig.MaxBotCap.Keys));
         foreach (String key in botConfig.MaxBotCap.Keys) {
-            if (key is "factory_day" or "factory_night") {
+            if (key is "factory4_day" or "factory4_night") {
                 botConfig.MaxBotCap[key] = 7;
             } else {
-                botConfig.MaxBotCap[key] = 11;
-            }            
+                //botConfig.MaxBotCap[key] = 11;
+                continue;
+            }
         }
         /*
         foreach( String key in botConfig.AssaultBrainType.Keys) {
