@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
 public class ModifyGlobalDatabase : IOnLoad {
     private ISptLogger<ModifyGlobalDatabase> Logger { get; }
     private DatabaseService DatabaseService { get; }

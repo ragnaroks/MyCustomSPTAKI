@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
 public class ModifyQuestDatabase : IOnLoad {
     private ISptLogger<ModifyQuestDatabase> Logger { get; }
     private DatabaseService DatabaseService { get; }

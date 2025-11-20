@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
 public class AddMasterArmband : IOnLoad {
     private ISptLogger<AddMasterArmband> Logger { get; }
     private DatabaseService DatabaseService { get; }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
 public class ModifyBotConfig : IOnLoad {
     private ISptLogger<ModifyBotConfig> Logger { get; }
     private ConfigServer ConfigServer { get; }
@@ -25,15 +25,35 @@ public class ModifyBotConfig : IOnLoad {
     public Task OnLoad () {
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         botConfig.ShowTypeInNickname = true;
-        //this.Logger.Log(LogLevel.Warn,Constants.LoggerPrefix+String.Join("/",botConfig.MaxBotCap.Keys));
-        foreach (String key in botConfig.MaxBotCap.Keys) {
-            if (key is "factory4_day" or "factory4_night") {
-                botConfig.MaxBotCap[key] = 7;
-            } else {
-                //botConfig.MaxBotCap[key] = 11;
-                continue;
-            }
-        }
+        botConfig.MaxBotCap["default"] = 18;
+        botConfig.MaxBotCap["Default"] = 18;
+        botConfig.MaxBotCap["factory4_day"] = 7;
+        botConfig.MaxBotCap["Factory4Day"] = 7;
+        botConfig.MaxBotCap["factory4_night"] = 7;
+        botConfig.MaxBotCap["Factory4Night"] = 7;
+        botConfig.MaxBotCap["bigmap"] = 26;
+        botConfig.MaxBotCap["Bigmap"] = 26;
+        botConfig.MaxBotCap["interchange"] = 24;
+        botConfig.MaxBotCap["Interchange"] = 24;
+        botConfig.MaxBotCap["laboratory"] = 19;
+        botConfig.MaxBotCap["Laboratory"] = 19;
+        botConfig.MaxBotCap["labyrinth"] = 8;
+        botConfig.MaxBotCap["Labyrinth"] = 8;
+        botConfig.MaxBotCap["lighthouse"] = 23;
+        botConfig.MaxBotCap["Lighthouse"] = 23;
+        botConfig.MaxBotCap["rezervbase"] = 23;
+        botConfig.MaxBotCap["RezervBase"] = 23;
+        botConfig.MaxBotCap["sandbox"] = 11;
+        botConfig.MaxBotCap["Sandbox"] = 11;
+        botConfig.MaxBotCap["sandbox_hgh"] = 12;
+        botConfig.MaxBotCap["SandboxHigh"] = 12;
+        botConfig.MaxBotCap["shoreline"] = 25;
+        botConfig.MaxBotCap["Shoreline"] = 25;
+        botConfig.MaxBotCap["tarkovstreets"] = 24;
+        botConfig.MaxBotCap["TarkovStreets"] = 24;
+        botConfig.MaxBotCap["woods"] = 23;
+        botConfig.MaxBotCap["Woods"] = 23;
+
         /*
         foreach( String key in botConfig.AssaultBrainType.Keys) {
             botConfig.AssaultBrainType[key].Clear();

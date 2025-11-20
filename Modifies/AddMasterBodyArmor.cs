@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
-[Injectable(InjectionType.Transient, null, OnLoadOrder.PostDBModLoader + 1)]
+[Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
 public class AddMasterBodyArmor : IOnLoad {
     private ISptLogger<AddMasterBodyArmor> Logger { get; }
     private DatabaseService DatabaseService { get; }
@@ -68,7 +68,7 @@ public class AddMasterBodyArmor : IOnLoad {
                 BlocksEyewear = false,
                 BlocksFaceCover = false,
                 BlocksHeadwear = false,
-                BluntThroughput = 0.1D,
+                BluntThroughput = 0.125D,
                 Durability = 900D,
                 MaxDurability = 900D,
                 RepairCost = 100,
@@ -76,7 +76,7 @@ public class AddMasterBodyArmor : IOnLoad {
                 MinRepairDegradation = 0D,
                 MaxRepairKitDegradation = 0D,
                 MinRepairKitDegradation = 0D,
-                Indestructibility = 0.95D,
+                Indestructibility = 0.9D,
                 ArmorClass = 10,
                 ArmorColliders = [
                     "LeftCalf","LeftForearm","LeftSideChestDown","LeftSideChestUp","LeftThigh","LeftUpperArm",
