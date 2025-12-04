@@ -40,7 +40,7 @@ public class AddNightVisionGoggles : IOnLoad {
     public Task OnLoad () {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         NewItemFromCloneDetails newItem = new() {
-            ItemTplToClone = ItemTpl.NIGHTVISION_L3HARRIS_GPNVG18_NIGHT_VISION_GOGGLES,
+            ItemTplToClone = ItemTpl.THERMALVISION_T7_THERMAL_GOGGLES_WITH_A_NIGHT_VISION_MOUNT,
             NewId = this.NewId,
             ParentId = BaseClasses.NIGHT_VISION,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
