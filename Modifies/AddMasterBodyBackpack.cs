@@ -17,17 +17,17 @@ using System.Threading.Tasks;
 namespace MyCustomSPTAKI.Modifies;
 
 [Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
-public class AddMasterArmband : IOnLoad {
-    private ISptLogger<AddMasterArmband> Logger { get; }
+public class AddMasterBodyBackpack : IOnLoad {
+    private ISptLogger<AddMasterBodyBackpack> Logger { get; }
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
-    private Double HandbookPrice { get; } = 1000_0000D;
-    private MongoId BaseId { get; } = new("680b992ddb2d7f5fd00e7a00");
-    private MongoId NewId { get; } = new("680b992ddb2d7f5fd00e7a01");
-    private MongoId RotateId { get; set; } = new("680b992ddb2d7f5fd00e7a20");
+    private Double HandbookPrice { get; } = 196_0000D;
+    private MongoId BaseId { get; } = new("6938900eebe7860edeced700");
+    private MongoId NewId { get; } = new("6938900eebe7860edeced701");
+    private MongoId RotateId { get; set; } = new("6938900eebe7860edeced720");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterArmband (ISptLogger<AddMasterArmband> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterBodyBackpack (ISptLogger<AddMasterBodyBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
@@ -42,12 +42,12 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 2,
-                CellsV = 7,
+                CellsH = 14,
+                CellsV = 14,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.AMMO],
-                        ExcludedFilter = null
+                        Filter = [BaseClasses.ITEM],
+                        ExcludedFilter = [BaseClasses.MOB_CONTAINER,BaseClasses.SIMPLE_CONTAINER,BaseClasses.BACKPACK]
                     }
                 ],
                 IsSortingTable = false,
@@ -63,12 +63,12 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 2,
-                CellsV = 7,
+                CellsH = 14,
+                CellsV = 14,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.FOOD_DRINK],
-                        ExcludedFilter = null
+                        Filter = [BaseClasses.ITEM],
+                        ExcludedFilter = [BaseClasses.MOB_CONTAINER,BaseClasses.SIMPLE_CONTAINER,BaseClasses.BACKPACK]
                     }
                 ],
                 IsSortingTable = false,
@@ -77,64 +77,42 @@ public class AddMasterArmband : IOnLoad {
                 MinCount = 0
             }
         };
-        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
-        Grid colume3 = new() {
-            Id = this.RotateId,
-            Name = "colume3",
-            Parent = this.NewId,
-            Prototype = "55d329c24bdc2d892f8b4567",
-            Properties = new() {
-                CellsH = 7,
-                CellsV = 7,
-                Filters = [
-                    new(){
-                        Filter = [BaseClasses.MEDS],
-                        ExcludedFilter = null
-                    }
-                ],
-                IsSortingTable = false,
-                MaxCount = 0,
-                MaxWeight = 0,
-                MinCount = 0
-            }
-        };
-
-
+        
         NewItemFromCloneDetails newItem = new() {
-            ItemTplToClone = ItemTpl.ARMBAND_EVASION,
+            ItemTplToClone = ItemTpl.ARMOR_LBT6094A_SLICK_PLATE_CARRIER_BLACK,
             NewId = this.NewId,
-            ParentId = BaseClasses.MOB_CONTAINER,
+            ParentId = BaseClasses.SIMPLE_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
-            HandbookParentId = "5b5f6fd286f774093f2ecf0d",
+            HandbookParentId = "5b5f701386f774093f2ecf0f",
             Locales = new(){
-                {"en",new(){Name = "master armband",ShortName = "Master",Description = "skydust™ master armband"}},
-                {"ch",new(){Name = "大师肩带",ShortName = "大师",Description = "skydust™ 大师肩带"}}
+                {"en",new(){Name = "master body backpack",ShortName = "Master",Description = "skydust™ master body backpack"}},
+                {"ch",new(){Name = "大师背包",ShortName = "大师",Description = "skydust™ 大师背包"}}
             },
             OverrideProperties = new() {
                 BackgroundColor = "blue",
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = 0.5D,
-                Width = 1,
-                Height = 1,
+                Weight = -196D,
+                Width = 3,
+                Height = 3,
                 MousePenalty = 0D,
                 SpeedPenaltyPercent = 0D,
                 WeaponErgonomicPenalty = 0D,
                 ExamineExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
                 LootExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
-                Unlootable = true,
-                InsuranceDisabled = true,
-                IsSecured = true,
-                Grids = [colume1,colume2,colume3]
+                Grids = [colume1,colume2],
+                Slots = [],
+                ArmorColliders = [],
+                ArmorPlateColliders = []
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
         if (createItemResult.Success is false) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterArmband.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
+                String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -144,7 +122,7 @@ public class AddMasterArmband : IOnLoad {
         if (trader is null) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterArmband.OnLoad() / failed / trader not found"),
+                String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / failed / trader not found"),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -180,7 +158,7 @@ public class AddMasterArmband : IOnLoad {
         if(templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT,out TemplateItem? template) is true && template is not null) {
             if(template.Properties is not null && template.Properties.Slots is not null) {
                 foreach (Slot slot in template.Properties.Slots) {
-                    if(slot.Name is not "ArmBand"){continue;}
+                    if(slot.Name is not "ArmorVest"){continue;}
                     if(slot.Properties is null || slot.Properties.Filters is null){continue;}
                     SlotFilter slotFilter = slot.Properties.Filters.First();
                     if(slotFilter.Filter is null){continue;}
@@ -192,7 +170,7 @@ public class AddMasterArmband : IOnLoad {
 
         this.Logger.Log(
             LogLevel.Info,
-            String.Concat(Constants.LoggerPrefix, "AddMasterArmband.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
+            String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
             LogTextColor.Green
         );
         return Task.CompletedTask;
