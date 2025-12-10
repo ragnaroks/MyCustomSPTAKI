@@ -17,17 +17,17 @@ using System.Threading.Tasks;
 namespace MyCustomSPTAKI.Modifies;
 
 [Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
-public class AddMasterBodyBackpack : IOnLoad {
-    private ISptLogger<AddMasterBodyBackpack> Logger { get; }
+public class AddMasterFaceBackpack : IOnLoad {
+    private ISptLogger<AddMasterFaceBackpack> Logger { get; }
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
     private Double HandbookPrice { get; } = 196_0000D;
-    private MongoId BaseId { get; } = new("6938900eebe7860edeced700");
-    private MongoId NewId { get; } = new("6938900eebe7860edeced701");
-    private MongoId RotateId { get; set; } = new("6938900eebe7860edeced720");
+    private MongoId BaseId { get; } = new("6938900eebe7860edeced800");
+    private MongoId NewId { get; } = new("6938900eebe7860edeced801");
+    private MongoId RotateId { get; set; } = new("6938900eebe7860edeced820");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterBodyBackpack (ISptLogger<AddMasterBodyBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterFaceBackpack (ISptLogger<AddMasterFaceBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
@@ -58,15 +58,15 @@ public class AddMasterBodyBackpack : IOnLoad {
         };
         
         NewItemFromCloneDetails newItem = new() {
-            ItemTplToClone = ItemTpl.ARMOR_LBT6094A_SLICK_PLATE_CARRIER_BLACK,
+            ItemTplToClone = ItemTpl.VISORS_TACTICAL_GLASSES,
             NewId = this.NewId,
             ParentId = BaseClasses.SIMPLE_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
-            HandbookParentId = "5b5f701386f774093f2ecf0f",
+            HandbookParentId = "5b47574386f77428ca22b331",
             Locales = new(){
-                {"en",new(){Name = "master body backpack",ShortName = "MasterBody",Description = "skydust™ master body backpack"}},
-                {"ch",new(){Name = "大师身体背包",ShortName = "大师身体",Description = "skydust™ 大师身体背包"}}
+                {"en",new(){Name = "master eye backpack",ShortName = "MasterEye",Description = "skydust™ master eye backpack"}},
+                {"ch",new(){Name = "大师眼部背包",ShortName = "大师眼部",Description = "skydust™ 大师眼部背包"}}
             },
             OverrideProperties = new() {
                 BackgroundColor = "blue",
@@ -74,8 +74,8 @@ public class AddMasterBodyBackpack : IOnLoad {
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
                 Weight = -98D,
-                //Width = 3,
-                //Height = 3,
+                //Width = 1,
+                //Height = 1,
                 MousePenalty = 0D,
                 SpeedPenaltyPercent = 0D,
                 WeaponErgonomicPenalty = 0D,
@@ -92,7 +92,7 @@ public class AddMasterBodyBackpack : IOnLoad {
         if (createItemResult.Success is false) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
+                String.Concat(Constants.LoggerPrefix, "AddMasterFaceBackpack.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -102,7 +102,7 @@ public class AddMasterBodyBackpack : IOnLoad {
         if (trader is null) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / failed / trader not found"),
+                String.Concat(Constants.LoggerPrefix, "AddMasterFaceBackpack.OnLoad() / failed / trader not found"),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -138,7 +138,7 @@ public class AddMasterBodyBackpack : IOnLoad {
         if(templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT,out TemplateItem? template) is true && template is not null) {
             if(template.Properties is not null && template.Properties.Slots is not null) {
                 foreach (Slot slot in template.Properties.Slots) {
-                    if(slot.Name is not "ArmorVest"){continue;}
+                    if(slot.Name is not "Eyewear"){continue;}
                     if(slot.Properties is null || slot.Properties.Filters is null){continue;}
                     SlotFilter slotFilter = slot.Properties.Filters.First();
                     if(slotFilter.Filter is null){continue;}
@@ -150,7 +150,7 @@ public class AddMasterBodyBackpack : IOnLoad {
 
         this.Logger.Log(
             LogLevel.Info,
-            String.Concat(Constants.LoggerPrefix, "AddMasterBodyBackpack.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
+            String.Concat(Constants.LoggerPrefix, "AddMasterFaceBackpack.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
             LogTextColor.Green
         );
         return Task.CompletedTask;
