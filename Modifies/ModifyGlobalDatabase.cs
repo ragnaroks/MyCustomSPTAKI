@@ -26,7 +26,7 @@ public class ModifyGlobalDatabase : IOnLoad {
         Globals globals = this.DatabaseService.GetGlobals();
         //globals.Configuration.BaseCheckTime = 0D;
         //globals.Configuration.BaseLoadTime = 0D;
-        //globals.Configuration.BaseUnloadTime = 0D;
+        globals.Configuration.BaseUnloadTime = 0D;
         globals.Configuration.AimPunchMagnitude = 0D;
         globals.Configuration.RestrictionsInRaid = [];
         globals.Configuration.SkillFatiguePerPoint = 0D;

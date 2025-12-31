@@ -85,7 +85,10 @@ public class AddMasterBodyBackpack : IOnLoad {
                 Slots = [],
                 ArmorColliders = [],
                 ArmorPlateColliders = [],
-                ConflictingItems = []
+                ConflictingItems = [],
+                BluntThroughput = 0.85D,
+                Durability = 100D,
+                MaxDurability = 100D
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
