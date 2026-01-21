@@ -1,11 +1,16 @@
 ﻿using SPTarkov.DI.Annotations;
+using SPTarkov.Server.Core.Constants;
 using SPTarkov.Server.Core.DI;
+using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common;
+using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
@@ -24,6 +29,8 @@ public class ModifyGlobalDatabase : IOnLoad {
 
     public Task OnLoad () {
         Globals globals = this.DatabaseService.GetGlobals();
+        Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
+
         //globals.Configuration.BaseCheckTime = 0D;
         //globals.Configuration.BaseLoadTime = 0D;
         globals.Configuration.BaseUnloadTime = 0D;

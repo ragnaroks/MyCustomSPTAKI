@@ -46,7 +46,7 @@ public class AddMasterArmband : IOnLoad {
                 CellsV = 7,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.AMMO],
+                        Filter = [BaseClasses.AMMO,BaseClasses.MAGAZINE],
                         ExcludedFilter = null
                     }
                 ],
@@ -63,11 +63,15 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 2,
+                CellsH = 4,
                 CellsV = 7,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.FOOD_DRINK],
+                        Filter = [
+                            BaseClasses.MED_KIT,
+                            ItemTpl.MEDICAL_CMS_SURGICAL_KIT,
+                            ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT
+                        ],
                         ExcludedFilter = null
                     }
                 ],
@@ -84,11 +88,105 @@ public class AddMasterArmband : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 7,
+                CellsH = 1,
                 CellsV = 7,
                 Filters = [
                     new(){
-                        Filter = [BaseClasses.MEDS],
+                        Filter = [
+                            ItemTpl.MEDICAL_CALOKB_HEMOSTATIC_APPLICATOR,
+                            ItemTpl.MEDICAL_CAT_HEMOSTATIC_TOURNIQUET,
+                            ItemTpl.MEDICAL_ESMARCH_TOURNIQUET
+                        ],
+                        ExcludedFilter = null
+                    }
+                ],
+                IsSortingTable = false,
+                MaxCount = 0,
+                MaxWeight = 0,
+                MinCount = 0
+            }
+        };
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        Grid colume4 = new() {
+            Id = this.RotateId,
+            Name = "colume4",
+            Parent = this.NewId,
+            Prototype = "55d329c24bdc2d892f8b4567",
+            Properties = new() {
+                CellsH = 1,
+                CellsV = 7,
+                Filters = [
+                    new(){
+                        Filter = [ItemTpl.MEDICAL_ARMY_BANDAGE,ItemTpl.MEDICAL_ASEPTIC_BANDAGE],
+                        ExcludedFilter = null
+                    }
+                ],
+                IsSortingTable = false,
+                MaxCount = 0,
+                MaxWeight = 0,
+                MinCount = 0
+            }
+        };
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        Grid colume5 = new() {
+            Id = this.RotateId,
+            Name = "colume5",
+            Parent = this.NewId,
+            Prototype = "55d329c24bdc2d892f8b4567",
+            Properties = new() {
+                CellsH = 1,
+                CellsV = 7,
+                Filters = [
+                    new(){
+                        Filter = [ItemTpl.MEDICAL_ALUMINUM_SPLINT,ItemTpl.MEDICAL_IMMOBILIZING_SPLINT],
+                        ExcludedFilter = null
+                    }
+                ],
+                IsSortingTable = false,
+                MaxCount = 0,
+                MaxWeight = 0,
+                MinCount = 0
+            }
+        };
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        Grid colume6 = new() {
+            Id = this.RotateId,
+            Name = "colume6",
+            Parent = this.NewId,
+            Prototype = "55d329c24bdc2d892f8b4567",
+            Properties = new() {
+                CellsH = 1,
+                CellsV = 7,
+                Filters = [
+                    new(){
+                        Filter = [
+                            ItemTpl.DRUGS_ANALGIN_PAINKILLERS,
+                            ItemTpl.DRUGS_AUGMENTIN_ANTIBIOTIC_PILLS,
+                            ItemTpl.DRUGS_IBUPROFEN_PAINKILLERS,
+                            ItemTpl.DRUGS_VASELINE_BALM,
+                            ItemTpl.DRUGS_GOLDEN_STAR_BALM
+                        ],
+                        ExcludedFilter = null
+                    }
+                ],
+                IsSortingTable = false,
+                MaxCount = 0,
+                MaxWeight = 0,
+                MinCount = 0
+            }
+        };
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        Grid colume7 = new() {
+            Id = this.RotateId,
+            Name = "colume7",
+            Parent = this.NewId,
+            Prototype = "55d329c24bdc2d892f8b4567",
+            Properties = new() {
+                CellsH = 4,
+                CellsV = 7,
+                Filters = [
+                    new(){
+                        Filter = [BaseClasses.STIMULATOR,ItemTpl.DRUGS_MORPHINE_INJECTOR],
                         ExcludedFilter = null
                     }
                 ],
@@ -127,7 +225,7 @@ public class AddMasterArmband : IOnLoad {
                 Unlootable = true,
                 InsuranceDisabled = true,
                 IsSecured = true,
-                Grids = [colume1,colume2,colume3]
+                Grids = [colume1, colume2, colume3, colume4, colume5, colume6, colume7]
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
@@ -177,13 +275,13 @@ public class AddMasterArmband : IOnLoad {
         });
 
         Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
-        if(templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT,out TemplateItem? template) is true && template is not null) {
-            if(template.Properties is not null && template.Properties.Slots is not null) {
+        if (templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT, out TemplateItem? template) is true && template is not null) {
+            if (template.Properties is not null && template.Properties.Slots is not null) {
                 foreach (Slot slot in template.Properties.Slots) {
-                    if(slot.Name is not "ArmBand"){continue;}
-                    if(slot.Properties is null || slot.Properties.Filters is null){continue;}
+                    if (slot.Name is not "ArmBand") { continue; }
+                    if (slot.Properties is null || slot.Properties.Filters is null) { continue; }
                     SlotFilter slotFilter = slot.Properties.Filters.First();
-                    if(slotFilter.Filter is null){continue;}
+                    if (slotFilter.Filter is null) { continue; }
                     _ = slotFilter.Filter.Add(this.NewId);
                     break;
                 }
