@@ -24,7 +24,7 @@ public class AddMasterMagazine : IOnLoad {
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
     private ConfigServer ConfigServer { get; }
-    private Double HandbookPrice { get; } = 50_0000D;
+    private Double HandbookPrice { get; } = 75_0000D;
     private MongoId BaseId { get; } = new("692991bace9e97027c9b7400");
     private MongoId NewId { get; } = new("692991bace9e97027c9b7401");
     private MongoId RotateId { get; set; } = new("692991bace9e97027c9b7420");
@@ -80,6 +80,7 @@ public class AddMasterMagazine : IOnLoad {
                 ],
                 CheckTimeModifier = 0D,
                 LoadUnloadModifier = 0D,
+                Ergonomics = 100,
                 CanFast = false,
             }
         };

@@ -30,10 +30,11 @@ public class ModifyPlayerHealth : IOnLoad {
         foreach (KeyValuePair<MongoId, SptProfile> profile in profiles) {
             BotBaseHealth? botBaseHealth = profile.Value.CharacterData?.PmcData?.Health;
             if (botBaseHealth is null || botBaseHealth.BodyParts is null) { continue; }
-            foreach (KeyValuePair<String, BodyPartHealth> bodyPart in botBaseHealth.BodyParts) {
+            foreach (KeyValuePair<String, BodyPartHealth> bodyPart in botBaseHealth.BodyParts){
                 CurrentMinMax? current = bodyPart.Value.Health;
                 if (current is null) { continue; }
-                current.Minimum = current.Maximum = 200;
+                current.Maximum = 200;
+                current.Minimum = 0;
             }
             this.Logger.Log(
                 LogLevel.Info,
