@@ -1,9 +1,11 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using Microsoft.Extensions.Primitives;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
 using SPTarkov.Server.Core.Models.Enums;
 using SPTarkov.Server.Core.Models.Logging;
+using SPTarkov.Server.Core.Models.Spt.Bots;
 using SPTarkov.Server.Core.Models.Spt.Config;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Spt.Mod;
@@ -14,6 +16,7 @@ using SPTarkov.Server.Core.Services.Mod;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
@@ -58,7 +61,7 @@ public class AddMasterMagazine : IOnLoad {
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
                 Weight = 0.25,
-                Width = 1,
+                Width = 2,
                 Height = 2,
                 ExamineExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
                 LootExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
@@ -82,6 +85,15 @@ public class AddMasterMagazine : IOnLoad {
                 LoadUnloadModifier = 0D,
                 Ergonomics = 100,
                 CanFast = false,
+                AllowFeed = false,
+                AllowJam = false,
+                AllowMisfire = false,
+                AllowSlide = false,
+                BaseMalfunctionChance = 0D,
+                MalfFeedChance = 0D,
+                MalfMisfireChance = 0D,
+                MalfunctionChance = 0D,
+                AllowOverheat = true
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
@@ -138,6 +150,8 @@ public class AddMasterMagazine : IOnLoad {
             if (template.Properties.Slots is null || template.Properties.Slots.Any() is false) { continue; }
             //if (template.Properties.Chambers is null || template.Properties.Slots.Any() is false) { continue; }
             if (template.Properties.WeapFireType is null || template.Properties.WeapFireType.Count < 1) { continue; }
+            if(template.Properties.ReloadMagType is ReloadMode.OnlyBarrel){continue;}
+            // MTs-255 ???
             foreach (Slot slot in template.Properties.Slots) {
                 if (slot.Name is not "mod_magazine") { continue; }
                 if (slot.Properties is null || slot.Properties.Filters is null || slot.Properties.Filters.Any() is false) { continue; }
@@ -148,11 +162,12 @@ public class AddMasterMagazine : IOnLoad {
             }
         }
 
+        /*
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         EquipmentFilterDetails equipmentFilterDetails = new(){
             LevelRange = new(){
                 Min = 1,
-                Max = 999
+                Max = 100
             },
             Cartridge = [],
             Equipment = new(){
@@ -164,18 +179,32 @@ public class AddMasterMagazine : IOnLoad {
             if(!botConfig.Equipment.ContainsKey(botTypeName)){continue;}
             EquipmentFilters? equipmentFilters = botConfig.Equipment[botTypeName];
             if(equipmentFilters is null) {
-                botConfig.Equipment[botTypeName] = new() {
+                equipmentFilters = new() {
                     Blacklist = [equipmentFilterDetails]
                 };
-                continue;
-            }
-            if(equipmentFilters.Blacklist is null) {
+            }else if(equipmentFilters.Blacklist is null) {
                 equipmentFilters.Blacklist = [equipmentFilterDetails];
                 continue;
+            } else {
+                equipmentFilters.Blacklist.Add(equipmentFilterDetails);
             }
-            equipmentFilters.Blacklist.Add(equipmentFilterDetails);
+            botConfig.Equipment[botTypeName] = equipmentFilters;
         }
-        
+        */
+        Bots bots = this.DatabaseService.GetBots();        
+        foreach (KeyValuePair<String, BotType?> botType in bots.Types) {
+            if(botType.Key.Contains("test",StringComparison.InvariantCultureIgnoreCase)) {continue;}
+            if(botType.Value is null){continue;}
+            foreach (KeyValuePair<MongoId, Dictionary<String, HashSet<MongoId>>> modOnItem in botType.Value.BotInventory.Mods) {
+                if(modOnItem.Value.TryGetValue("mod_magazine",out HashSet<MongoId>? modIdSet) is false){continue;}
+                if(modIdSet is null){continue;}
+                _ = modIdSet.Remove(this.NewId);
+            }
+            if (botType.Value.BotGeneration.Items.Magazines.Whitelist is not null) {
+                _ = botType.Value.BotGeneration.Items.Magazines.Whitelist.Remove(this.NewId);
+            }
+        }
+
         this.Logger.Log(
             LogLevel.Info,
             String.Concat(Constants.LoggerPrefix, "AddMasterMagazine.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
