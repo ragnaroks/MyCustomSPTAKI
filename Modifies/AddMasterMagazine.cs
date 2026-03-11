@@ -24,7 +24,7 @@ public class AddMasterMagazine : IOnLoad {
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
     private ConfigServer ConfigServer { get; }
-    private Double HandbookPrice { get; } = 75_0000D;
+    private Double HandbookPrice { get; } = 100_0000D;
     private MongoId BaseId { get; } = new("692991bace9e97027c9b7400");
     private MongoId NewId { get; } = new("692991bace9e97027c9b7401");
     private MongoId RotateId { get; set; } = new("692991bace9e97027c9b7420");
@@ -149,18 +149,33 @@ public class AddMasterMagazine : IOnLoad {
         }
 
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
-        foreach (KeyValuePair<String, EquipmentFilters?> equipments in botConfig.Equipment) {
-            if (equipments.Value is null || equipments.Value.Blacklist is null) { continue; }
-            foreach (EquipmentFilterDetails details in equipments.Value.Blacklist) {
-                if (details.Equipment is null) { continue; }
-                foreach (KeyValuePair<String, HashSet<MongoId>> equipment in details.Equipment) {
-                    if (equipment.Key is not "mod_magazine") { continue; }
-                    _ = equipment.Value.Add(this.NewId);
-                    break;
-                }
+        EquipmentFilterDetails equipmentFilterDetails = new(){
+            LevelRange = new(){
+                Min = 1,
+                Max = 999
+            },
+            Cartridge = [],
+            Equipment = new(){
+                // IDK why this HashSet will have 2 same item at final
+                {"mod_magazine",[this.NewId]}
             }
+        };
+        foreach (String botTypeName in botConfig.Equipment.Keys) {
+            if(!botConfig.Equipment.ContainsKey(botTypeName)){continue;}
+            EquipmentFilters? equipmentFilters = botConfig.Equipment[botTypeName];
+            if(equipmentFilters is null) {
+                botConfig.Equipment[botTypeName] = new() {
+                    Blacklist = [equipmentFilterDetails]
+                };
+                continue;
+            }
+            if(equipmentFilters.Blacklist is null) {
+                equipmentFilters.Blacklist = [equipmentFilterDetails];
+                continue;
+            }
+            equipmentFilters.Blacklist.Add(equipmentFilterDetails);
         }
-
+        
         this.Logger.Log(
             LogLevel.Info,
             String.Concat(Constants.LoggerPrefix, "AddMasterMagazine.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),

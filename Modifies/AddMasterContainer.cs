@@ -72,7 +72,7 @@ public class AddMasterContainer : IOnLoad {
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = -98D,
+                Weight = -196D,
                 Width = 2,
                 Height = 1,
                 MousePenalty = 0D,

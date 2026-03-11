@@ -73,7 +73,7 @@ public class AddMasterFaceBackpack : IOnLoad {
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = -98D,
+                Weight = -196D,
                 //Width = 1,
                 //Height = 1,
                 MousePenalty = 0D,
