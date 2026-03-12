@@ -39,7 +39,6 @@ public class ModifyGlobalDatabase : IOnLoad {
         globals.Configuration.SkillFreshEffectiveness = 3D;
         globals.Configuration.SavagePlayCooldown = 60;
 
-        
         foreach (MaxActiveOfferCount maxActiveOfferCount in globals.Configuration.RagFair.MaxActiveOfferCount) {
             maxActiveOfferCount.Count *= 10;
             maxActiveOfferCount.CountForSpecialEditions *= 10;

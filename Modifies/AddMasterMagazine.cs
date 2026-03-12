@@ -162,8 +162,8 @@ public class AddMasterMagazine : IOnLoad {
             }
         }
 
-        /*
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
+        // IDK why this HashSet will have 2 same item at final, and seems like equipmentFilterDetails not work
         EquipmentFilterDetails equipmentFilterDetails = new(){
             LevelRange = new(){
                 Min = 1,
@@ -171,7 +171,6 @@ public class AddMasterMagazine : IOnLoad {
             },
             Cartridge = [],
             Equipment = new(){
-                // IDK why this HashSet will have 2 same item at final
                 {"mod_magazine",[this.NewId]}
             }
         };
@@ -190,7 +189,20 @@ public class AddMasterMagazine : IOnLoad {
             }
             botConfig.Equipment[botTypeName] = equipmentFilters;
         }
-        */
+        
+        // this copy from https://github.com/jbs4bmx/HoltzmanShield/blob/7082fa820b4f465373181197ef08f02b4d033448/project/HoltzmanShield/HoltzmanShieldMod.cs#L281
+        foreach (KeyValuePair<String, Dictionary<MongoId, Double>> spawnLimit in botConfig.ItemSpawnLimits) {
+            spawnLimit.Value[this.NewId] = 0D;
+        }
+
+        PmcConfig pmcConfig = this.ConfigServer.GetConfig<PmcConfig>();
+        _ = pmcConfig.PocketLoot.Blacklist.Add(this.NewId);
+        _ = pmcConfig.VestLoot.Blacklist.Add(this.NewId);
+        _ = pmcConfig.BackpackLoot.Blacklist.Add(this.NewId);
+        pmcConfig.GlobalLootBlacklist.Add(this.NewId);
+
+
+        // and this, maybe work?
         Bots bots = this.DatabaseService.GetBots();        
         foreach (KeyValuePair<String, BotType?> botType in bots.Types) {
             if(botType.Key.Contains("test",StringComparison.InvariantCultureIgnoreCase)) {continue;}
@@ -204,6 +216,10 @@ public class AddMasterMagazine : IOnLoad {
                 _ = botType.Value.BotGeneration.Items.Magazines.Whitelist.Remove(this.NewId);
             }
         }
+
+        // this way works fine
+        ItemConfig itemConfig = this.ConfigServer.GetConfig<ItemConfig>();
+        _ = itemConfig.Blacklist.Add(this.NewId);
 
         this.Logger.Log(
             LogLevel.Info,

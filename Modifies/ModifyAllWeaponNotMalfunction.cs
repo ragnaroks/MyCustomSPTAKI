@@ -17,7 +17,7 @@ namespace MyCustomSPTAKI.Modifies;
 public class ModifyAllWeaponNotMalfunction : IOnLoad {
     private ISptLogger<ModifyAllWeaponNotMalfunction> Logger { get; }
     private DatabaseService DatabaseService { get; }
-    private ItemHelper ItemHelper{ get; }
+    private ItemHelper ItemHelper { get; }
 
 #pragma warning disable IDE0290 // 使用主构造函数    
     public ModifyAllWeaponNotMalfunction (ISptLogger<ModifyAllWeaponNotMalfunction> logger, DatabaseService databaseService, ItemHelper itemHelper) {
@@ -29,10 +29,14 @@ public class ModifyAllWeaponNotMalfunction : IOnLoad {
 
     public Task OnLoad () {
         Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
-        IEnumerable<MongoId> weapons = this.ItemHelper.GetItemTplsOfBaseType(BaseClasses.WEAPON);
-        foreach (MongoId id in weapons) {
-            if(templates.TryGetValue(id, out TemplateItem? templateItem) is false){continue;}
-            if(templateItem is null || templateItem.Properties is null){continue;}
+        IEnumerable<MongoId> weaponsBaseId = this.ItemHelper.GetItemTplsOfBaseType(BaseClasses.WEAPON);
+        List<MongoId> weaponsId = [];
+        foreach (MongoId baseId in weaponsBaseId) {
+            weaponsId.AddRange(this.ItemHelper.GetItemTplsOfBaseType(baseId));
+        }
+        foreach (MongoId id in weaponsId) {
+            if (templates.TryGetValue(id, out TemplateItem? templateItem) is false) { continue; }
+            if (templateItem is null || templateItem.Properties is null) { continue; }
             templateItem.Properties.AllowFeed = false;
             templateItem.Properties.AllowJam = false;
             templateItem.Properties.AllowMisfire = false;
