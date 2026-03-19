@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -9,9 +12,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -26,14 +26,14 @@ public class AddMasterContainer : IOnLoad {
     private MongoId RotateId { get; set; } = new("69b1889c568f17dcba5a2520");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterContainer (ISptLogger<AddMasterContainer> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterContainer(ISptLogger<AddMasterContainer> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         Grid main = new() {
             Id = this.RotateId,
@@ -55,7 +55,7 @@ public class AddMasterContainer : IOnLoad {
                 MinCount = 0
             }
         };
-        
+
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.CONTAINER_THICC_ITEM_CASE,
             NewId = this.NewId,

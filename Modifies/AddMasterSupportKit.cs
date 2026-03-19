@@ -42,7 +42,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 2,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.AMMO,BaseClasses.MAGAZINE],
@@ -63,7 +63,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 4,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [
@@ -88,7 +88,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 1,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [
@@ -113,7 +113,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 1,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [ItemTpl.MEDICAL_ARMY_BANDAGE,ItemTpl.MEDICAL_ASEPTIC_BANDAGE],
@@ -134,7 +134,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 1,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [ItemTpl.MEDICAL_ALUMINUM_SPLINT,ItemTpl.MEDICAL_IMMOBILIZING_SPLINT],
@@ -155,7 +155,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 1,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [
@@ -182,7 +182,7 @@ public class AddMasterSupportKit : IOnLoad {
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
                 CellsH = 4,
-                CellsV = 14,
+                CellsV = 10,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.STIMULATOR,ItemTpl.DRUGS_MORPHINE_INJECTOR],
@@ -213,7 +213,7 @@ public class AddMasterSupportKit : IOnLoad {
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = -196D,
+                Weight = -140D,
                 Width = 2,
                 Height = 2,
                 MousePenalty = 0D,

@@ -1,4 +1,8 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -9,10 +13,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -27,14 +27,14 @@ public class AddMasterFaceBackpack : IOnLoad {
     private MongoId RotateId { get; set; } = new("6938900eebe7860edeced820");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterFaceBackpack (ISptLogger<AddMasterFaceBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterFaceBackpack(ISptLogger<AddMasterFaceBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         Grid main = new() {
             Id = this.RotateId,
@@ -56,7 +56,7 @@ public class AddMasterFaceBackpack : IOnLoad {
                 MinCount = 0
             }
         };
-        
+
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.VISORS_TACTICAL_GLASSES,
             NewId = this.NewId,
@@ -135,13 +135,13 @@ public class AddMasterFaceBackpack : IOnLoad {
         });
 
         Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
-        if(templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT,out TemplateItem? template) is true && template is not null) {
-            if(template.Properties is not null && template.Properties.Slots is not null) {
+        if (templates.TryGetValue(ItemTpl.INVENTORY_DEFAULT, out TemplateItem? template) is true && template is not null) {
+            if (template.Properties is not null && template.Properties.Slots is not null) {
                 foreach (Slot slot in template.Properties.Slots) {
-                    if(slot.Name is not "Eyewear"){continue;}
-                    if(slot.Properties is null || slot.Properties.Filters is null){continue;}
+                    if (slot.Name is not "Eyewear") { continue; }
+                    if (slot.Properties is null || slot.Properties.Filters is null) { continue; }
                     SlotFilter slotFilter = slot.Properties.Filters.First();
-                    if(slotFilter.Filter is null){continue;}
+                    if (slotFilter.Filter is null) { continue; }
                     _ = slotFilter.Filter.Add(this.NewId);
                     break;
                 }

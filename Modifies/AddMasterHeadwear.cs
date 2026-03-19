@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -9,10 +12,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -27,16 +26,16 @@ public class AddMasterHeadwear : IOnLoad {
     private MongoId RotateId { get; set; } = new("690e702019c77df600752020");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterHeadwear (ISptLogger<AddMasterHeadwear> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterHeadwear(ISptLogger<AddMasterHeadwear> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
-        
+
 
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.FACECOVER_GHOST_BALACLAVA,
@@ -77,7 +76,7 @@ public class AddMasterHeadwear : IOnLoad {
                 MinRepairKitDegradation = 0D,
                 Indestructibility = 1D,
                 ArmorClass = 10,
-                ArmorColliders = ["BackHead","Ears","Eyes","HeadCommon","Jaw","NeckBack","NeckFront","ParietalHead"]
+                ArmorColliders = ["BackHead", "Ears", "Eyes", "HeadCommon", "Jaw", "NeckBack", "NeckFront", "ParietalHead"]
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);

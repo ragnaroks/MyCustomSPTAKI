@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -9,9 +12,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -26,14 +26,14 @@ public class AddSmallBackpack : IOnLoad {
     private MongoId RotateId { get; set; } = new("6808d38f971c17d80caf9920");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddSmallBackpack (ISptLogger<AddSmallBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddSmallBackpack(ISptLogger<AddSmallBackpack> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.BACKPACK_SANITARS_BAG,

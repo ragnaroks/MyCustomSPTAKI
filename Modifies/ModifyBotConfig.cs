@@ -1,12 +1,12 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Config;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Servers;
-using System;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -16,13 +16,13 @@ public class ModifyBotConfig : IOnLoad {
     private ConfigServer ConfigServer { get; }
 
 #pragma warning disable IDE0290 // 使用主构造函数    
-    public ModifyBotConfig (ISptLogger<ModifyBotConfig> logger, ConfigServer configServer) {
+    public ModifyBotConfig(ISptLogger<ModifyBotConfig> logger, ConfigServer configServer) {
         this.Logger = logger;
         this.ConfigServer = configServer;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         botConfig.ShowTypeInNickname = true;
         botConfig.MaxBotCap["default"] = 18;

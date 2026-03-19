@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -6,9 +9,6 @@ using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -18,13 +18,13 @@ public class ModifyQuestDatabase : IOnLoad {
     private DatabaseService DatabaseService { get; }
 
 #pragma warning disable IDE0290 // 使用主构造函数    
-    public ModifyQuestDatabase (ISptLogger<ModifyQuestDatabase> logger, DatabaseService databaseService) {
+    public ModifyQuestDatabase(ISptLogger<ModifyQuestDatabase> logger, DatabaseService databaseService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         Dictionary<MongoId, Quest> quests = this.DatabaseService.GetQuests();
 
         foreach (KeyValuePair<MongoId, Quest> keyValuePair in quests) {

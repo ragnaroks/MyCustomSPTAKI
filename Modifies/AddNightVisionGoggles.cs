@@ -1,4 +1,8 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Helpers;
 using SPTarkov.Server.Core.Models.Common;
@@ -10,10 +14,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -22,14 +22,14 @@ public class AddNightVisionGoggles : IOnLoad {
     private ISptLogger<AddNightVisionGoggles> Logger { get; }
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
-    private ItemHelper ItemHelper{get;}
+    private ItemHelper ItemHelper { get; }
     private Double HandbookPrice { get; } = 50_0000D;
     private MongoId BaseId { get; } = new("67f65b10352e88d7cb840100");
     private MongoId NewId { get; } = new("67f65b10352e88d7cb840101");
     private MongoId RotateId { get; set; } = new("67f65b10352e88d7cb840120");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddNightVisionGoggles (ISptLogger<AddNightVisionGoggles> logger, DatabaseService databaseService, CustomItemService customItemService,ItemHelper itemHelper) {
+    public AddNightVisionGoggles(ISptLogger<AddNightVisionGoggles> logger, DatabaseService databaseService, CustomItemService customItemService, ItemHelper itemHelper) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
@@ -37,7 +37,7 @@ public class AddNightVisionGoggles : IOnLoad {
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = ItemTpl.THERMALVISION_T7_THERMAL_GOGGLES_WITH_A_NIGHT_VISION_MOUNT,
@@ -63,7 +63,7 @@ public class AddNightVisionGoggles : IOnLoad {
                 LootExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
                 NoiseIntensity = 0D,
                 NoiseScale = 0D,
-                Color = new(){R=150,G=214,B=240,A=0},
+                Color = new() { R = 150, G = 214, B = 240, A = 0 },
                 Intensity = 1.618D,
                 DiffuseIntensity = 0D,
                 IsNoisy = false,
@@ -125,27 +125,27 @@ public class AddNightVisionGoggles : IOnLoad {
 
         IEnumerable<MongoId> headwears = this.ItemHelper.GetItemTplsOfBaseType(BaseClasses.HEADWEAR);
         foreach (MongoId id in headwears) {
-            if(templates.TryGetValue(id, out TemplateItem? template) is false || template is null){continue;}
-            if(template.Properties is null || template.Properties.Slots is null || template.Properties.Slots.Any() is false){continue;}
+            if (templates.TryGetValue(id, out TemplateItem? template) is false || template is null) { continue; }
+            if (template.Properties is null || template.Properties.Slots is null || template.Properties.Slots.Any() is false) { continue; }
             foreach (Slot slot in template.Properties.Slots) {
-                if(slot.Name is not "mod_nvg"){continue;}
-                if(slot.Properties is null || slot.Properties.Filters is null){continue;}
+                if (slot.Name is not "mod_nvg") { continue; }
+                if (slot.Properties is null || slot.Properties.Filters is null) { continue; }
                 SlotFilter slotFilter = slot.Properties.Filters.First();
-                if(slotFilter.Filter is null){continue;}
-                if(slotFilter.Filter.Contains(ItemTpl.NIGHTVISION_L3HARRIS_GPNVG18_NIGHT_VISION_GOGGLES) is false){continue;}
+                if (slotFilter.Filter is null) { continue; }
+                if (slotFilter.Filter.Contains(ItemTpl.NIGHTVISION_L3HARRIS_GPNVG18_NIGHT_VISION_GOGGLES) is false) { continue; }
                 _ = slotFilter.Filter.Add(this.NewId);
                 break;
             }
         }
 
-        if(templates.TryGetValue(ItemTpl.MOUNT_PVS7_WILCOX_ADAPTER, out TemplateItem? templateAdapter) is true && templateAdapter is not null) {
-            if(templateAdapter.Properties is not null && templateAdapter.Properties.Slots is not null && templateAdapter.Properties.Slots.Any() is true) {
+        if (templates.TryGetValue(ItemTpl.MOUNT_PVS7_WILCOX_ADAPTER, out TemplateItem? templateAdapter) is true && templateAdapter is not null) {
+            if (templateAdapter.Properties is not null && templateAdapter.Properties.Slots is not null && templateAdapter.Properties.Slots.Any() is true) {
                 foreach (Slot slot in templateAdapter.Properties.Slots) {
-                    if(slot.Name is not "mod_nvg"){continue;}
-                    if(slot.Properties is null || slot.Properties.Filters is null){continue;}
+                    if (slot.Name is not "mod_nvg") { continue; }
+                    if (slot.Properties is null || slot.Properties.Filters is null) { continue; }
                     SlotFilter slotFilter = slot.Properties.Filters.First();
-                    if(slotFilter.Filter is null){continue;}
-                    if(slotFilter.Filter.Contains(ItemTpl.THERMALVISION_T7_THERMAL_GOGGLES_WITH_A_NIGHT_VISION_MOUNT) is false){continue;}
+                    if (slotFilter.Filter is null) { continue; }
+                    if (slotFilter.Filter.Contains(ItemTpl.THERMALVISION_T7_THERMAL_GOGGLES_WITH_A_NIGHT_VISION_MOUNT) is false) { continue; }
                     _ = slotFilter.Filter.Add(this.NewId);
                     break;
                 }

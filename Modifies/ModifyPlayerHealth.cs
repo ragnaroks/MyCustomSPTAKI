@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Helpers;
 using SPTarkov.Server.Core.Models.Common;
@@ -7,9 +10,6 @@ using SPTarkov.Server.Core.Models.Eft.Profile;
 using SPTarkov.Server.Core.Models.Logging;
 using SPTarkov.Server.Core.Models.Spt.Logging;
 using SPTarkov.Server.Core.Models.Utils;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -19,18 +19,18 @@ public class ModifyPlayerHealth : IOnLoad {
     private ProfileHelper ProfileHelper { get; }
 
 #pragma warning disable IDE0290 // 使用主构造函数    
-    public ModifyPlayerHealth (ISptLogger<ModifyPlayerHealth> logger, ProfileHelper profileHelper) {
+    public ModifyPlayerHealth(ISptLogger<ModifyPlayerHealth> logger, ProfileHelper profileHelper) {
         this.Logger = logger;
         this.ProfileHelper = profileHelper;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         Dictionary<MongoId, SptProfile> profiles = this.ProfileHelper.GetProfiles();
         foreach (KeyValuePair<MongoId, SptProfile> profile in profiles) {
             BotBaseHealth? botBaseHealth = profile.Value.CharacterData?.PmcData?.Health;
             if (botBaseHealth is null || botBaseHealth.BodyParts is null) { continue; }
-            foreach (KeyValuePair<String, BodyPartHealth> bodyPart in botBaseHealth.BodyParts){
+            foreach (KeyValuePair<String, BodyPartHealth> bodyPart in botBaseHealth.BodyParts) {
                 CurrentMinMax? current = bodyPart.Value.Health;
                 if (current is null) { continue; }
                 current.Maximum = 200;

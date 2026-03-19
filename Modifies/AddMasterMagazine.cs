@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Primitives;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
@@ -13,11 +16,6 @@ using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Servers;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -33,7 +31,7 @@ public class AddMasterMagazine : IOnLoad {
     private MongoId RotateId { get; set; } = new("692991bace9e97027c9b7420");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterMagazine (ISptLogger<AddMasterMagazine> logger, DatabaseService databaseService, CustomItemService customItemService, ConfigServer configServer) {
+    public AddMasterMagazine(ISptLogger<AddMasterMagazine> logger, DatabaseService databaseService, CustomItemService customItemService, ConfigServer configServer) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
@@ -41,7 +39,7 @@ public class AddMasterMagazine : IOnLoad {
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         NewItemFromCloneDetails newItem = new() {
             // IDK why the magazine of toygun will cause a strange bug in detail window 
@@ -150,7 +148,7 @@ public class AddMasterMagazine : IOnLoad {
             if (template.Properties.Slots is null || template.Properties.Slots.Any() is false) { continue; }
             //if (template.Properties.Chambers is null || template.Properties.Slots.Any() is false) { continue; }
             if (template.Properties.WeapFireType is null || template.Properties.WeapFireType.Count < 1) { continue; }
-            if(template.Properties.ReloadMagType is ReloadMode.OnlyBarrel){continue;}
+            if (template.Properties.ReloadMagType is ReloadMode.OnlyBarrel) { continue; }
             // MTs-255 ???
             foreach (Slot slot in template.Properties.Slots) {
                 if (slot.Name is not "mod_magazine") { continue; }
@@ -164,8 +162,8 @@ public class AddMasterMagazine : IOnLoad {
 
         BotConfig botConfig = this.ConfigServer.GetConfig<BotConfig>();
         // IDK why this HashSet will have 2 same item at final, and seems like equipmentFilterDetails not work
-        EquipmentFilterDetails equipmentFilterDetails = new(){
-            LevelRange = new(){
+        EquipmentFilterDetails equipmentFilterDetails = new() {
+            LevelRange = new() {
                 Min = 1,
                 Max = 100
             },
@@ -175,13 +173,13 @@ public class AddMasterMagazine : IOnLoad {
             }
         };
         foreach (String botTypeName in botConfig.Equipment.Keys) {
-            if(!botConfig.Equipment.ContainsKey(botTypeName)){continue;}
+            if (!botConfig.Equipment.ContainsKey(botTypeName)) { continue; }
             EquipmentFilters? equipmentFilters = botConfig.Equipment[botTypeName];
-            if(equipmentFilters is null) {
+            if (equipmentFilters is null) {
                 equipmentFilters = new() {
                     Blacklist = [equipmentFilterDetails]
                 };
-            }else if(equipmentFilters.Blacklist is null) {
+            } else if (equipmentFilters.Blacklist is null) {
                 equipmentFilters.Blacklist = [equipmentFilterDetails];
                 continue;
             } else {
@@ -189,7 +187,7 @@ public class AddMasterMagazine : IOnLoad {
             }
             botConfig.Equipment[botTypeName] = equipmentFilters;
         }
-        
+
         // this copy from https://github.com/jbs4bmx/HoltzmanShield/blob/7082fa820b4f465373181197ef08f02b4d033448/project/HoltzmanShield/HoltzmanShieldMod.cs#L281
         foreach (KeyValuePair<String, Dictionary<MongoId, Double>> spawnLimit in botConfig.ItemSpawnLimits) {
             spawnLimit.Value[this.NewId] = 0D;
@@ -203,13 +201,13 @@ public class AddMasterMagazine : IOnLoad {
 
 
         // and this, maybe work?
-        Bots bots = this.DatabaseService.GetBots();        
+        Bots bots = this.DatabaseService.GetBots();
         foreach (KeyValuePair<String, BotType?> botType in bots.Types) {
-            if(botType.Key.Contains("test",StringComparison.InvariantCultureIgnoreCase)) {continue;}
-            if(botType.Value is null){continue;}
+            if (botType.Key.Contains("test", StringComparison.InvariantCultureIgnoreCase)) { continue; }
+            if (botType.Value is null) { continue; }
             foreach (KeyValuePair<MongoId, Dictionary<String, HashSet<MongoId>>> modOnItem in botType.Value.BotInventory.Mods) {
-                if(modOnItem.Value.TryGetValue("mod_magazine",out HashSet<MongoId>? modIdSet) is false){continue;}
-                if(modIdSet is null){continue;}
+                if (modOnItem.Value.TryGetValue("mod_magazine", out HashSet<MongoId>? modIdSet) is false) { continue; }
+                if (modIdSet is null) { continue; }
                 _ = modIdSet.Remove(this.NewId);
             }
             if (botType.Value.BotGeneration.Items.Magazines.Whitelist is not null) {
