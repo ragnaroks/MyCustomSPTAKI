@@ -16,17 +16,17 @@ using SPTarkov.Server.Core.Services.Mod;
 namespace MyCustomSPTAKI.Modifies;
 
 [Injectable(InjectionType.Scoped, null, OnLoadOrder.PostDBModLoader + 1)]
-public class AddMasterContainer : IOnLoad {
-    private ISptLogger<AddMasterContainer> Logger { get; }
+public class AddMasterCase : IOnLoad {
+    private ISptLogger<AddMasterCase> Logger { get; }
     private DatabaseService DatabaseService { get; }
     private CustomItemService CustomItemService { get; }
-    private Double HandbookPrice { get; } = 3000_0000D;
-    private MongoId BaseId { get; } = new("69b1889c568f17dcba5a2500");
-    private MongoId NewId { get; } = new("69b1889c568f17dcba5a2501");
-    private MongoId RotateId { get; set; } = new("69b1889c568f17dcba5a2520");
+    private Double HandbookPrice { get; } = 500_0000D;
+    private MongoId BaseId { get; } = new("69b1889c568f17dcba5a2400");
+    private MongoId NewId { get; } = new("69b1889c568f17dcba5a2401");
+    private MongoId RotateId { get; set; } = new("69b1889c568f17dcba5a2420");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterContainer(ISptLogger<AddMasterContainer> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterCase(ISptLogger<AddMasterCase> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
@@ -41,13 +41,14 @@ public class AddMasterContainer : IOnLoad {
             Parent = this.NewId,
             Prototype = "55d329c24bdc2d892f8b4567",
             Properties = new() {
-                CellsH = 14,
-                CellsV = 14,
+                CellsH = 9,
+                CellsV = 9,
                 Filters = [
                     new(){
                         Filter = [BaseClasses.ITEM],
                         ExcludedFilter = [
                             this.NewId,
+                            new("69b1889c568f17dcba5a2501"),
                             BaseClasses.MOB_CONTAINER,
                             BaseClasses.SPEC_ITEM,
                             ItemTpl.CONTAINER_THICC_ITEM_CASE,
@@ -63,23 +64,23 @@ public class AddMasterContainer : IOnLoad {
         };
 
         NewItemFromCloneDetails newItem = new() {
-            ItemTplToClone = ItemTpl.CONTAINER_THICC_ITEM_CASE,
+            ItemTplToClone = ItemTpl.CONTAINER_ITEM_CASE,
             NewId = this.NewId,
             ParentId = BaseClasses.SIMPLE_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
             HandbookParentId = "5b5f701386f774093f2ecf0f",
             Locales = new(){
-                {"en",new(){Name = "master item container",ShortName = "Master",Description = "skydust™ master item container"}},
-                {"ch",new(){Name = "大师容器箱",ShortName = "大师",Description = "skydust™ 大师容器箱"}}
+                {"en",new(){Name = "master item case",ShortName = "Master",Description = "skydust™ master item case"}},
+                {"ch",new(){Name = "大师物品箱",ShortName = "大师",Description = "skydust™ 大师物品箱"}}
             },
             OverrideProperties = new() {
                 BackgroundColor = "blue",
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = -196D,
-                Width = 2,
+                Weight = -81D,
+                Width = 1,
                 Height = 1,
                 MousePenalty = 0D,
                 SpeedPenaltyPercent = 0D,
@@ -94,7 +95,7 @@ public class AddMasterContainer : IOnLoad {
         if (createItemResult.Success is false) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterContainer.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
+                String.Concat(Constants.LoggerPrefix, "AddMasterCase.OnLoad() / failed / ", String.Join("；", createItemResult.Errors ?? Enumerable.Empty<String>())),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -104,7 +105,7 @@ public class AddMasterContainer : IOnLoad {
         if (trader is null) {
             this.Logger.Log(
                 LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterContainer.OnLoad() / failed / trader not found"),
+                String.Concat(Constants.LoggerPrefix, "AddMasterCase.OnLoad() / failed / trader not found"),
                 LogTextColor.Yellow
             );
             return Task.CompletedTask;
@@ -131,14 +132,14 @@ public class AddMasterContainer : IOnLoad {
             Upd = new() {
                 UnlimitedCount = true,
                 StackObjectsCount = 999,
-                BuyRestrictionMax = 3,
+                BuyRestrictionMax = 9,
                 BuyRestrictionCurrent = 0
             }
         });
 
         this.Logger.Log(
             LogLevel.Info,
-            String.Concat(Constants.LoggerPrefix, "AddMasterContainer.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
+            String.Concat(Constants.LoggerPrefix, "AddMasterCase.OnLoad() / success / ", this.BaseId, " / ", this.RotateId),
             LogTextColor.Green
         );
         return Task.CompletedTask;

@@ -1,4 +1,7 @@
-﻿using SPTarkov.DI.Annotations;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
 using SPTarkov.Server.Core.Models.Eft.Common.Tables;
@@ -9,9 +12,6 @@ using SPTarkov.Server.Core.Models.Spt.Mod;
 using SPTarkov.Server.Core.Models.Utils;
 using SPTarkov.Server.Core.Services;
 using SPTarkov.Server.Core.Services.Mod;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyCustomSPTAKI.Modifies;
 
@@ -26,14 +26,14 @@ public class AddMasterSupportKit : IOnLoad {
     private MongoId RotateId { get; set; } = new("680b992ddb2d7f5fd00e7a20");
 
 #pragma warning disable IDE0290 // 使用主构造函数
-    public AddMasterSupportKit (ISptLogger<AddMasterSupportKit> logger, DatabaseService databaseService, CustomItemService customItemService) {
+    public AddMasterSupportKit(ISptLogger<AddMasterSupportKit> logger, DatabaseService databaseService, CustomItemService customItemService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
         this.CustomItemService = customItemService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad () {
+    public Task OnLoad() {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         Grid colume1 = new() {
             Id = this.RotateId,
@@ -195,6 +195,27 @@ public class AddMasterSupportKit : IOnLoad {
                 MinCount = 0
             }
         };
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        Grid colume8 = new() {
+            Id = this.RotateId,
+            Name = "colume8",
+            Parent = this.NewId,
+            Prototype = "55d329c24bdc2d892f8b4567",
+            Properties = new() {
+                CellsH = 2,
+                CellsV = 10,
+                Filters = [
+                    new(){
+                        Filter = [BaseClasses.FOOD_DRINK],
+                        ExcludedFilter = null
+                    }
+                ],
+                IsSortingTable = false,
+                MaxCount = 0,
+                MaxWeight = 0,
+                MinCount = 0
+            }
+        };
 
 
         NewItemFromCloneDetails newItem = new() {
@@ -221,7 +242,7 @@ public class AddMasterSupportKit : IOnLoad {
                 WeaponErgonomicPenalty = 0D,
                 ExamineExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
                 LootExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
-                Grids = [colume1, colume2, colume3, colume4, colume5, colume6, colume7],
+                Grids = [colume1, colume2, colume3, colume4, colume5, colume6, colume7, colume8],
                 Prefab = new() {
                     Path = "assets/content/weapons/usable_items/item_meds_grizly/item_grizzly_loot.bundle"
                 }

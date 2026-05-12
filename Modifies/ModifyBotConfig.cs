@@ -55,15 +55,17 @@ public class ModifyBotConfig : IOnLoad {
         botConfig.MaxBotCap["Woods"] = 23;
 
         /*
-        foreach( String key in botConfig.AssaultBrainType.Keys) {
+        foreach(String key in botConfig.AssaultBrainType.Keys) {
             botConfig.AssaultBrainType[key].Clear();
             botConfig.AssaultBrainType[key].Add("pmcBot",1);
         }
-        foreach( String key in botConfig.PlayerScavBrainType.Keys) {
+        foreach(String key in botConfig.PlayerScavBrainType.Keys) {
             botConfig.PlayerScavBrainType[key].Clear();
             botConfig.PlayerScavBrainType[key].Add("pmcBot",1);
         }
         */
+
+        botConfig.ReplaceScavWith = SPTarkov.Server.Core.Models.Eft.Common.WildSpawnType.infectedPmc;
 
         this.Logger.Log(
             LogLevel.Info,

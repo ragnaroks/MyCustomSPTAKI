@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
@@ -46,7 +47,6 @@ public class ModifyGlobalDatabase : IOnLoad {
         // 物品无同时上架数量限制
         globals.Configuration.RagFair.ItemRestrictions = [];
 
-        // 战局时间 4 倍，撤离点无条件
         foreach (KeyValuePair<String, Location> location in locations) {
             if (location.Key.Equals("Develop", StringComparison.InvariantCultureIgnoreCase)) { continue; }
             if (location.Key.Equals("Hideout", StringComparison.InvariantCultureIgnoreCase)) { continue; }
@@ -54,13 +54,19 @@ public class ModifyGlobalDatabase : IOnLoad {
             if (location.Key.Equals("Suburbs", StringComparison.InvariantCultureIgnoreCase)) { continue; }
             if (location.Key.Equals("Terminal", StringComparison.InvariantCultureIgnoreCase)) { continue; }
             if (location.Key.Equals("Town", StringComparison.InvariantCultureIgnoreCase)) { continue; }
+            // 战局时间 4 倍，撤离点无条件
             location.Value.Base.EscapeTimeLimit *= 4;
             foreach (AllExtractsExit extractsExit in location.Value.AllExtracts) {
                 extractsExit.PassageRequirement = SPTarkov.Server.Core.Models.Enums.RequirementState.None;
                 extractsExit.ExfiltrationType = SPTarkov.Server.Core.Models.Enums.ExfiltrationType.Individual;
             }
+            // boss 小弟 10 倍数量
+            foreach (BossLocationSpawn spawn in location.Value.Base.BossLocationSpawn) {
+                if(spawn.BossEscortType is null || !spawn.BossEscortType.Contains("follow")) { continue; }
+                if (spawn.BossEscortAmount is null or "0" || spawn.BossEscortAmount.Contains(',')) { continue; }
+                spawn.BossEscortAmount = String.Concat(spawn.BossEscortAmount, "0");
+            }
         }
-
 
         this.Logger.Log(
             LogLevel.Info,
