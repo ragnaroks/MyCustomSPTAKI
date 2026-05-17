@@ -118,6 +118,7 @@ public class AddMasterAssaultRifle : IOnLoad {
                 BaseMalfunctionChance = 0D,
                 Foldable = false,
                 WeapFireType = ["single", "fullauto"],
+                BFirerate = 900D,
                 Slots = slots,
                 Chambers = chambers
 

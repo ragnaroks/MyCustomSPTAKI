@@ -118,6 +118,7 @@ public class AddMasterSubmachineGun : IOnLoad {
                 BaseMalfunctionChance = 0D,
                 Foldable = false,
                 WeapFireType = ["single", "fullauto"],
+                BFirerate = 1100D,
                 Slots = slots,
                 Chambers = chambers
             }

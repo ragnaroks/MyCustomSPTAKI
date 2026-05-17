@@ -59,7 +59,7 @@ public class AddMasterSubmachineMagazine : IOnLoad {
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
                 Weight = 0.25,
-                Width = 1,
+                Width = 1,//2
                 Height = 2,
                 ExamineExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
                 LootExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
@@ -79,8 +79,8 @@ public class AddMasterSubmachineMagazine : IOnLoad {
 
                     }
                 ],
-                CheckTimeModifier = 0D,
-                LoadUnloadModifier = 0D,
+                CheckTimeModifier = -50D,
+                LoadUnloadModifier = -95D,
                 Ergonomics = 100,
                 CanFast = false,
                 AllowFeed = false,
