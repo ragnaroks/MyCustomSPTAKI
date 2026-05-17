@@ -68,7 +68,7 @@ public class AddMasterContainer : IOnLoad {
             ParentId = BaseClasses.SIMPLE_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
-            HandbookParentId = "5b5f701386f774093f2ecf0f",
+            HandbookParentId = Constants.HandbookIdForContainer,
             Locales = new(){
                 {"en",new(){Name = "master item container",ShortName = "Master",Description = "skydust™ master item container"}},
                 {"ch",new(){Name = "大师容器箱",ShortName = "大师",Description = "skydust™ 大师容器箱"}}

@@ -69,7 +69,7 @@ public class AddMasterCase : IOnLoad {
             ParentId = BaseClasses.SIMPLE_CONTAINER,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
             HandbookPriceRoubles = this.HandbookPrice,
-            HandbookParentId = "5b5f701386f774093f2ecf0f",
+            HandbookParentId = Constants.HandbookIdForContainer,
             Locales = new(){
                 {"en",new(){Name = "master item case",ShortName = "Master",Description = "skydust™ master item case"}},
                 {"ch",new(){Name = "大师物品箱",ShortName = "大师",Description = "skydust™ 大师物品箱"}}
