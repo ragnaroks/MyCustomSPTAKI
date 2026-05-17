@@ -46,7 +46,7 @@ public class ModifyAllWeaponNotMalfunction : IOnLoad {
             templateItem.Properties.MalfMisfireChance = 0D;
             templateItem.Properties.MalfunctionChance = 0D;
             templateItem.Properties.AllowOverheat = true;
-            templateItem.Properties.Ergonomics = 128D;
+            //templateItem.Properties.Ergonomics = 128D;
         }
 
         this.Logger.Log(

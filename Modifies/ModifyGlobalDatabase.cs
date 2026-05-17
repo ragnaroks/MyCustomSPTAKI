@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
@@ -18,26 +17,27 @@ public class ModifyGlobalDatabase : IOnLoad {
     private DatabaseService DatabaseService { get; }
 
 #pragma warning disable IDE0290 // 使用主构造函数    
-    public ModifyGlobalDatabase(ISptLogger<ModifyGlobalDatabase> logger, DatabaseService databaseService) {
+    public ModifyGlobalDatabase (ISptLogger<ModifyGlobalDatabase> logger, DatabaseService databaseService) {
         this.Logger = logger;
         this.DatabaseService = databaseService;
     }
 #pragma warning restore IDE0290 // 使用主构造函数
 
-    public Task OnLoad() {
+    public Task OnLoad () {
         Globals globals = this.DatabaseService.GetGlobals();
         Dictionary<String, Location> locations = this.DatabaseService.GetLocations().GetDictionary();
         //Dictionary<MongoId, TemplateItem> templates = this.DatabaseService.GetItems();
 
         //globals.Configuration.BaseCheckTime = 0D;
         //globals.Configuration.BaseLoadTime = 0D;
-        globals.Configuration.BaseUnloadTime = 0D;
+        //globals.Configuration.BaseUnloadTime = 0D;
         globals.Configuration.AimPunchMagnitude = 0D;
         globals.Configuration.RestrictionsInRaid = [];
         globals.Configuration.SkillFatiguePerPoint = 0D;
         globals.Configuration.SkillMinEffectiveness = 1D;
         globals.Configuration.SkillFreshEffectiveness = 3D;
         globals.Configuration.SavagePlayCooldown = 60;
+        //globals.Configuration.Malfunction.
 
         foreach (MaxActiveOfferCount maxActiveOfferCount in globals.Configuration.RagFair.MaxActiveOfferCount) {
             maxActiveOfferCount.Count *= 10;
@@ -60,12 +60,14 @@ public class ModifyGlobalDatabase : IOnLoad {
                 extractsExit.PassageRequirement = SPTarkov.Server.Core.Models.Enums.RequirementState.None;
                 extractsExit.ExfiltrationType = SPTarkov.Server.Core.Models.Enums.ExfiltrationType.Individual;
             }
+            /*
             // boss 小弟 10 倍数量
             foreach (BossLocationSpawn spawn in location.Value.Base.BossLocationSpawn) {
-                if(spawn.BossEscortType is null || !spawn.BossEscortType.Contains("follow")) { continue; }
+                if (spawn.BossEscortType is null || !spawn.BossEscortType.Contains("follow")) { continue; }
                 if (spawn.BossEscortAmount is null or "0" || spawn.BossEscortAmount.Contains(',')) { continue; }
                 spawn.BossEscortAmount = String.Concat(spawn.BossEscortAmount, "0");
             }
+            */
         }
 
         this.Logger.Log(

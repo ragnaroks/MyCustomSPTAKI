@@ -79,8 +79,8 @@ public class AddMasterSubmachineMagazine : IOnLoad {
 
                     }
                 ],
-                CheckTimeModifier = -50D,
-                LoadUnloadModifier = -95D,
+                CheckTimeModifier = 0D,
+                LoadUnloadModifier = 0D,
                 Ergonomics = 100,
                 CanFast = false,
                 AllowFeed = false,
@@ -96,7 +96,8 @@ public class AddMasterSubmachineMagazine : IOnLoad {
                 ExtraSizeDown = 0,
                 ExtraSizeLeft = 0,
                 ExtraSizeRight = 0,
-                ExtraSizeUp = 0
+                ExtraSizeUp = 0,
+                DurabilityBurnModificator = -90D,
             }
         };
         CreateItemResult createItemResult = this.CustomItemService.CreateItemFromClone(newItem);
