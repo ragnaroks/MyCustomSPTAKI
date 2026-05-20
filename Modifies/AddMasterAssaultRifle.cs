@@ -292,6 +292,8 @@ public class AddMasterAssaultRifle : IOnLoad {
                 Ergonomics = 100D,
                 MaxDurability = 9600D,
                 Durability = 9600D,
+                DurabilityBurnRatio = 1.01D,
+                CenterOfImpact = 0.015,
                 AllowFeed = false,
                 AllowJam = false,
                 AllowMisfire = false,

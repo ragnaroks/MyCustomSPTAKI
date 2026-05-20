@@ -293,6 +293,7 @@ public class AddMasterSubmachineGun : IOnLoad {
                 Ergonomics = 100D,
                 MaxDurability = 9600D,
                 Durability = 9600D,
+                DurabilityBurnRatio = 1.01D,
                 AllowFeed = false,
                 AllowJam = false,
                 AllowMisfire = false,
