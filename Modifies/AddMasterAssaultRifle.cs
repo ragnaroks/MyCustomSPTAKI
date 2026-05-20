@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MyCustomSPTAKI.Extend;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Common;
@@ -27,10 +26,10 @@ public class AddMasterAssaultRifle : IOnLoad {
     private CustomItemService CustomItemService { get; }
     private ConfigServer ConfigServer { get; }
     private Double HandbookPrice { get; } = 250_0000D;
-    private MongoId BaseId { get; } = new("6a0901f08779ac57da22c100");
-    private MongoId NewId { get; } = new("6a0901f08779ac57da22c101");
-    private MongoId RotateId { get; set; } = new("6a0901f08779ac57da22c120");
-    private MongoId OriginTemplateId { get; } = ItemTpl.ASSAULTRIFLE_DESERT_TECH_MDR_556X45_ASSAULT_RIFLE;
+    private MongoId BaseId { get; } = new("6a0901f08779ac57da23c100");
+    private MongoId NewId { get; } = new("6a0901f08779ac57da23c101");
+    private MongoId RotateId { get; set; } = new("6a0901f08779ac57da23c120");
+    private MongoId OriginTemplateId { get; } = ItemTpl.SMG_TDI_KRISS_VECTOR_GEN2_45_ACP_SUBMACHINE_GUN;
 
 #pragma warning disable IDE0290 // 使用主构造函数
     public AddMasterAssaultRifle (ISptLogger<AddMasterAssaultRifle> logger, DatabaseService databaseService, CustomItemService customItemService, ConfigServer configServer) {
@@ -42,47 +41,230 @@ public class AddMasterAssaultRifle : IOnLoad {
 #pragma warning restore IDE0290 // 使用主构造函数
 
     public Task OnLoad () {
+        IList<Slot> chambers = [];
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        chambers.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "patron_in_weapon",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d4af244bdc2d962f8b4571",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Filter = Constants.AssaultAmmoSet
+                    }
+                ]
+            }
+        });
 
-        TemplateItem? originItem = this.DatabaseService.GetItem(this.OriginTemplateId);
-        if (originItem is null) {
-            this.Logger.Log(
-                LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterAssaultRifle.OnLoad() / failed / TemplateId [", this.OriginTemplateId, "] not found"),
-                LogTextColor.Yellow
-            );
-            return Task.CompletedTask;
-        }
-        if (originItem.Properties is null || originItem.Properties.Slots is null || originItem.Properties.Chambers is null) {
-            this.Logger.Log(
-                LogLevel.Info,
-                String.Concat(Constants.LoggerPrefix, "AddMasterAssaultRifle.OnLoad() / failed / TemplateId [", this.OriginTemplateId, "] properties error"),
-                LogTextColor.Yellow
-            );
-            return Task.CompletedTask;
-        }
-        IList<Slot> slots = [.. originItem.Properties.Slots];
-        foreach (Slot slot in slots) {
-            if (slot.Name is not "mod_magazine") { continue; }
-            if (slot.Properties is null) { continue; }
-            slot.Properties.Filters = [
-                new SlotFilter(){
-                    Filter = [new("6a08f67d799458e8c3913101")]
-                }
-            ];
-            break;
-        }
-        IList<Slot> chambers = [.. originItem.Properties.Chambers];
-        foreach (Slot slot in chambers) {
-            if (slot.Name is not "patron_in_weapon") { continue; }
-            if (slot.Properties is null) { continue; }
-            slot.Properties.Filters = [
-                new SlotFilter(){
-                    Filter = Constants.AssaultAmmoSet
-                }
-            ];
-            break;
-        }
+        IList<Slot> slots = [];
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_magazine",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c394bdc2dae468b4577",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        AnimationIndex = -1,
+                        Filter = [new("6a08f67d799458e8c3913101")]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_sight_front",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.IRONSIGHT_MAGPUL_MBUS_GEN2_FLIPUP_FRONT_SIGHT,
+                            ItemTpl.IRONSIGHT_MAGPUL_MBUS_GEN2_FLIPUP_FRONT_SIGHT_FDE,
+                            ItemTpl.IRONSIGHT_KRISS_DEFIANCE_LOW_PROFILE_FLIPUP_FRONT_SIGHT,
+                            ItemTpl.IRONSIGHT_KAC_FOLDING_MICRO_FRONT_SIGHT
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_sight_rear",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.IRONSIGHT_MAGPUL_MBUS_GEN2_FLIPUP_REAR_SIGHT,
+                            ItemTpl.IRONSIGHT_MAGPUL_MBUS_GEN2_FLIPUP_REAR_SIGHT_FDE,
+                            ItemTpl.IRONSIGHT_KRISS_DEFIANCE_LOW_PROFILE_FLIPUP_REAR_SIGHT,
+                            ItemTpl.IRONSIGHT_KAC_FOLDING_MICRO_REAR_SIGHT
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_scope",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            BaseClasses.ASSAULT_SCOPE,
+                            //BaseClasses.OPTIC_SCOPE,
+                            BaseClasses.SPECIAL_SCOPE
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_tactical_000",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.TACTICALCOMBO_HOLOSUN_LS321_TACTICAL_DEVICE,
+                            ItemTpl.TACTICALCOMBO_L3HARRIS_ANPEQ15_TACTICAL_DEVICE,
+                            ItemTpl.TACTICALCOMBO_L3HARRIS_LA5BPEQ_TACTICAL_DEVICE,
+                            ItemTpl.TACTICALCOMBO_SUREFIRE_XC1_TACTICAL_FLASHLIGHT,
+                            ItemTpl.TACTICALCOMBO_WILCOX_RAPTAR_ES_TACTICAL_RANGEFINDER,
+                            ItemTpl.TACTICALCOMBO_ZENIT_PERST3_TACTICAL_DEVICE,
+                            ItemTpl.TACTICALCOMBO_BE_MEYERS_MAWLC1_TACTICAL_DEVICE
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_stock",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.STOCK_KRISS_VECTOR_NONFOLDING_STOCK_ADAPTER,
+                            ItemTpl.STOCK_KRISS_VECTOR_GEN2_FOLDING
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_barrel",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.BARREL_KRISS_VECTOR_45_ACP_5_INCH,
+                            ItemTpl.BARREL_KRISS_VECTOR_45_ACP_6_INCH
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_mount",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.MOUNT_KRISS_VECTOR_MK5_MODULAR_RAIL,
+                            ItemTpl.MOUNT_KRISS_VECTOR_BOTTOM_RAIL
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_mount_001",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.MOUNT_KRISS_VECTOR_SIDE_RAIL
+                        ]
+                    }
+                ]
+            }
+        });
+        this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
+        slots.Add(new() {
+            Id = this.RotateId,
+            Parent = this.NewId,
+            Name = "mod_mount_002",
+            Required = false,
+            MergeSlotWithChildren = false,
+            Prototype = "55d30c4c4bdc2db4468b457e",
+            Properties = new() {
+                Filters = [
+                    new(){
+                        Shift = 0,
+                        Filter = [
+                            ItemTpl.MOUNT_KRISS_VECTOR_SIDE_RAIL
+                        ]
+                    }
+                ]
+            }
+        });
 
         NewItemFromCloneDetails newItem = new() {
             ItemTplToClone = this.OriginTemplateId,

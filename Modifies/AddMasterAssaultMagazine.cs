@@ -42,8 +42,7 @@ public class AddMasterAssaultMagazine : IOnLoad {
     public Task OnLoad () {
         this.RotateId = Helper.Miscellaneous.MongoIdCalc(this.RotateId, 1);
         NewItemFromCloneDetails newItem = new() {
-            // IDK why the magazine of toygun will cause a strange bug in detail window 
-            ItemTplToClone = ItemTpl.MAGAZINE_556X45_MK16_FDE_30RND,
+            ItemTplToClone = ItemTpl.MAGAZINE_9X19_BIG_STICK_33RND,
             NewId = this.NewId,
             ParentId = BaseClasses.MAGAZINE,
             FleaPriceRoubles = Math.Ceiling(this.HandbookPrice * 1.25),
@@ -58,7 +57,7 @@ public class AddMasterAssaultMagazine : IOnLoad {
                 CanSellOnRagfair = false,
                 Rarity = LootRarity.Not_exist,
                 RarityPvE = "not_exist",
-                Weight = 0.25,
+                Weight = 0.15,
                 Width = 1,//2
                 Height = 2,
                 ExamineExperience = (Int32)Math.Ceiling(this.HandbookPrice / 10000),
